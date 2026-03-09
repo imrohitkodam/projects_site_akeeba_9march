@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+    <fields name="params" addfieldpath="/plugins/system/nrframework/fields">
+        <fieldset name="module_conditions" label="NR_PUBLISHING_ASSIGNMENTS" addfieldpath="administrator/components/com_smilepack/forms/fields" class="sp-fieldset-reset">
+            
+            
+            <field name="@display_conditions" type="SPFreeDisplayConditions" />
+            
+        </fieldset>
+    </fields>
+</form>

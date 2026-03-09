@@ -1,0 +1,396 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="template" client="site" method="upgrade">
+	<name>JPagebuilder</name>
+	<author>JExtensions Store</author>
+	<creationDate>2025-11-16</creationDate>
+	<copyright>Copyright (C) 2024 - Joomla! Extensions Store. All Rights Reserved.</copyright>
+	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+	<authorEmail>info@storejextensions.org</authorEmail>
+	<authorUrl>https://storejextensions.org</authorUrl>
+	<version>2.6</version>
+	<description>The JPagebuilder blank template, stripped down from almost all elements that allows to build a full page layout using the JPagebuilder page builder. The template uses Bootstrap 5.</description>
+	<inheritable>1</inheritable>
+	
+	<files>
+		<filename>index.php</filename>
+		<filename>joomla.asset.json</filename>
+		<filename>templateDetails.xml</filename>
+		<folder>html</folder>
+	</files>
+	<media destination="templates/site/jpagebuilder" folder="media">
+		<folder>js</folder>
+		<folder>css</folder>
+		<folder>images</folder>
+	</media>
+	<positions>
+		<position>menu</position>
+		<position>breadcrumbs</position>
+		<position>footer</position>
+	</positions>
+	<languages folder="language">
+		<language tag="en-GB">en-GB/tpl_jpagebuilder.ini</language>
+		<language tag="en-GB">en-GB/tpl_jpagebuilder.sys.ini</language>
+	</languages>
+	<config>
+		<fields name="params">
+			<fieldset name="advanced">
+				<field
+					name="showheader"
+					type="radio"
+					label="TPL_JPAGEBUILDER_SHOWHEADER_LABEL"
+					description="TPL_JPAGEBUILDER_SHOWHEADER_DESCRIPTION"
+					default="1"
+					layout="joomla.form.field.radio.switcher"
+					filter="boolean">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field
+					name="headercolor"
+					type="color"
+					label="TPL_JPAGEBUILDER_HEADERCOLOR_LABEL"
+					description="TPL_JPAGEBUILDER_HEADERCOLOR_DESCRIPTION"
+					default="#212529"
+					/>
+				<field
+					name="headertextcolor"
+					type="color"
+					label="TPL_JPAGEBUILDER_HEADERTEXTCOLOR_LABEL"
+					description="TPL_JPAGEBUILDER_HEADERTEXTCOLOR_DESCRIPTION"
+					default="#FFFFFF"
+					/>
+				<field
+					name="sitelogo"
+					type="media"
+					label="TPL_JPAGEBUILDER_SITELOGO_LABEL"
+					description="TPL_JPAGEBUILDER_SITELOGO_DESCRIPTION"
+					default=""
+					/>
+				<field
+					name="include_site_name"
+					type="radio"
+					label="TPL_JPAGEBUILDER_INCLUDE_SITE_NAME_LABEL"
+					description="TPL_JPAGEBUILDER_INCLUDE_SITE_NAME_DESCRIPTION"
+					default="1"
+					layout="joomla.form.field.radio.switcher"
+					filter="boolean">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field
+					name="stickyheader"
+					type="radio"
+					label="TPL_JPAGEBUILDER_STICKY_HEADER_LABEL"
+					description="TPL_JPAGEBUILDER_STICKY_HEADER_DESCRIPTION"
+					default="0"
+					layout="joomla.form.field.radio.switcher"
+					filter="boolean">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field
+					name="menubuttoncolor"
+					type="list"
+					label="TPL_JPAGEBUILDER_MENU_BUTTON_COLOR_LABEL"
+					description="TPL_JPAGEBUILDER_MENU_BUTTON_COLOR_DESCRIPTION"
+					default="0">
+					<option value="0">TPL_JPAGEBUILDER_MENU_BUTTON_COLOR_WHITE</option>
+					<option value="1">TPL_JPAGEBUILDER_MENU_BUTTON_COLOR_BLACK</option>
+				</field>
+				<field
+					name="mainmenuright"
+					type="radio"
+					label="TPL_JPAGEBUILDER_MAINMENURIGHT_LABEL"
+					description="TPL_JPAGEBUILDER_MAINMENURIGHT_DESCRIPTION"
+					default="0"
+					layout="joomla.form.field.radio.switcher"
+					filter="boolean">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field
+					name="maxwidth"
+					type="text"
+					label="TPL_JPAGEBUILDER_MAXWIDTH_LABEL"
+					description="TPL_JPAGEBUILDER_MAXWIDTH_DESCRIPTION"
+					default=""
+					/>
+				<field
+					name="minheight"
+					type="text"
+					label="TPL_JPAGEBUILDER_MINHEIGHT_LABEL"
+					description="TPL_JPAGEBUILDER_MINHEIGHT_DESCRIPTION"
+					default="960px"
+					/>
+				<field
+					name="containersitebodyfullsize"
+					type="radio"
+					label="TPL_JPAGEBUILDER_CONTAINERSITEBODY_LABEL"
+					description="TPL_JPAGEBUILDER_CONTAINERSITEBODY_DESCRIPTION"
+					default="1"
+					layout="joomla.form.field.radio.switcher"
+					filter="boolean">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field
+					name="showfooter"
+					type="radio"
+					label="TPL_JPAGEBUILDER_SHOWFOOTER_LABEL"
+					description="TPL_JPAGEBUILDER_SHOWFOOTER_DESCRIPTION"
+					default="1"
+					layout="joomla.form.field.radio.switcher"
+					filter="boolean">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field
+					name="footercolor"
+					type="color"
+					label="TPL_JPAGEBUILDER_FOOTERCOLOR_LABEL"
+					description="TPL_JPAGEBUILDER_FOOTERCOLOR_DESCRIPTION"
+					default="#212529"
+					/>
+
+				<field
+				    name="customfavicon"
+				    type="radio"
+				    label="TPL_JPAGEBUILDER_CUSTOMFAVICON_LABEL"
+				    description="TPL_JPAGEBUILDER_CUSTOMFAVICON_DESCRIPTION"
+				    default="0"
+				    layout="joomla.form.field.radio.switcher"
+				    filter="boolean">
+				    <option value="0">JNO</option>
+				    <option value="1">JYES</option>
+				</field>
+				
+				<field
+				    name="favicon_svg"
+				    type="media"
+				    label="TPL_JPAGEBUILDER_FAVICON_SVG_LABEL"
+				    description="TPL_JPAGEBUILDER_FAVICON_SVG_DESCRIPTION"
+				    preview="true"
+				/>
+				
+				<field
+				    name="favicon_ico"
+				    type="media"
+				    label="TPL_JPAGEBUILDER_FAVICON_ICO_LABEL"
+				    description="TPL_JPAGEBUILDER_FAVICON_ICO_DESCRIPTION"
+				    preview="true"
+				/>
+				
+				<field
+				    name="favicon_mask"
+				    type="media"
+				    label="TPL_JPAGEBUILDER_FAVICON_MASK_LABEL"
+				    description="TPL_JPAGEBUILDER_FAVICON_MASK_DESCRIPTION"
+				    preview="true"
+				/>
+				
+				<field
+				    name="favicon_color"
+				    type="color"
+				    label="TPL_JPAGEBUILDER_FAVICON_COLOR_LABEL"
+				    description="TPL_JPAGEBUILDER_FAVICON_COLOR_DESCRIPTION"
+				    default="#000000"
+				/>
+
+				<field
+					name="loadbootstrap"
+					type="radio"
+					label="TPL_JPAGEBUILDER_LOADBOOTSTRAP_LABEL"
+					description="TPL_JPAGEBUILDER_LOADBOOTSTRAP_DESCRIPTION"
+					default="0"
+					layout="joomla.form.field.radio.switcher"
+					filter="boolean">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				
+				<field name="customcsscode"
+					type="textarea"
+					default=""
+					cols="50"
+					rows="10"
+					label="TPL_JPAGEBUILDER_CUSTOM_CSS_STYLES_LABEL"
+					description="TPL_JPAGEBUILDER_CUSTOM_CSS_STYLES_DESCRIPTION"
+					/>
+			</fieldset>
+			
+			<fieldset name="menucustomization">
+			    <field
+			        name="custom_menu_styles"
+			        type="radio"
+			        label="TPL_JPAGEBUILDER_CUSTOM_MENU_STYLES_LABEL"
+			        description="TPL_JPAGEBUILDER_CUSTOM_MENU_STYLES_LABEL_DESCRIPTION"
+			        default="0"
+			        layout="joomla.form.field.radio.switcher"
+			        filter="boolean">
+			        <option value="0">JNO</option>
+			        <option value="1">JYES</option>
+			    </field>
+			
+			    <field name="menu_text_color" type="color" default="#eeeeee"
+			        label="TPL_JPAGEBUILDER_MENU_TEXT_COLOR" description="TPL_JPAGEBUILDER_MENU_TEXT_COLOR_DESC" showon="custom_menu_styles:1" />
+			    <field name="menu_bg_color" type="color" default="#212529"
+			        label="TPL_JPAGEBUILDER_MENU_BG_COLOR" description="TPL_JPAGEBUILDER_MENU_BG_COLOR_DESC" showon="custom_menu_styles:1" />
+			    <field name="menu_hover_text_color" type="color" default="#ffffff"
+			        label="TPL_JPAGEBUILDER_MENU_HOVER_TEXT_COLOR" description="TPL_JPAGEBUILDER_MENU_HOVER_TEXT_COLOR_DESC" showon="custom_menu_styles:1" />
+			    <field name="menu_hover_bg_color" type="color" default="#333333"
+			        label="TPL_JPAGEBUILDER_MENU_HOVER_BG_COLOR" description="TPL_JPAGEBUILDER_MENU_HOVER_BG_COLOR_DESC" showon="custom_menu_styles:1" />
+			
+			    <field name="submenu_text_color" type="color" default="#dddddd"
+			        label="TPL_JPAGEBUILDER_SUBMENU_TEXT_COLOR" description="TPL_JPAGEBUILDER_SUBMENU_TEXT_COLOR_DESC" showon="custom_menu_styles:1" />
+			    <field name="submenu_bg_color" type="color" default="#1a1a1a"
+			        label="TPL_JPAGEBUILDER_SUBMENU_BG_COLOR" description="TPL_JPAGEBUILDER_SUBMENU_BG_COLOR_DESC" showon="custom_menu_styles:1" />
+			    <field name="submenu_hover_text_color" type="color" default="#ffffff"
+			        label="TPL_JPAGEBUILDER_SUBMENU_HOVER_TEXT_COLOR" description="TPL_JPAGEBUILDER_SUBMENU_HOVER_TEXT_COLOR_DESC" showon="custom_menu_styles:1" />
+			    <field name="submenu_hover_bg_color" type="color" default="#444444"
+			        label="TPL_JPAGEBUILDER_SUBMENU_HOVER_BG_COLOR" description="TPL_JPAGEBUILDER_SUBMENU_HOVER_BG_COLOR_DESC" showon="custom_menu_styles:1" />
+			
+			    <field name="menu_active_text_color" type="color" default="#ffffff"
+			        label="TPL_JPAGEBUILDER_MENU_ACTIVE_TEXT_COLOR" description="TPL_JPAGEBUILDER_MENU_ACTIVE_TEXT_COLOR_DESC" showon="custom_menu_styles:1" />
+			    <field name="menu_active_bg_color" type="color" default="#555555"
+			        label="TPL_JPAGEBUILDER_MENU_ACTIVE_BG_COLOR" description="TPL_JPAGEBUILDER_MENU_ACTIVE_BG_COLOR_DESC" showon="custom_menu_styles:1" />
+			
+			    <field name="menu_font_size" type="list" default="16"
+			        label="TPL_JPAGEBUILDER_MENU_FONT_SIZE" description="TPL_JPAGEBUILDER_MENU_FONT_SIZE_DESC" showon="custom_menu_styles:1">
+			        <option value="12">12px</option>
+			        <option value="13">13px</option>
+			        <option value="14">14px</option>
+			        <option value="15">15px</option>
+			        <option value="16">16px</option>
+			        <option value="17">17px</option>
+			        <option value="18">18px</option>
+			        <option value="19">19px</option>
+			        <option value="20">20px</option>
+			        <option value="21">21px</option>
+			        <option value="22">22px</option>
+			        <option value="23">23px</option>
+			        <option value="24">24px</option>
+			    </field>
+			
+			    <field name="menu_font_weight" type="list" default="500"
+			        label="TPL_JPAGEBUILDER_MENU_FONT_WEIGHT" description="TPL_JPAGEBUILDER_MENU_FONT_WEIGHT_DESC" showon="custom_menu_styles:1">
+			        <option value="300">Light</option>
+			        <option value="400">Normal</option>
+			        <option value="500">Medium</option>
+			        <option value="600">Semi-bold</option>
+			        <option value="700">Bold</option>
+			        <option value="800">Extra-bold</option>
+			    </field>
+			
+			    <field name="menu_text_transform_top" type="list" default="uppercase"
+			        label="TPL_JPAGEBUILDER_MENU_TEXT_TRANSFORM_TOP" description="TPL_JPAGEBUILDER_MENU_TEXT_TRANSFORM_TOP_DESC" showon="custom_menu_styles:1">
+			        <option value="none">None</option>
+			        <option value="uppercase">Uppercase</option>
+			        <option value="lowercase">Lowercase</option>
+			        <option value="capitalize">Capitalize</option>
+			    </field>
+			
+			    <field name="menu_text_transform_sub" type="list" default="none"
+			        label="TPL_JPAGEBUILDER_MENU_TEXT_TRANSFORM_SUB" description="TPL_JPAGEBUILDER_MENU_TEXT_TRANSFORM_SUB_DESC" showon="custom_menu_styles:1">
+			        <option value="none">None</option>
+			        <option value="uppercase">Uppercase</option>
+			        <option value="lowercase">Lowercase</option>
+			        <option value="capitalize">Capitalize</option>
+			    </field>
+			
+			    <field name="menu_separator_color" type="color" default="#2a2a2a"
+			        label="TPL_JPAGEBUILDER_MENU_SEPARATOR_COLOR" description="TPL_JPAGEBUILDER_MENU_SEPARATOR_COLOR_DESC" showon="custom_menu_styles:1" />
+			    <field name="menu_separator_width" type="list" default="1"
+			        label="TPL_JPAGEBUILDER_MENU_SEPARATOR_WIDTH" description="TPL_JPAGEBUILDER_MENU_SEPARATOR_WIDTH_DESC" showon="custom_menu_styles:1">
+			        <option value="0">0px</option>
+			        <option value="1">1px</option>
+			        <option value="2">2px</option>
+			        <option value="3">3px</option>
+			        <option value="4">4px</option>
+			        <option value="5">5px</option>
+			        <option value="6">6px</option>
+			        <option value="7">7px</option>
+			        <option value="8">8px</option>
+			        <option value="9">9px</option>
+			        <option value="10">10px</option>
+			        <option value="11">11px</option>
+			        <option value="12">12px</option>
+			        <option value="13">13px</option>
+			        <option value="14">14px</option>
+			        <option value="15">15px</option>
+			        <option value="16">16px</option>
+			        <option value="17">17px</option>
+			        <option value="18">18px</option>
+			        <option value="19">19px</option>
+			        <option value="20">20px</option>
+			    </field>
+			
+			    <field name="menu_horizontal_separator_color" type="color" default="#333333"
+			        label="TPL_JPAGEBUILDER_MENU_HORIZONTAL_SEPARATOR_COLOR" description="TPL_JPAGEBUILDER_MENU_HORIZONTAL_SEPARATOR_COLOR_DESC" showon="custom_menu_styles:1" />
+			    <field name="menu_horizontal_separator_height" type="list" default="1"
+			        label="TPL_JPAGEBUILDER_MENU_HORIZONTAL_SEPARATOR_HEIGHT" description="TPL_JPAGEBUILDER_MENU_HORIZONTAL_SEPARATOR_HEIGHT_DESC" showon="custom_menu_styles:1">
+			        <option value="0">0px</option>
+			        <option value="1">1px</option>
+			        <option value="2">2px</option>
+			        <option value="3">3px</option>
+			        <option value="4">4px</option>
+			        <option value="5">5px</option>
+			        <option value="6">6px</option>
+			        <option value="7">7px</option>
+			        <option value="8">8px</option>
+			        <option value="9">9px</option>
+			        <option value="10">10px</option>
+			        <option value="11">11px</option>
+			        <option value="12">12px</option>
+			        <option value="13">13px</option>
+			        <option value="14">14px</option>
+			        <option value="15">15px</option>
+			        <option value="16">16px</option>
+			        <option value="17">17px</option>
+			        <option value="18">18px</option>
+			        <option value="19">19px</option>
+			        <option value="20">20px</option>
+			    </field>
+			
+			    <field name="menu_hover_mode" type="list" default="expand"
+			        label="TPL_JPAGEBUILDER_MENU_HOVER_MODE"
+			        description="TPL_JPAGEBUILDER_MENU_HOVER_MODE_DESC" showon="custom_menu_styles:1">
+			        <option value="normal">TPL_JPAGEBUILDER_MENU_HOVER_MODE_NORMAL</option>
+			        <option value="expand">TPL_JPAGEBUILDER_MENU_HOVER_MODE_EXPAND</option>
+			        <option value="slide">TPL_JPAGEBUILDER_MENU_HOVER_MODE_SLIDE</option>
+			        <option value="fade">TPL_JPAGEBUILDER_MENU_HOVER_MODE_FADE</option>
+			        <option value="underline">TPL_JPAGEBUILDER_MENU_HOVER_MODE_UNDERLINE</option>
+			        <option value="outline">TPL_JPAGEBUILDER_MENU_HOVER_MODE_OUTLINE</option>
+			        <option value="glow">TPL_JPAGEBUILDER_MENU_HOVER_MODE_GLOW</option>
+			    </field>
+			    
+			    <field name="menu_border_radius" type="list" default="0"
+			        label="TPL_JPAGEBUILDER_MENU_BORDER_RADIUS"
+			        description="TPL_JPAGEBUILDER_MENU_BORDER_RADIUS_DESC" showon="custom_menu_styles:1">
+			        <option value="0">0px</option>
+			        <option value="2">2px</option>
+			        <option value="4">4px</option>
+			        <option value="6">6px</option>
+			        <option value="8">8px</option>
+			        <option value="10">10px</option>
+			        <option value="12">12px</option>
+			        <option value="16">16px</option>
+			        <option value="20">20px</option>
+			    </field>
+			
+			    <field name="menu_margin" type="list" default="0"
+			        label="TPL_JPAGEBUILDER_MENU_MARGIN"
+			        description="TPL_JPAGEBUILDER_MENU_MARGIN_DESC" showon="custom_menu_styles:1">
+			        <option value="0">0px</option>
+			        <option value="2">2px</option>
+			        <option value="4">4px</option>
+			        <option value="6">6px</option>
+			        <option value="8">8px</option>
+			        <option value="10">10px</option>
+			        <option value="12">12px</option>
+			        <option value="16">16px</option>
+			        <option value="20">20px</option>
+			    </field>
+			</fieldset>
+		</fields>
+	</config>
+</extension>

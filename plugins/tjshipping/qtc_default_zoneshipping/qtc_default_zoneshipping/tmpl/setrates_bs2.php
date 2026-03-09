@@ -1,0 +1,465 @@
+<?php
+/**
+ * @package     Quick2cart
+ * @subpackage  com_quick2cart
+ *
+ * @author      Techjoomla <extensions@techjoomla.com>
+ * @copyright   Copyright (C) 2009 - 2021 Techjoomla. All rights reserved.
+ * @license     http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
+ */
+
+// No direct access
+defined('_JEXEC') or die;
+
+use Joomla\CMS\Factory;
+use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Language\Text;
+use Joomla\CMS\Router\Route;
+use Joomla\CMS\Uri\Uri;
+
+HTMLHelper::_('bootstrap.renderModal', 'a.modal');
+
+require_once(JPATH_SITE.'/plugins/tjshipping/qtc_default_zoneshipping/qtc_default_zoneshipping/qtczoneShipHelper.php');
+$qtczoneShipHelper   = new qtczoneShipHelper;
+$comquick2cartHelper = new comquick2cartHelper;
+$productHelper       = new productHelper;
+$zoneHelper          = new zoneHelper;
+$qtcshiphelper       = new qtcshiphelper;
+$taxHelper           = new taxHelper;
+
+$app          = Factory::getApplication();
+$jinput       = $app->input;
+$extension_id = $jinput->get('extension_id');
+$methodId     = $jinput->get('methodId',0, 'INT');
+
+$shipMethDetail = $qtcshiphelper->getShipMethDetail($methodId);
+$itemid         = $comquick2cartHelper->getitemid('index.php?option=com_quick2cart&view=vendor&layout=cp');
+
+if (!empty($methodId))
+{
+	$status = $comquick2cartHelper->store_authorize('', $shipMethDetail['store_id']);
+
+	if (!$status)
+	{
+		$zoneHelper->showUnauthorizedMsg();
+		return false;
+	}
+}
+?>
+<script type="text/javascript">
+function qtcAddShipMethRates()
+{
+	var SelectedZoneVal = document.getElementById('zone_id').value;
+	var flag            = 1;
+
+	if (document.getElementById('qtc_shipping_range_start') && document.getElementById('qtc_shipping_range_end'))
+	{
+		var SelectedRangeLow  = document.getElementById('qtc_shipping_range_start').value;
+		var SelectedRangeHigh = document.getElementById('qtc_shipping_range_end').value;
+
+		if(SelectedRangeLow == '')
+		{
+			var msg = "<?php echo Text::_('PLG_QTC_DEFAULT_ZONESHIPPING_INVALID_RANGE_MIN_SELECTION'); ?>"
+			alert(msg);
+			document.getElementById('qtc_shipping_range_start').focus();
+			document.getElementById('qtc_shipping_range_start').value = "";
+
+			return false;
+		}
+
+		if(SelectedRangeHigh  == '')
+		{
+			var msg = "<?php echo Text::_('PLG_QTC_DEFAULT_ZONESHIPPING_INVALID_RANGE_MAX_SELECTION'); ?>"
+			alert(msg);
+			document.getElementById('qtc_shipping_range_end').focus();
+			document.getElementById('qtc_shipping_range_end').value = "";
+			return false;
+		}
+
+		if (Number(SelectedRangeLow) >= Number(SelectedRangeHigh))
+		{
+			var msg = "<?php echo Text::_('PLG_QTC_DEFAULT_ZONESHIPPING_INVALID_RANGE'); ?>"
+			alert(msg);
+			return false;
+		}
+	}
+
+	if (SelectedZoneVal  == '')
+	{
+		var msg = "<?php echo Text::_('PLG_QTC_DEFAULT_ZONESHIPPING_INVALID_ZONE_SELECTION'); ?>"
+		alert(msg);
+		return false;
+	}
+
+	techjoomla.jQuery('.qtc_ship_rates_validate input').each(function(){
+		if (techjoomla.jQuery(this).val() == '')
+		{
+			techjoomla.jQuery(this).focus();
+			techjoomla.jQuery(this).val('');
+			flag = 0;
+		}
+	});
+
+	if (flag == 0)
+	{
+		var msg = "<?php echo Text::_('PLG_QTC_DEFAULT_ZONESHIPPING_INVALID_SHIPPING_COST'); ?>"
+		alert(msg);
+
+		return false;
+	}
+
+	techjoomla.jQuery('.qtc_handle_rates_validate input').each(function(){
+		if (techjoomla.jQuery(this).val() == '')
+		{
+			var msg = "<?php echo Text::_('PLG_QTC_DEFAULT_ZONESHIPPING_INVALID_HANDLING_FEE'); ?>"
+			alert(msg);
+
+			techjoomla.jQuery(this).focus();
+			techjoomla.jQuery(this).val('');
+			flag = 0;
+		}
+	});
+
+	if (flag == 0)
+	{
+		return false;
+	}
+
+	var extension_id = <?php echo $extension_id; ?>;
+	var shipMethodId = <?php echo $methodId; ?>;
+	values           = techjoomla.jQuery('#qtcSetRateform').serialize();
+
+	techjoomla.jQuery.ajax({
+		url :"<?php echo Uri::base();?>index.php?option=com_quick2cart&task=shipping.qtcHandleShipAjaxCall&plugview=setrates&extension_id=" +extension_id +"&methodId="+ shipMethodId + '&tmpl=component',
+		type: 'POST',
+		async:false,
+		data:values,
+		dataType: 'json',
+		beforeSend: function() {},
+		complete: function() {},
+		success: function(response)
+		{
+			// Get selected zone
+			var SelectedZone = techjoomla.jQuery("#zone_id").children("option").filter(":selected").text() ;
+
+			// Remove Error dive content
+			techjoomla.jQuery('#qtcErrorContentDiv').html('');
+			techjoomla.jQuery('.qtcError').fadeOut();
+
+			var taxrule_id = 1;
+			var rateId     = response.rateId;
+			var q          = "'";
+			var editbtn    = '<input type="button" value="<?php echo Text::_("PLG_QTC_DEFAULT_ZONESHIPPING_EDIT"); ?>" class="btn btn-primary">';
+			var editHref   = "<?php echo Uri::base();?>index.php?option=com_quick2cart&view=shipping&layout=list&plugview=editrate&extension_id=" +extension_id +"&methodId="+ shipMethodId + "&rateId=" + rateId + "&tmpl=component";
+			var editLink   = '<a rel="{handler:\'iframe\',size:{x: window.innerWidth-450, y: window.innerHeight-250}}" href="'+editHref+'" class="modal qtc_modal">'+editbtn+'</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
+			var delLink    = '<input onclick="qtcDeleteShipRate('+
+						rateId+',this);" class="btn btn-danger" type="button" value="<?php echo Text::_("PLG_QTC_DEFAULT_ZONESHIPPING_DELETE"); ?>">';
+			var showRangeTd = <?php echo ($shipMethDetail['shipping_type'] == 3 ? 1 : 0 ) ; 	?> ;
+			var RangeTdContent = '';
+
+			if (showRangeTd == 1)
+			{
+				RangeTdContent = '';
+			}
+			else
+			{
+				RangeTdContent = '<td id="qtcRangeTd_'+ rateId +'">'  + response.rangeTd+ '</td> ';
+			}
+
+			var result='<tr id="qtcRateId_' + rateId +'"><td id="qtczoneTd_'+ rateId +'">'+SelectedZone+'</td>' + RangeTdContent +' <td id="qtcShipCostTd_'+ rateId +'">' +response.shipCostTd + '</td> <td id="qtcHandleCostTd_'+ rateId +'">' +response.handleCostTd + '</td><td>' + editLink + delLink + '</td></tr>';
+			techjoomla.jQuery('#tableBody').append(result);
+			window.parent.location.reload();
+			techjoomla.jQuery('#qtc_shipping_list').find('input:text').each(function() {techjoomla.jQuery(this).val('');});
+		},
+		error: function(response) {	}
+	});
+}
+
+function qtcDeleteShipRate(rateId, delBtn)
+{
+	var data = {
+		rateId : rateId,
+		plugtask : 'qtcDelshipMethRate'
+	};
+
+	var extension_id = <?php echo $extension_id; ?>;
+	var shipMethodId = <?php echo $methodId; ?>;
+
+	techjoomla.jQuery.ajax({
+		type : "POST",
+		url :"<?php echo Uri::base();?>index.php?option=com_quick2cart&task=shipping.qtcHandleShipAjaxCall&plugview=setrates&extension_id=" +extension_id +"&methodId="+ shipMethodId + '&tmpl=component',
+		data : data,
+		dataType: 'json',
+		beforeSend: function() {},
+		success : function(response)
+		{
+			if (response.error == 0)
+			{
+				techjoomla.jQuery(delBtn).closest('tr').remove();
+			}
+			else
+			{
+				techjoomla.jQuery('#qtcErrorContentDiv').html(response.errorMsg);
+				techjoomla.jQuery('.qtcError').fadeIn();
+			}
+		}
+	});
+}
+
+function toggleShippingZoneRateModal(rateId)
+{
+	jQuery('#setShippingZoneRateModal_' + rateId).attr('style' , 'display:block !important');
+	jQuery('#setShippingZoneRateModal_' + rateId).attr('data-width' , (window.innerWidth)/2);
+	jQuery('#setShippingZoneRateModal_' + rateId).attr('data-height' , window.innerHeight);
+	jQuery('#setShippingZoneRateModal_' + rateId).modal('show');
+}
+</script>
+
+<form name='qtcSetRateform' id="qtcSetRateform"  method="post" >
+	<legend id="">
+		<?php echo Text::_("PLG_QTC_DEFAULT_ZONESHIPPING_SET_RATEFOR_") ?>&nbsp; <?php echo !empty($shipMethDetail['name']) ? ucfirst($shipMethDetail['name']) : ''; ?>
+		<span class="pull-right" >
+			<?php $backlink = Route::_("index.php?option=com_quick2cart&view=shipping&layout=list&plugview=default&extension_id=" . $extension_id . "&Itemid=" . $itemid . "&methodId=" . $methodId . '');?>
+			<button
+				type="button"
+				onClick="location.href='<?php echo $backlink; ?>'"
+				title="<?php echo Text::_("PLG_QTC_DEFAULT_ZONESHIPPING_SHIPTAXPROFILE_SETRATE_BACK_TITLE"); ?>"
+				class="btn  btn-primary">
+				<i class="<?php echo QTC_ICON_BACK; ?>"></i>
+				<?php echo Text::_("PLG_QTC_DEFAULT_ZONESHIPPING_SET_RATEFOR_BACK"); ?>
+			</button>
+		</span>
+	</legend>
+
+	<div class="alert alert-info">
+		<p><?php echo Text::_('PLG_QTC_DEFAULT_ZONESHIPPING_SETRATES_HELP'); ?></p>
+	</div>
+	<div class="alert alert-warning">
+		<i class="icon-info"></i> &nbsp;<?php echo Text::_('PLG_QTC_DEFAULT_ZONESHIPPING_COMPLETE_RANGE_HELP'); ?>
+	</div>
+
+	<!-- div id Added by Deepali -->
+	 <div id="qtc_shipping_list">
+		<table class=" table table-striped">
+			<thead>
+				<tr>
+					<th width="20%"><?php echo Text::_("PLG_QTC_DEFAULT_ZONESHIPPING_ZONES"); ?></th>
+
+					<?php
+					if ($shipMethDetail['shipping_type'] !=3)
+					{
+					?>
+						<th width="20%"><?php echo Text::_("PLG_QTC_DEFAULT_ZONESHIPPING_RANGE"); ?></th>
+					<?php
+					}
+					?>
+					<th width="25%"><?php echo Text::_("PLG_QTC_DEFAULT_ZONESHIPPING_SHIP_COST"); ?></th>
+					<th width="25%"><?php echo Text::_("PLG_QTC_DEFAULT_ZONESHIPPING_HANDLE_FEE"); ?></th>
+					<th width=""></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>
+						<?php
+						$default   = 0;
+						$options   = array();
+						$options[] = HTMLHelper::_('select.option', "", Text::_('PLG_QTC_DEFAULT_ZONESHIPPING_SEL_ZONE'));
+
+						foreach ($shipFormData['zonelist'] as $zone)
+						{
+							$profileText = '';
+							$profileText = $zone['name'] . '  [' . Text::_('PLG_QTC_DEFAULT_ZONESHIPPING_STORE') . ':' . $zone['storeName'] . ' ] ';
+							$options[]   = HTMLHelper::_('select.option', $zone['id'], $profileText);
+						}
+
+						echo HTMLHelper::_('select.genericlist',$options,"zone_id",'class="form-select"  required="" aria-invalid="false" size="1" ','value','text',$default,'zone_id');
+						?>
+					</td>
+
+					<?php
+					if ($shipMethDetail['shipping_type'] !=3)
+					{
+						$showWeightUnite   = ($shipMethDetail['shipping_type'] == 2) ? 1 : 0;
+						$weightUniteSymbol = $qtczoneShipHelper->getWeightUniteSymbol();
+					?>
+					<td>
+						<div class="input-append curr_margin ">
+							<input type="number" name="rangeFrom" size="" id="qtc_shipping_range_start" value="" class=" input-mini " placeholder="<?php echo Text::_("PLG_QTC_DEFAULT_ZONESHIPPING_FROM_HINT"); ?>">
+							<?php
+							if ($showWeightUnite ==1 )
+							{
+								?>
+								<span class="add-on "><?php echo $weightUniteSymbol; ?></span>
+								<?php
+							} ?>
+						</div>
+						<br/>
+						<?php echo Text::_("PLG_QTC_DEFAULT_ZONESHIPPING_TO"); ?>
+						<br/>
+						<div class="input-append curr_margin ">
+							<input type="number" name="rangeTo" size="" id="qtc_shipping_range_end" value="" class=" input-mini " placeholder="<?php echo Text::_("PLG_QTC_DEFAULT_ZONESHIPPING_TO_HINT"); ?>">
+							<?php
+							if ($showWeightUnite ==1 )
+							{?>
+								<span class="add-on "><?php echo $weightUniteSymbol; ?></span>
+							<?php 
+							} ?>
+						</div>
+					</td>
+					<?php
+					}
+					?>
+					<td class="qtc_ship_rates_validate">
+						<?php
+						// Show shipping cost fields
+						echo $productHelper->getMultipleCurrFields($name = 'shipCost');
+						?>
+					</td>
+					<td class="qtc_handle_rates_validate">
+						<?php
+						// Show shipping cost fields
+						echo $productHelper->getMultipleCurrFields($name = 'handleCost');
+						?>
+					</td>
+					<td>
+						<input class="btn btn-primary" type="button" onclick="qtcAddShipMethRates()" value="<?php echo Text::_("PLG_QTC_DEFAULT_ZONESHIPPING_ADD_RATE"); ?>"
+						class="button" />
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<!-- plugin related things -->
+	<input type="hidden" name="plugview" value="default" />
+	<input type="hidden" name="shipMethId" value="" />
+	<input type="hidden" name="plugtask" value="addShipMethRate" />
+	<input type="hidden" name="boxchecked" value="0" />
+</form>
+
+<!-- For Error Display-->
+<div class='row-fluid'>
+	<div class="error alert alert-danger qtcError" style="display: none;">
+		<?php echo Text::_('COM_QUICK2CART_ZONE_ERROR'); ?>
+		<i class="icon-cancel pull-right" style="align: right;"
+			onclick="techjoomla.jQuery(this).parent().fadeOut();"> </i> <br />
+		<hr />
+		<div id="qtcErrorContentDiv"></div>
+	</div>
+</div>
+
+<div class="">
+	<!-- Show rates list -->
+	<table class="adminlist table table-striped table-bordered">
+		<thead>
+			<tr>
+				<th width="25%"><?php echo Text::_('PLG_QTC_DEFAULT_ZONESHIPPING_ZONES'); ?> </th>
+
+				<?php
+				if ($shipMethDetail['shipping_type'] !=3)
+				{
+				?>
+					<th width="10%"><?php echo Text::_("PLG_QTC_DEFAULT_ZONESHIPPING_RANGE"); ?></th>
+				<?php
+				}
+				?>
+				<th width="20%"><?php echo Text::_("PLG_QTC_DEFAULT_ZONESHIPPING_SHIP_COST"); ?></th>
+				<th width="20%"><?php echo Text::_("PLG_QTC_DEFAULT_ZONESHIPPING_HANDLE_FEE"); ?></th>
+				<th width="20%"><?php echo Text::_("PLG_QTC_DEFAULT_ZONESHIPPING_ACTION"); ?></th>
+			</tr>
+		</thead>
+		<tbody id="tableBody">
+		<?php
+		$i = 1;
+
+		if (!empty($shipFormData['ratelist']))
+		{
+			$rateList = $shipFormData['ratelist'];
+			foreach ($rateList as $rate)
+			{
+				$qtcRateId = $rate['rateId'];
+				?>
+				<tr id="qtcRateId_<?php echo $rate['rateId'];?>">
+					<td id="qtczoneTd_<?php echo $qtcRateId;?>" >
+					<?php
+						if (!empty($rate['zone_id']))
+						{
+							$zoneDetail =  $zoneHelper->getZoneDetail($rate['zone_id']);
+							echo $zoneDetail['name'] . ' <br/>[' . Text::_('PLG_QTC_DEFAULT_ZONESHIPPING_STORE') . ':' . $zoneDetail['title'] . ' ] ';
+						}
+					?>
+					</td>
+
+					<?php
+					if ($shipMethDetail['shipping_type'] !=3)
+					{
+					?>
+						<td id="qtcRangeTd_<?php echo $qtcRateId;?>" >
+							<?php
+							echo $rate['rangeFrom'];
+							echo " " . Text::_("PLG_QTC_DEFAULT_ZONESHIPPING_TO") . " " ;
+							echo $rate['rangeTo'];
+						?>
+						</td>
+					<?php
+					}
+					?>
+					<td id="qtcShipCostTd_<?php echo $qtcRateId;?>" >
+						<?php
+						$shipCost = array();
+
+						foreach ($rate['rateCurrDetails'] as $rateDetail)
+						{
+							$shipCost[] = number_format($rateDetail['shipCost'], 2) . '  ' . $rateDetail['currency'];
+						}
+
+						echo implode(', ',$shipCost);
+						?>
+					</td>
+
+					<td id="qtcHandleCostTd_<?php echo $qtcRateId;?>" >
+						<?php
+						// Handling cost.
+						$handleCost = array();
+
+						foreach ($rate['rateCurrDetails'] as $rateDetail)
+						{
+							$handleCost[] =	number_format($rateDetail['handleCost'], 2) . '  ' . $rateDetail['currency'];
+						}
+						echo implode(', ',$handleCost);
+						?>
+					</td>
+
+					<!-- Action -->
+					<td id="qtcActionTd_<?php echo $qtcRateId;?>" >
+						
+						<?php
+						$editRateLink = "index.php?option=com_quick2cart&view=shipping&layout=list&plugview=editrate&extension_id=" . $extension_id . "&Itemid=" . $itemid . "&methodId=" . $methodId . "&rateId=" . $rate['rateId'] . '&tmpl=component';
+						?>
+						<button class="btn btn-medium btn-primary" type="button" onclick="toggleShippingZoneRateModal('<?php echo $rate['rateId'];?>');">
+							<?php echo Text::_('COM_QUICK2CART_ZONERULE_EDIT'); ?>
+						</button>
+						<?php
+							echo HTMLHelper::_(
+								'bootstrap.renderModal',
+								'setShippingZoneRateModal_' . $rate['rateId'],
+								array(
+									'title'      => Text::_('COM_QUICK2CART_ZONERULE_EDIT'),
+									'url'        => $editRateLink,
+									'modalWidth' => '80',
+									'bodyHeight' => '70',
+									'height'     => '600px',
+									'width'      => '1200px',
+								)
+							)
+						?>
+						<input onclick="qtcDeleteShipRate(<?php echo $rate['rateId']; ?>, this);" class="btn btn-danger btn-medium" type="button" value="<?php echo Text::_("PLG_QTC_DEFAULT_ZONESHIPPING_DELETE"); ?>">
+					</td>
+				</tr>
+				<?php
+			}
+		}?>
+		</tbody>
+	</table>
+</div>
+

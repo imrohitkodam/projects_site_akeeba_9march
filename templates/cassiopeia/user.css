@@ -1,0 +1,5 @@
+/* Example: Ensuring table containers are visible */
+.os-subscribe-table {
+    display: block !important;
+    visibility: visible !important;
+}

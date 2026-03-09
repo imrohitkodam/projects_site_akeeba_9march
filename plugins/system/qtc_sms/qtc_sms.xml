@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="3.0" type="plugin" group="system" method="upgrade">
+	<name>plg_system_qtc_sms</name>
+	<author>Techjoomla</author>
+	<authorEmail>extensions@techjoomla.com</authorEmail>
+	<authorUrl>https://techjoomla.com</authorUrl>
+	<copyright>Copyright (C) 2010 - 2025 Techjoomla. All rights reserved.</copyright>
+	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+	<creationDate>2nd Jul 2025</creationDate>
+	<version>5.1.0</version>
+	<description>PLG_SYSTEM_QTC_SMS_DESCRIPTION</description>
+	<files>
+		<filename plugin="qtc_sms">qtc_sms.php</filename>
+		<folder>qtc_sms</folder>
+		<filename>index.html</filename>
+	</files>
+	<languages folder="language/en-GB">
+		<language tag="en-GB">en-GB.plg_system_qtc_sms.ini</language>
+		<language tag="en-GB">en-GB.plg_system_qtc_sms.sys.ini</language>
+	</languages>
+	<config>
+		<fields name="params" addfieldpath="/plugins/system/qtc_sms/qtc_sms/elements">
+			<fieldset name="basic">
+				<field name="sms_options" type="smsplg" default="" label="PLG_SYSTEM_QTC_SMS_OPTIONS_DESC_NAME" description="PLG_SYSTEM_QTC_SMS_OPTIONS_DESC" />
+				<field name="order_status" type="list" default="" label="PLG_SYSTEM_QTC_SMS_SELECT_ORDER_STATUS_OPTION" description="PLG_SYSTEM_QTC_SMS_SELECT_ORDER_STATUS_OPTION_DESC" class="articleselectbox" multiple="multiple">
+					<option value="Confirmed">COM_QUICK2CART_ORDER_STATUS_CONFIRMED</option>
+					<option value="Refunded">COM_QUICK2CART_ORDER_STATUS_REFUND</option>
+					<option value="Shipped">COM_QUICK2CART_ORDER_STATUS_SHIPPED</option>
+					<option value="Pending">COM_QUICK2CART_ORDER_STATUS_PENDING</option>
+				</field>
+			</fieldset>
+		</fields>
+	</config>
+</extension>
