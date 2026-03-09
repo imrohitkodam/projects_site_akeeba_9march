@@ -7,7 +7,7 @@
 	<authorUrl>https://techjoomla.com</authorUrl>
 	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
 	<creationDate>2nd Jul 2025</creationDate>
-	<version>5.1.0</version>
+	<version>5.1.1</version>
 	<description>PLG_QTCSHIPPING_QTC_PINWISE_SHIPPING_DESCRIPTION</description>
 	<files>
 		<filename plugin="qtc_pinwise_shipping">qtc_pinwise_shipping.php</filename>

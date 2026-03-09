@@ -548,7 +548,7 @@ return array(
     'symbol' => 'Kč',
     'decimal' => ',',
     'currencyName' => 'Czech Koruna',
-    'decimalCurrencyName' => '',
+    'decimalCurrencyName' => 'haléř',
   ),
   'DKK' =>
   array(

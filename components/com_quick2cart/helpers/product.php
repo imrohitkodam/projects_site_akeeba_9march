@@ -1903,7 +1903,9 @@ class ProductHelper
 			$file_extension = strtolower(substr(strrchr($filename, "."), 1));
 			$ctype          = $productHelper->datei_mime($file_extension);
 
-			ob_end_clean();
+			while (ob_get_level()) {
+				ob_end_clean();
+			}
 
 			//  Needed for MS IE - otherwise content disposition is not used?
 			if (ini_get('zlib.output_compression'))

@@ -944,15 +944,18 @@ if (empty($this->cart))
 						<button id="btnWizardPrev" type="button" style="display:none" class="btn btn-primary float-start" >
 							<i class="<?php echo Q2C_ICON_ARROW_CHEVRON_LEFT; ?> <?php echo Q2C_ICON_WHITECOLOR; ?>" ></i>&nbsp;<?php echo Text::_('COM_QUICK2CART_PREV');?>
 						</button>
-						<!-- Earlier, if zero price was not allowed, it used to show the error at the final step, but now it will display the error at the very first step -->
-						<button 
-    							id="btnWizardNext" 
-    							type="button" 
-    							class="btn btn-primary float-end" 
-    							data-last="Finish" 
-    							onclick="generateOtpAndNext();">
-    							<span><?php echo Text::_("COM_QUICK2CART_BTN_SAVEANDNEXT"); ?></span>
-   								<i class="<?php echo Q2C_ICON_ARROW_CHEVRON_RIGH; ?> <?php echo Q2C_ICON_WHITECOLOR; ?>"></i>
+						<!-- Next/Save and Next Button -->
+						<?php
+							$otpEnabled = $this->params->get('enable_otp', 0);
+						?>
+						<button
+							id="btnWizardNext"
+							type="button"
+							class="btn btn-primary float-end"
+							data-last="Finish"
+							onclick="<?php echo ($otpEnabled ? 'generateOtpAndNext();' : 'btnWizardNext();'); ?>">
+							<span><?php echo Text::_("COM_QUICK2CART_BTN_SAVEANDNEXT"); ?></span>
+							<i class="<?php echo Q2C_ICON_ARROW_CHEVRON_RIGH; ?> <?php echo Q2C_ICON_WHITECOLOR; ?>"></i>
 						</button>
 					</div>
 				</div>
@@ -989,32 +992,31 @@ if (empty($this->cart))
 	var savennextbtn_text="<?php echo Text::_("COM_QUICK2CART_BTN_SAVEANDNEXT");?>";
 	var savenexitbtn_text="<?php echo Text::_("COM_QUICK2CART_BTN_SAVEANDEXIT");?>";
 	var root_url = "<?php echo Uri::root(); ?>";
-	var otpSentMsg = "<?php echo Text::_('COM_QUICK2CART_OTP_SENT_SUCCESSFULLY'); ?>";
-	var otpFailedMsg = "<?php echo Text::_('COM_QUICK2CART_OTP_GENERATION_FAILED'); ?>";
-
-	function generateOtpAndNext() {
-		var activeStep = jQuery('.tab-pane.step-pane.active').attr('id');
-
-		if (activeStep !== 'step2') {
-			btnWizardNext();
-			return;
-		}
-
-		jQuery.ajax({
-			url: root_url + 'index.php?option=com_quick2cart&task=cartcheckout.generateOtp',
-			type: 'POST',
-			dataType: 'json',
-			success: function(response) {
-				if (response && response.success) {
-					jQuery('#otp-msg').css('color', 'green').html(otpSentMsg);
-					btnWizardNext();
-				} else {
+	<?php if ($otpEnabled): ?>
+		var otpSentMsg = "<?php echo Text::_('COM_QUICK2CART_OTP_SENT_SUCCESSFULLY'); ?>";
+		var otpFailedMsg = "<?php echo Text::_('COM_QUICK2CART_OTP_GENERATION_FAILED'); ?>";
+		function generateOtpAndNext() {
+			var activeStep = jQuery('.tab-pane.step-pane.active').attr('id');
+			if (activeStep !== 'step2') {
+				btnWizardNext();
+				return;
+			}
+			jQuery.ajax({
+				url: root_url + 'index.php?option=com_quick2cart&task=cartcheckout.generateOtp',
+				type: 'POST',
+				dataType: 'json',
+				success: function(response) {
+					if (response && response.success) {
+						jQuery('#otp-msg').css('color', 'green').html(otpSentMsg);
+						btnWizardNext();
+					} else {
+						jQuery('#otp-msg').css('color', 'red').html(otpFailedMsg);
+					}
+				},
+				error: function() {
 					jQuery('#otp-msg').css('color', 'red').html(otpFailedMsg);
 				}
-			},
-			error: function() {
-				jQuery('#otp-msg').css('color', 'red').html(otpFailedMsg);
-			}
-		});
-	}
+			});
+		}
+	<?php endif; ?>
 </script>

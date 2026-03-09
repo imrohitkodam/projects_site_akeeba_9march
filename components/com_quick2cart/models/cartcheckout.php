@@ -1790,7 +1790,7 @@ class Quick2cartModelcartcheckout extends BaseDatabaseModel
 			$quick2CartMailsHelper = new Quick2CartMailsHelper;
 			$quick2CartMailsHelper->sendOtpToUser($userEmail, $otp);
 
-			return ['success' => true, 'otp' => $otp, 'email' => $userEmail];
+			return ['success' => true];
 		}
 		catch (Exception $e)
 		{

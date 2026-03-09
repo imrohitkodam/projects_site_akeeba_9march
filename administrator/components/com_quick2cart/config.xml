@@ -154,6 +154,10 @@
 	</fieldset>
 	<!--Payment settings options -->
 	<fieldset name="payment_settings" label="COM_QTC_PAYMENT_SETTINGS" description="" addfieldpath="/administrator/components/com_quick2cart/assets/elements">
+		<field name="enable_otp" type="radio" default="0" label="COM_QUICK2CART_ENABLE_OTP_LABEL" description="COM_QUICK2CART_ENABLE_OTP_DESC" class="btn-group">
+			<option value="1">JYES</option>
+			<option value="0">JNO</option>
+  		</field>
 		<field name="sale_mail" type="text" default="" label="QTC_SALES_EMAIL" description="QTC_SALES_EMAIL_DESC" />
 		<field name="commission" type="text" default="0" class="validate-numeric" label="COM_QTC_SALES_COMMISSION" description="COM_QTC_SALES_COMMISSION_DESC" />
 		<field name="gateways" type="gatewayplg" multiple="true" label="SELECT_GATEWAY" layout="joomla.form.field.list-fancy-select" description="SELECT_GATEWAY_DES" />

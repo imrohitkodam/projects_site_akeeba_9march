@@ -26,7 +26,7 @@ class TJNotificationTablePreferences extends Table
 	 */
 	public function __construct(&$db)
 	{
-		// This table has no primary key 'id' column; it uses a composite key (user_id, client, key, provider)
-		parent::__construct('#__tj_notification_user_exclusions', null, $db);
+		$this->setColumnAlias('published', 'state');
+		parent::__construct('#__tj_notification_user_exclusions', 'id', $db);
 	}
 }

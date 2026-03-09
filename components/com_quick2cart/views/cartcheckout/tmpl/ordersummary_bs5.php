@@ -902,7 +902,9 @@ if (isset($allowToScheduleDeliverySlot) && $allowToScheduleDeliverySlot == '1')
 				<?php
 				if ($finalPaymentAmount > 0)
 				{
+					$otpEnabled = $params->get('enable_otp', 0);
 					?>
+					<?php if($otpEnabled) { ?>
 					<!-- OTP Verification UI Start -->
 					<div class="qtcAddBorder p-4 mb-4">
 						<h3 class="mb-4"><?php echo Text::_("COM_QUICK2CART_VERIFY_OTP_TITLE"); ?></h3>
@@ -932,6 +934,7 @@ if (isset($allowToScheduleDeliverySlot) && $allowToScheduleDeliverySlot == '1')
 						<div class="mt-3" id="otp_status_message"></div>
 						<div id="otp-msg" class="fw-semibold" style="color:red; margin-top:10px;"></div>
 					</div>
+					<?php } ?>
 					<!-- OTP Verification UI End -->
 					<div>
 						<button class="btn btn-large btn-success" id="qtc-co-place-order" onclick="processOrder()" type="button" style="display:none;">
@@ -967,7 +970,14 @@ if (isset($allowToScheduleDeliverySlot) && $allowToScheduleDeliverySlot == '1')
 	var otpVerifiedFail = "<?php echo Text::_('COM_QUICK2CART_OTP_VERIFIED_FAIL'); ?>";
 	var otpResentSuccess = "<?php echo Text::_('COM_QUICK2CART_OTP_RESENT_SUCCESS'); ?>";
 	var otpResentFail = "<?php echo Text::_('COM_QUICK2CART_OTP_RESENT_FAIL'); ?>";
+	var otpEnabled = <?php echo (int)$otpEnabled; ?>;
 
+	jQuery(document).ready(function() {
+    if (!otpEnabled) {
+        jQuery('#qtc-co-place-order').show();
+    }})
+
+	<?php if($otpEnabled) { ?>
 	function confirmOtp() {
 		var otp = jQuery('#otp_input').val();
 		jQuery.ajax({
@@ -1011,4 +1021,5 @@ if (isset($allowToScheduleDeliverySlot) && $allowToScheduleDeliverySlot == '1')
 			}
 		});
 	}
+	<?php } ?>
 </script>

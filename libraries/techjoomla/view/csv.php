@@ -148,14 +148,16 @@ class TjExportCsv extends HtmlView
 		{
 			$fsize = filesize($file);
 			$path_parts = pathinfo($file);
-
+			
 			header("Cache-Control: public, must-revalidate");
 			header('Cache-Control: pre-check=0, post-check=0, max-age=0');
 			header("Expires: 0");
 			header("Content-Description: File Transfer");
+			header("Content-Type: application/octet-stream");
+			header("Content-Transfer-Encoding: binary");
 			header("Content-Type: text/csv");
 			header("Content-Length: " . (string) $fsize);
-			header("Content-Disposition: filename=\"" . $path_parts["basename"] . "\"");
+			header("Content-Disposition: attachment; filename=\"" . $path_parts["basename"] . "\"");
 			$fd = fopen($file, "r");
 
 			if (empty($fd))
