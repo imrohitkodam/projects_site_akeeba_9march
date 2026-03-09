@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extension version="3.0" type="plugin" group="qtcshipping" method="upgrade">
+	<name>shipping_charges_to_quick2Cart</name>
+	<author>Techjoomla</author>
+	<creationDate>2nd Jul 2025</creationDate>
+	<copyright>Copyright (C) 2010 - 2025 Techjoomla. All rights reserved.</copyright>
+	<authorEmail>extensions@techjoomla.com</authorEmail>
+	<authorUrl>https://techjoomla.com</authorUrl>
+	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+	<version>5.1.0</version>
+	<description>SHIPPING_CHARGES_TO_QUICK2CART_DESC</description>
+	<files>
+		<filename plugin="qtc_shipping_default">qtc_shipping_default.php</filename>
+	</files>
+	<languages folder="language/en-GB">
+		<language tag="en-GB">en-GB.plg_qtcshipping_qtc_shipping_default.ini</language>
+		<language tag="en-GB">en-GB.plg_qtcshipping_qtc_shipping_default.sys.ini</language>
+	</languages>
+	<!-- parameters for Joomla 1.5.x -->
+	<params>
+		<param name="shipping_limit" type="text" default="200" label="PLG_SHIPIN" description="PLG_SHIPIN_DESC" />
+		<param name="shipping_per" type="text" default="30" label="PLG_SHIPIN_CHAR" description="PLG_SHIPIN_CHAR_DESC" />
+	</params>
+	<!-- Fields for Joomla 1.6.x and onwards -->
+	<config name="params">
+		<fields name="params">
+			<fieldset name="basic">
+				<field name="shipping_limit" type="text" default="200" label="PLG_SHIPIN" description="PLG_SHIPIN_DESC" />
+				<field name="shipping_per" type="text" default="30" label="PLG_SHIPIN_CHAR" description="PLG_SHIPIN_CHAR_DESC" />
+			</fieldset>
+		</fields>
+	</config>
+</extension>

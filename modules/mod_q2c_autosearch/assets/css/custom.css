@@ -1,0 +1,25 @@
+.error
+{
+	color:red;
+}
+
+#qtcAutoSearchFilter #modq2c-autosuggest-data-container {
+	display: none;
+	background: white;
+	width: 196px;
+	max-height: 300px;
+	overflow-y: auto; 
+	z-index :10000;
+}
+
+#qtcAutoSearchFilter #modq2c-autosuggest-data-container li {
+	list-style: none;
+	padding: 5px;
+	border : 1px solid white;
+	color : black;
+}
+
+#qtcAutoSearchFilter #modq2c-autosuggest-data-container li:hover {
+	background: lightgray;
+	cursor: pointer;
+}

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extension type="plugin" group="finder" method="upgrade">
+	<name>PLG_FINDER_QUICK2CARTPRODUCTS</name>
+	<version>5.1.0</version>
+	<description>PLG_FINDER_QUICK2CARTPRODUCTS_XML_DESCRIPTION</description>
+
+	<author>Techjoomla</author>
+	<authorEmail>extensions@techjoomla.com</authorEmail>
+	<authorUrl>https://techjoomla.com</authorUrl>
+	<copyright>Copyright (C) 2010 - 2025 Techjoomla. All rights reserved.</copyright>
+	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+	<creationDate>2nd Jul 2025</creationDate>
+	<files>
+		<filename plugin="quick2cartproducts">quick2cartproducts.php</filename>
+	</files>
+	<languages>
+		<language tag="en-GB">en-GB/en-GB.plg_finder_quick2cartproducts.ini</language>
+		<language tag="en-GB">en-GB/en-GB.plg_finder_quick2cartproducts.sys.ini</language>
+	</languages>
+	<config>
+		<fields name="params">
+			<fieldset name="basic" addfieldprefix="Joomla\Component\Finder\Administrator\Field">
+				
+			</fieldset>
+		</fields>
+	</config>
+</extension>

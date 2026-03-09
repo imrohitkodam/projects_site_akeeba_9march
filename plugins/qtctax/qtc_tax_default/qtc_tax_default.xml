@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="3.0" type="plugin" group="qtctax" method="upgrade">
+	<name>taxation_to_quick2Cart</name>
+	<author>Techjoomla</author>
+	<creationDate>2nd Jul 2025</creationDate>
+	<copyright>Copyright (C) 2010 - 2025 Techjoomla. All rights reserved.</copyright>
+	<authorEmail>extensions@techjoomla.com</authorEmail>
+	<authorUrl>https://techjoomla.com</authorUrl>
+	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+	<version>5.1.0</version>
+	<description>Plugin for adding Taxation to Quick2Cart</description>
+	<files>
+		<filename plugin="qtc_tax_default">qtc_tax_default.php</filename>
+	</files>
+	<languages folder="language/en-GB">
+		<language tag="en-GB">en-GB.plg_qtctax_qtc_tax_default.ini</language>
+		<language tag="en-GB">en-GB.plg_qtctax_qtc_tax_default.sys.ini</language>
+ 	</languages>
+	<!-- Fields for Joomla 1.6.x and onwards -->
+	<config name="params">
+		<fields name="params">
+			<fieldset name="basic">
+				<field name="tax_per" type="text" default="12.5" label="PLG_QTC_TAX_DEFAULT_TAX" description="PLG_QTC_TAX_DEFAULT_TAX_DESC" />
+			</fieldset>
+		</fields>
+	</config>
+</extension>

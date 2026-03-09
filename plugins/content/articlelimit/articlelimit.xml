@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension method="upgrade" type="plugin" group="content">
+    <name>PLG_ARTICLE_LIMIT</name>
+    <version>1.0</version>
+    <description>PLG_USER_ARTICLE_LIMIT_DESCRIPTION</description>
+    <author>Paweł</author>
+    <creationDate>Today</creationDate>
+    <copyright>(C) 2024 Open Source Matters, Inc.</copyright>
+    <license>GNU General Public License version 2 or later</license>
+    <namespace path="src">Pablop76\Plugin\Content\Articlelimit</namespace>
+    <files>
+        <folder plugin="articlelimit">services</folder>
+        <folder>src</folder>
+    </files>
+    <languages>
+        <language tag="en-GB">language/en-GB/plg_content_articlelimit.ini</language>
+        <language tag="en-GB">language/en-GB/plg_content_articlelimit.sys.ini</language>
+        <language tag="pl-PL">language/pl-PL/plg_content_articlelimit.ini</language>
+        <language tag="pl-PL">language/pl-PL/plg_content_articlelimit.sys.ini</language>
+    </languages>
+    <config>
+        <fields name="params">
+            <fieldset name="basic">
+                <field
+                    name="default_limit"
+                    type="number"
+                    label="PLG_USER_ARTICLELIMIT_DEFAULT_LIMIT_LABEL"
+                    description="PLG_USER_ARTICLELIMIT_DEFAULT_LIMIT_DESC"
+                    default="0"
+                    min="0"
+                    size="5"
+                    filter="integer"
+                />
+
+                <field
+                    name="author_limit"
+                    type="number"
+                    label="PLG_USER_ARTICLELIMIT_AUTHOR_LIMIT_LABEL"
+                    description="PLG_USER_ARTICLELIMIT_AUTHOR_LIMIT_DESC"
+                    default="0"
+                    min="0"
+                    size="5"
+                    filter="integer"
+                />
+
+                <field
+                    name="exclude_categories"
+                    type="category"
+                    multiple="true"
+                    label="PLG_USER_ARTICLELIMIT_EXCLUDE_CATEGORIES_LABEL"
+                    description="PLG_USER_ARTICLELIMIT_EXCLUDE_CATEGORIES_DESC"
+                    extension="com_content"
+                    default="[]"
+                >
+                    <option value="">JNONE</option>
+                </field>
+
+                <field
+                    name="count_states"
+                    type="checkboxes"
+                    label="PLG_USER_ARTICLELIMIT_COUNT_STATES_LABEL"
+                    description="PLG_USER_ARTICLELIMIT_COUNT_STATES_DESC"
+                >
+                    <option value="1">JPUBLISHED</option>
+                    <option value="0">JUNPUBLISHED</option>
+                    <option value="2">JARCHIVED</option>
+                    <option value="-2">JTRASHED</option>
+                </field>
+            </fieldset>
+        </fields>
+    </config>
+</extension>

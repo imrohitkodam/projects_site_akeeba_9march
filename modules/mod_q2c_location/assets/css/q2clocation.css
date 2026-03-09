@@ -1,0 +1,47 @@
+.modq2c_location_popover_container {
+	min-height: 20vh;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+}
+
+#locator-input-section {
+	margin: 10px;
+	max-width: 600px;
+}
+
+.modq2c_location #previousAddress{
+   text-align: left;
+}
+
+.modq2c_location #autocomplete{
+   width:100%
+}
+
+.modq2c_location .previousEachAddress{
+  display: contents;
+}
+
+.modq2c_location hr {
+	width: 90%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.modq2c_location #location-icon{
+	position: absolute;
+}
+.modq2c_location .city-location{
+	margin-left: 10px;
+}
+.modq2c_location .city-location #city{
+	word-wrap: break-word;
+	width:200px
+}
+.modq2c_location #locator-button{
+    position: absolute;
+    right: 24px;
+    top: 15px;
+}

@@ -1,0 +1,2 @@
+1.0.4
+*	Added compatibility with Joomla v 5.x 6.x

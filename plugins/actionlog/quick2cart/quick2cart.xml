@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="3.4" type="plugin" group="actionlog" method="upgrade">
+	<name>plg_actionlog_quick2cart</name>
+	<version>5.1.0</version>
+	<creationDate>2nd Jul 2025</creationDate>
+	<author>Techjoomla</author>
+	<authorEmail>extensions@techjoomla.com</authorEmail>
+	<authorUrl>https://techjoomla.com</authorUrl>
+	<copyright>Copyright (C) 2010 - 2025 Techjoomla. All rights reserved.</copyright>
+	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+	<description>PLG_ACTIONLOG_QUICK2CART_XML_DESCRIPTION</description>
+	<files>
+		<filename plugin="quick2cart">quick2cart.php</filename>
+		<filename>index.html</filename>
+	</files>
+	<languages folder="language">
+		<language tag="en-GB">en-GB/en-GB.plg_actionlog_quick2cart.ini</language>
+		<language tag="en-GB">en-GB/en-GB.plg_actionlog_quick2cart.sys.ini</language>
+	</languages>
+	<config>
+		<fields name="params">
+			<fieldset name="basic">
+				<field name="logActionForOrderPlaced" type="radio" label="PLG_ACTIONLOG_QUICK2CART_LOG_ACTION_ORDER_PLACED_LBL" description="PLG_ACTIONLOG_QUICK2CART_LOG_ACTION_ORDER_PLACED_DESC" default="1" class="btn-group btn-group-yesno">
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+				<field name="logActionForOrderDelete" type="radio" label="PLG_ACTIONLOG_QUICK2CART_LOG_ACTION_ORDER_DELETE_LBL" description="PLG_ACTIONLOG_QUICK2CART_LOG_ACTION_ORDER_DELETE_DESC" default="1" class="btn-group btn-group-yesno">
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+				<field name="logActionForDigitalFileDownload" type="radio" label="PLG_ACTIONLOG_QUICK2CART_LOG_ACTION_DOWNLOAD_FILE_LBL" description="PLG_ACTIONLOG_QUICK2CART_LOG_ACTION_DOWNLOAD_FILE_DESC" default="1" class="btn-group btn-group-yesno">
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+				<field name="logActionForCreateZone" type="radio" label="PLG_ACTIONLOG_QUICK2CART_LOG_ACTION_CREATE_ZONE_LBL" description="PLG_ACTIONLOG_QUICK2CART_LOG_ACTION_CREATE_ZONE_DESC" default="0" class="btn-group btn-group-yesno">
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+				<field name="logActionForDeleteZone" type="radio" label="PLG_ACTIONLOG_QUICK2CART_LOG_ACTION_DELETE_ZONE_LBL" description="PLG_ACTIONLOG_QUICK2CART_LOG_ACTION_DELETE_ZONE_DESC" default="0" class="btn-group btn-group-yesno">
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+				<field name="logActionForCreateTaxRate" type="radio" label="PLG_ACTIONLOG_QUICK2CART_LOG_ACTION_CREATE_TAX_RATE_LBL" description="PLG_ACTIONLOG_QUICK2CART_LOG_ACTION_CREATE_TAX_RATE_DESC" default="0" class="btn-group btn-group-yesno">
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+				<field name="logActionForDeleteTaxRate" type="radio" label="PLG_ACTIONLOG_QUICK2CART_LOG_ACTION_DELETE_TAX_RATE_LBL" description="PLG_ACTIONLOG_QUICK2CART_LOG_ACTION_DELETE_TAX_RATE_DESC" default="0" class="btn-group btn-group-yesno">
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+				<field name="logActionForCreateTaxProfile" type="radio" label="PLG_ACTIONLOG_QUICK2CART_LOG_ACTION_CREATE_TAX_PROFILE_LBL" description="PLG_ACTIONLOG_QUICK2CART_LOG_ACTION_CREATE_TAX_PROFILE_DESC" default="0" class="btn-group btn-group-yesno">
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+				<field name="logActionForDeleteTaxProfile" type="radio" label="PLG_ACTIONLOG_QUICK2CART_LOG_ACTION_DELETE_TAX_PROFILE_LBL" description="PLG_ACTIONLOG_QUICK2CART_LOG_ACTION_DELETE_TAX_PROFILE_DESC" default="0" class="btn-group btn-group-yesno">
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+				<field name="logActionForCreateShippingMethod" type="radio" label="PLG_ACTIONLOG_QUICK2CART_LOG_ACTION_CREATE_SHIPPING_METHOD_LBL" description="PLG_ACTIONLOG_QUICK2CART_LOG_ACTION_CREATE_SHIPPING_METHOD_DESC" default="0" class="btn-group btn-group-yesno">
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+				<field name="logActionForDeleteShippingMethod" type="radio" label="PLG_ACTIONLOG_QUICK2CART_LOG_ACTION_DELETE_SHIPPING_METHOD_LBL" description="PLG_ACTIONLOG_QUICK2CART_LOG_ACTION_DELETE_SHIPPING_METHOD_DESC" default="0" class="btn-group btn-group-yesno">
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+				<field name="logActionForCreateShippingProfile" type="radio" label="PLG_ACTIONLOG_QUICK2CART_LOG_ACTION_CREATE_SHIPPING_PROFILE_LBL" description="PLG_ACTIONLOG_QUICK2CART_LOG_ACTION_CREATE_SHIPPING_PROFILE_DESC" default="0" class="btn-group btn-group-yesno">
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+				<field name="logActionForDeleteShippingProfile" type="radio" label="PLG_ACTIONLOG_QUICK2CART_LOG_ACTION_DELETE_SHIPPING_PROFILE_LBL" description="PLG_ACTIONLOG_QUICK2CART_LOG_ACTION_DELETE_SHIPPING_PROFILE_DESC" default="0" class="btn-group btn-group-yesno">
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+				<field name="logActionForCreateStore" type="radio" label="PLG_ACTIONLOG_QUICK2CART_LOG_ACTION_CREATE_STORE_LBL" description="PLG_ACTIONLOG_QUICK2CART_LOG_ACTION_CREATE_STORE_DESC" default="1" class="btn-group btn-group-yesno">
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+				<field name="logActionForDeleteStore" type="radio" label="PLG_ACTIONLOG_QUICK2CART_LOG_ACTION_DELETE_STORE_LBL" description="PLG_ACTIONLOG_QUICK2CART_LOG_ACTION_DELETE_STORE_DESC" default="1" class="btn-group btn-group-yesno">
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+				<field name="logActionForCreateProduct" type="radio" label="PLG_ACTIONLOG_QUICK2CART_LOG_ACTION_CREATE_PRODUCT_LBL" description="PLG_ACTIONLOG_QUICK2CART_LOG_ACTION_CREATE_PRODUCT_DESC" default="1" class="btn-group btn-group-yesno">
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+				<field name="logActionForDeleteProduct" type="radio" label="PLG_ACTIONLOG_QUICK2CART_LOG_ACTION_DELETE_PRODUCT_LBL" description="PLG_ACTIONLOG_QUICK2CART_LOG_ACTION_DELETE_PRODUCT_DESC" default="1" class="btn-group btn-group-yesno">
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+				<field name="logActionForCreatePromotion" type="radio" label="PLG_ACTIONLOG_QUICK2CART_LOG_ACTION_CREATE_PROMOTION_LBL" description="PLG_ACTIONLOG_QUICK2CART_LOG_ACTION_CREATE_PROMOTION_DESC" default="0" class="btn-group btn-group-yesno">
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+				<field name="logActionForDeletePromotion" type="radio" label="PLG_ACTIONLOG_QUICK2CART_LOG_ACTION_DELETE_PROMOTION_LBL" description="PLG_ACTIONLOG_QUICK2CART_LOG_ACTION_DELETE_PROMOTION_DESC" default="0" class="btn-group btn-group-yesno">
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+				<field name="logActionForCreatePayout" type="radio" label="PLG_ACTIONLOG_QUICK2CART_LOG_ACTION_CREATE_PAYOUT_LBL" description="PLG_ACTIONLOG_QUICK2CART_LOG_ACTION_CREATE_PAYOUT_DESC" default="1" class="btn-group btn-group-yesno">
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+				<field name="logActionForDeletePayout" type="radio" label="PLG_ACTIONLOG_QUICK2CART_LOG_ACTION_DELETE_PAYOUT_LBL" description="PLG_ACTIONLOG_QUICK2CART_LOG_ACTION_DELETE_PAYOUT_DESC" default="1" class="btn-group btn-group-yesno">
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+			</fieldset>
+		</fields>
+	</config>
+</extension>

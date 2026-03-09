@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="plugin" group="finder" method="upgrade">
+	<name>Finder - JPageBuilder</name>
+	<author>JExtensions Store</author>
+	<creationDate>2025-11-16</creationDate>
+	<copyright>Copyright (C) 2024 - Joomla! Extensions Store. All Rights Reserved.</copyright>
+	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+	<authorEmail>info@storejextensions.org</authorEmail>
+	<authorUrl>https://storejextensions.org</authorUrl>
+    <version>2.6</version>
+    <description>JPageBuilder Finder plugin to search JPageBuilder pages</description>
+    <namespace path="src">JExtstore\Plugin\Finder\Jpagebuilder</namespace>
+	<files>
+		<folder plugin="jpagebuilder">services</folder>
+		<folder>src</folder>
+	</files>
+</extension>

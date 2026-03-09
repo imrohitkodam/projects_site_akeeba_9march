@@ -1,0 +1,21 @@
+{
+	"$schema": "https://developer.joomla.org/schemas/json-schema/web_assets.json",
+	"name": "mod_jm_pricing_tables",
+	"version": "1.0.4",
+	"license": "GNU General Public License version 2 or later; see LICENSE.txt",
+	"description": "JM Pricing Tables Web Asset Manifest",
+	"assets":
+	[ 
+		{
+			"name": "mod_jm_pricing_tables",
+			"type": "style",
+			"uri": "mod_jm_pricing_tables/default.css"
+		}, 
+		{
+			"name": "mod_jm_pricing_tables.jmelements",
+			"type": "script",
+			"dependencies": ["jquery"],
+			"uri": "mod_jm_pricing_tables/jmelements.js"
+		}
+	]
+}

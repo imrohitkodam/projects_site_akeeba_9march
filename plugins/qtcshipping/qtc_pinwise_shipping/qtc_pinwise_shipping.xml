@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extension version="3.0" type="plugin" group="qtcshipping" method="upgrade">
+	<name>plg_qtcshipping_qtc_pinwise_shipping</name>
+	<author>Techjoomla</author>
+	<copyright>Copyright (C) 2010 - 2025 Techjoomla. All rights reserved.</copyright>
+	<authorEmail>extensions@techjoomla.com</authorEmail>
+	<authorUrl>https://techjoomla.com</authorUrl>
+	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+	<creationDate>2nd Jul 2025</creationDate>
+	<version>5.1.0</version>
+	<description>PLG_QTCSHIPPING_QTC_PINWISE_SHIPPING_DESCRIPTION</description>
+	<files>
+		<filename plugin="qtc_pinwise_shipping">qtc_pinwise_shipping.php</filename>
+		<folder>form</folder>
+	</files>
+	<languages folder="language/en-GB">
+		<language tag="en-GB">en-GB.plg_qtcshipping_qtc_pinwise_shipping.ini</language>
+		<language tag="en-GB">en-GB.plg_qtcshipping_qtc_pinwise_shipping.sys.ini</language>
+	</languages>
+	<config name="params">
+		<fields name="params">
+			<fieldset name="basic">
+				<field 
+					name="shipping_limit"
+					type="text"
+					default="200"
+					label="PLG_QTCSHIPPING_QTC_PINWISE_SHIPPING_LIMIT"
+					description="PLG_QTCSHIPPING_QTC_PINWISE_SHIPPING_LIMIT_DESC" />
+				<field
+					name="shipping_charges"
+					type="subform"
+					label="PLG_QTCSHIPPING_QTC_PINWISE_SHIPPING_CHARGES_FORM"
+					description="PLG_QTCSHIPPING_QTC_PINWISE_SHIPPING_CHARGES_FORM_DESC"
+					min=""
+					max="50"
+					formsource="/plugins/qtcshipping/qtc_pinwise_shipping/form/shipping_charges.xml"
+					multiple="true"
+					buttons="add,remove"
+					layout="joomla.form.field.subform.repeatable-table"
+					groupByFieldset="false" />
+			</fieldset>
+		</fields>
+	</config>
+</extension>

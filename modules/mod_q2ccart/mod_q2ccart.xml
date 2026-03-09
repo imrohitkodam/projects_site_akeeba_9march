@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="3.0" type="module" client ="site" method="upgrade">
+	<name>mod_q2ccart</name>
+	<author>Techjoomla</author>
+	<authorEmail>extensions@techjoomla.com</authorEmail>
+	<authorUrl>https://techjoomla.com</authorUrl>
+	<copyright>Copyright (C) 2010 - 2025 Techjoomla. All rights reserved.</copyright>
+	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+	<creationDate>22nd Oct 2019</creationDate>
+	<version>2.9.18</version>
+	<description>MOD_Q2CCART_DESC</description>
+	<languages folder="lang">
+		<language tag="en-GB">en-GB/en-GB.mod_q2ccart.sys.ini</language>
+		<language tag="en-GB">en-GB/en-GB.mod_q2ccart.ini</language>
+	</languages>
+	<files>
+		<filename module="mod_q2ccart">mod_q2ccart.php</filename>
+		<filename>index.html</filename>
+		<folder>tmpl</folder>
+		<folder>assets</folder>
+	</files>
+	<config name="params">
+		<fields name="params">
+			<fieldset name="basic">
+				<field name="moduleclass_sfx" type="text" default="" label="MOD_Q2CFILTERS_SUFIX" description="MOD_Q2CFILTERS_SUFIX_DESC" />
+			</fieldset>
+			<fieldset name="advanced">
+				<field
+					name="layout"
+					type="modulelayout"
+					label="JFIELD_ALT_LAYOUT_LABEL"
+					description="JFIELD_ALT_MODULE_LAYOUT_DESC" />
+			</fieldset>
+		</fields>
+	</config>
+</extension>

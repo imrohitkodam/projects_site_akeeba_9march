@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="3.0" type="plugin" group="content" method="upgrade">
+
+	<name>plg_Quick2Cart_Content_Widget_for_Joomla_Content</name>
+
+	<author>Techjoomla</author>
+	<authorEmail>extensions@techjoomla.com</authorEmail>
+	<authorUrl>https://techjoomla.com</authorUrl>
+	<copyright>Copyright (C) 2010 - 2025 Techjoomla. All rights reserved.</copyright>
+	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+
+	<creationDate>2nd Jul 2025</creationDate>
+	<version>5.1.0</version>
+
+	<description>PLG_QUICK2CART_CONTENT_WIDGET_FOR_JOOMLA_CONTENT_DESC</description>
+
+	<files>
+		<filename plugin="content_quick2cart">content_quick2cart.php</filename>
+		<filename>index.html</filename>
+		<folder>content_quick2cart</folder>
+	</files>
+
+	<languages folder="language">
+		<language tag="en-GB">en-GB/en-GB.plg_content_content_quick2cart.ini</language>
+		<language tag="en-GB">en-GB/en-GB.plg_content_content_quick2cart.sys.ini</language>
+ 	</languages>
+
+	<!-- Fields for Joomla 1.6.x and onwards -->
+	<config name="params">
+		<fields name="params">
+			<fieldset name="basic">
+				<!--<field name="buy_text" type="text" default="Buy" label="PLG_BUY" description="PLG_BUY_DESC" />	 -->
+				<field name="btn_pos_method" type="radio" default="normal" label="PLG_BUY_POSITION" description="DES_PLG_BUY_POSITION">
+					<option value="data_tag">DATA_TAG</option>
+					<option value="normal">NORMAL</option>
+				</field>
+				<field name="btn_pos" type="radio" default="after" label="PLG_BUY_POS" description="DES_PLG_BUY_POS">
+					<option value="before">PLG_BUY_POS_BEFORE</option>
+					<option value="after">PLG_BUY_POS_AFTER</option>
+				</field>
+				<!--
+				<field name="showprice" type="radio" default="1" label="PLG_PRICE" description="PLG_PRICE_DESC">
+					<option value="0">P_NO</option>
+					<option value="1">P_YES</option>
+				</field>
+				-->
+			</fieldset>
+		</fields>
+	</config>
+
+</extension>

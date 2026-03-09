@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="plugin" group="content" method="upgrade">
+	<name>Content - JPageBuilder</name>
+	<author>JExtensions Store</author>
+	<creationDate>2025-11-16</creationDate>
+	<copyright>Copyright (C) 2024 - Joomla! Extensions Store. All Rights Reserved.</copyright>
+	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+	<authorEmail>info@storejextensions.org</authorEmail>
+	<authorUrl>https://storejextensions.org</authorUrl>
+    <version>2.6</version>
+    <description>JPageBuilder Content plugin to add support for 3rd party components</description>
+    
+	<files>
+		<filename plugin="jpagebuilder">jpagebuilder.php</filename>
+	</files>
+</extension>

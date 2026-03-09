@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<extension type="plugin" group="content" method="upgrade">
+
+	<name>Content - Responsive Tables</name>
+	<author>web-eau.net</author>
+	<creationDate>Fev 2023</creationDate>
+	<copyright>Copyright (C) 2022 - web-eau.net - All rights reserved.</copyright>
+	<license>GNU General Public License version 2 or later</license>
+	<authorEmail>daniel@web-eau.net</authorEmail>
+	<authorUrl>https://web-eau.net</authorUrl>
+	<version>4.1.1</version>
+	<description>
+		<![CDATA[			
+			<span class="readonly" style="background: #fff; color: #1f3047; position: relative;display: block;padding: 40px;font-size: 12px;border-radius: 4px;"><h1>Responsive Tables</h1>			
+			<p>Thank you for downloading and using this extension!<br />Responsive Tables is a "new generation" plugin dedicated for Joomla versions 3.0 and above.</p>
+			<p>With this plugin, you will be able to make responsive any HTML table in your website. This plugin offer you a great implementation:<br>
+			<ul>
+			<li>Doesn't break responsive layouts,</li>
+			<li>Doesn't unnecessarily hide data,</li>
+			<li>Still lets you compare rows.</li>
+			</ul>
+			</p>
+			<p>After installation, don't forget to publish the plugin. <br />
+			On any data table in your markup, you simply need to attach the CSS class <strong>responsive rt</strong> like that: < table class="responsive rt" > and that's all !<br/>
+			This plugin was successfuly tested on Apple iPhone, iPad, on Android and also on BlackBerry OS.	
+			</p> 
+			<div style="width:100%; text-align:center;position: relative;display: inline-block;height: auto;margin: 0 0 30px 0;" >
+			<img style=" margin: 0 auto;width: 450px;position: relative;display: block;" src="../plugins/content/responsive-tables/schema.jpg" align="left" /> 
+			</div>			
+			<p class='support'>You like this extension ? Thanks in advance for posting your positive review on <strong><a href="https://extensions.joomla.org/extension/responsive-tables/" target="_blank">Joomla Extension Directory</a></strong>.</p>			
+			<p class='license'>Responsive Tables is release under <a target="_blank" href="http://www.gnu.org/licenses/gpl-2.0.html">GNU/GPL v2 license.</a></p></span>			
+		]]>
+	</description>
+	
+	<files>
+		<filename plugin="responsive-tables">responsive-tables.php</filename>
+		<filename>responsive-tables.css</filename>
+		<filename>schema.jpg</filename>
+	</files>
+	
+	<languages>
+		<language tag="en-GB">en-GB.plg_responsive_tables.ini</language>
+		<language tag="en-GB">en-GB.plg_responsive_tables.sys.ini</language>
+	</languages>
+	
+	<updateservers>
+		<server type="extension" priority="2" name="Plugin Responsive Tables">https://web-eau.net/files/responsive-tables/responsive-tables.xml</server>
+	</updateservers>
+	
+	<config>
+		<fields name="params">
+		</fields>
+	</config>
+	
+</extension>

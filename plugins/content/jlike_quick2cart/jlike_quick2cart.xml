@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE install PUBLIC "-//Joomla! 1.5//DTD plugin 1.0//EN" "http://www.joomla.org/xml/dtd/1.5/plugin-install.dtd">
+<extension version="3.0" type="plugin" group="content" method="upgrade">
+    <name>Plg_JLike_Quick2cart_Plugin</name>
+
+	<author>Techjoomla</author>
+    <copyright>Copyright (C) 2010 - 2025 Techjoomla. All rights reserved.</copyright>
+	<authorEmail>extensions@techjoomla.com</authorEmail>
+	<authorUrl>https://techjoomla.com</authorUrl>
+	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+    <creationDate>16th Nov 2018</creationDate>
+	<version>2.1.2</version>
+
+    <description>PLG_JLIKE_QUICK2CART_PLUGIN_DESC</description>
+    <files>
+        <filename plugin="jlike_quick2cart">jlike_quick2cart.php</filename>
+    </files>
+	<languages folder="language">
+		<language tag="en-GB">en-GB/en-GB.plg_content_jlike_quick2cart.ini</language>
+		<language tag="en-GB">en-GB/en-GB.plg_content_jlike_quick2cart.sys.ini</language>
+	</languages>
+	<config>
+		<fields name="params">
+			<fieldset name="basic">
+				<field name="jlike_qtcMode" type="radio" class="btn-group" label="PLG_JLIKE_ALLOW_RATINGS_REVIES" default="jqtcReviewsAnddRating" description="PLG_JLIKE_ALLOW_RATINGS_REVIES_DESC">
+					<option value="jqtcReviewsAnddRating">PLG_JLIKE_QUICK2CART_REIVEW_ND_RATING</option>
+					<option value="jqtcCommenting">PLG_JLIKE_QUICK2CART_COMMENTING</option>
+					<option value="none">PLG_JLIKE_QUICK2CART_NONE</option>
+				</field>
+
+				<field name="jlike_allow_rating" class="btn-group" type="radio" default="boughtUser" label="PLG_Q2C_JLIKE_ALLOW_RATING" description="PLG_Q2C_JLIKE_ALLOW_RATING_DESC">
+					<option value="boughtUser">PLG_Q2C_JLIKE_RATING_BROUGHT_PRODUCT</option>
+					<option value="registoredUser">PLG_Q2C_JLIKE_RATING_REGISTER_USER</option>
+				</field>
+
+				<field name="jlQtcShowLikeButtons" class="btn-group" type="radio" default="1" label="PLG_Q2C_SHOW_JLIKE_BTNS" description="PLG_Q2C_SHOW_JLIKE_BTNS_DESC">
+					<option value="1">PLG_JLIKE_YES</option>
+					<option value="0">PLG_JLIKE_NO</option>
+				</field>
+
+			</fieldset>
+		</fields>
+	</config>
+</extension>

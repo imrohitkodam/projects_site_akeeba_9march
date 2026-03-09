@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fieldset>
+		<field
+			name="pinwise_shipping_charges"
+			type="text"
+			default="30"
+			label="PLG_QTCSHIPPING_QTC_PINWISE_SHIPPING_CHARGES"
+			description="PLG_QTCSHIPPING_QTC_PINWISE_SHIPPING_CHARGES_DESC"/>
+		<field
+			name="select_store"
+			type="sql"
+			default=""
+			label="PLG_QTCSHIPPING_QTC_PINWISE_SHIPPING_STORE"
+			description="PLG_QTCSHIPPING_QTC_PINWISE_SHIPPING_STORE_DESC"
+			query="SELECT id, title FROM #__kart_store"
+			key_field="id"
+			value_field="title">
+			<option value="">PLG_QTCSHIPPING_QTC_PINWISE_SELECT_STORE</option>
+		</field>
+		<field 
+			name="pincode"
+			type="textarea"
+			default=""
+			label="PLG_QTCSHIPPING_QTC_PINWISE_SHIPPING_PINCODE"
+			description="PLG_QTCSHIPPING_QTC_PINWISE_SHIPPING_PINCODE_DESC"
+			rows="5"
+			cols="20"/>
+	</fieldset>
+</form>

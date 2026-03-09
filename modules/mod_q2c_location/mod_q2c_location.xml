@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extension version="3.0" type="module" client="site" method="upgrade">
+	<name>mod_q2c_location</name>
+	<author>Techjoomla</author>
+	<authorEmail>extensions@techjoomla.com</authorEmail>
+	<authorUrl>https://techjoomla.com</authorUrl>
+	<copyright>Copyright (C) 2021 - 2021 Techjoomla. All rights reserved.</copyright>
+	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+	<creationDate>25th June 2021</creationDate>
+	<version>1.0.0</version>
+	<description>MOD_Q2C_LOCATION_DESC</description>
+	<languages folder="languages/en-GB">
+		<language tag="en-GB">en-GB.mod_q2c_location.ini</language>
+		<language tag="en-GB">en-GB.mod_q2c_location.sys.ini</language>
+	</languages>
+	<files>
+		<filename module="mod_q2c_location">mod_q2c_location.php</filename>
+		<filename>index.html</filename>
+		<folder>tmpl</folder>
+		<folder>assets</folder>
+	</files>
+	<config>
+		<fields name="params">
+			<fieldset name="basic">
+				<field
+					name="buyer_default_location"
+					type="textarea"
+					default=""
+					label="MOD_Q2C_LOCATION_ADD_DEFAULT_LOCATION"
+					description="MOD_Q2C_LOCATION_ADD_DEFAULT_LOCATION_DESC"/>
+				<field
+					name="buyer_default_city"
+					type="text"
+					default=""
+					label="MOD_Q2C_LOCATION_ADD_DEFAULT_CITY"
+					description="MOD_Q2C_LOCATION_ADD_DEFAULT_CITY_DESC"/>
+				<field
+					name="buyer_default_pincode"
+					type="text"
+					default=""
+					label="MOD_Q2C_LOCATION_ADD_DEFAULT_PINCODE"
+					description="MOD_Q2C_LOCATION_ADD_DEFAULT_PINCODE_DESC"/>
+				<field
+					name="google_map_api_key"
+					type="text"
+					default=""
+					label="MOD_Q2C_LOCATION_GOOGLE_MAP_API_KEY"
+					description="MOD_Q2C_LOCATION_GOOGLE_MAP_API_KEY_DESC"/>
+				<field
+					name="country"
+					type="country"
+					label="MOD_Q2C_LOCATION_COUNTRY"
+					description="MOD_Q2C_LOCATION_COUNTRY_DESC"
+					multiple="false"
+					addfieldpath="/modules/mod_q2c_location/assets/fields"
+				/>
+				<field 
+					name="moduleclass_sfx"
+					type="text" default=""
+					label="MOD_Q2C_LOCATION_SUFIX"
+					description="MOD_Q2C_LOCATION_SUFIX_DESC" />
+			</fieldset>
+			<fieldset name="advanced">
+				<field
+					name="layout"
+					type="modulelayout"
+					label="JFIELD_ALT_LAYOUT_LABEL"
+					description="JFIELD_ALT_MODULE_LAYOUT_DESC" />
+			</fieldset>
+		</fields>
+	</config>
+</extension>
