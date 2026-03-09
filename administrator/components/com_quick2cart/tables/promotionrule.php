@@ -1,0 +1,54 @@
+<?php
+/**
+ * @package     Quick2cart
+ * @subpackage  com_quick2cart
+ *
+ * @author      Techjoomla <extensions@techjoomla.com>
+ * @copyright   Copyright (C) 2009 - 2021 Techjoomla. All rights reserved.
+ * @license     http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
+ */
+
+// No direct access
+defined('_JEXEC') or die;
+
+use Joomla\CMS\Table\Table;
+use Joomla\Database\DatabaseDriver;
+
+/**
+ * promotionRule Table class
+ *
+ * @since  1.6
+ */
+class Quick2cartTablepromotionRule extends Table
+{
+	/**
+	 * Constructor
+	 *
+	 * @param   Joomla\Database\DatabaseDriver  &$db  A database connector object
+	 */
+	public function __construct($db)
+	{
+		parent::__construct('#__kart_promotions_rules', 'id', $db);
+	}
+
+	/**
+	 * Overloaded bind function to pre-process the params.
+	 *
+	 * @param   array  $array   Named array
+	 * @param   mixed  $ignore  Optional array or list of parameters to ignore
+	 *
+	 * @return  null|string  null is operation was satisfactory, otherwise returns an error
+	 *
+	 * @see     JTable:bind
+	 * @since   1.5
+	 */
+	public function bind($array, $ignore = '')
+	{
+		if (!isset($array['quantity']) || empty($array['quantity']))
+		{
+			$array['quantity'] = 0;
+		}
+
+		return parent::bind($array, $ignore);
+	}
+}

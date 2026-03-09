@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+	<view title="Shipping" >
+		<message><![CDATA[Store-Shipping]]></message>
+		<options var="layout">
+ 			<option value="default" name="Store-Shipping" msg="Store-Shipping" />
+		</options>
+	</view>
+</metadata>

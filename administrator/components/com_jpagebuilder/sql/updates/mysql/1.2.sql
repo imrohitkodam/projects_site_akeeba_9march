@@ -1,0 +1,13 @@
+ALTER TABLE `#__jpagebuilder` ADD `extension` varchar(255) NOT NULL DEFAULT 'com_jpagebuilder' AFTER `text`;
+ALTER TABLE `#__jpagebuilder` ADD `extension_view` varchar(255) NOT NULL DEFAULT 'page' AFTER `extension`;
+ALTER TABLE `#__jpagebuilder` ADD `view_id` bigint(20) NOT NULL AFTER `extension_view`;
+ALTER TABLE `#__jpagebuilder` ADD `active` tinyint(1) NOT NULL DEFAULT '0' AFTER `view_id`;
+ALTER TABLE `#__jpagebuilder` CHANGE `created_time` `created_on` DATETIME NOT NULL;
+ALTER TABLE `#__jpagebuilder` CHANGE `created_user_id` `created_by` bigint(20) NOT NULL DEFAULT '0';
+ALTER TABLE `#__jpagebuilder` CHANGE `modified_time` `modified` DATETIME NOT NULL;
+ALTER TABLE `#__jpagebuilder` CHANGE `modified_user_id` `modified_by` bigint(20) NOT NULL DEFAULT '0';
+ALTER TABLE `#__jpagebuilder` ADD `checked_out` int(10) NOT NULL DEFAULT '0' AFTER `modified_by`;
+ALTER TABLE `#__jpagebuilder` ADD `checked_out_time` datetime DEFAULT NULL AFTER `checked_out`;
+ALTER TABLE `#__jpagebuilder` ADD `css` longtext NOT NULL AFTER `hits`;
+ALTER TABLE `#__jpagebuilder` DROP `alias`;
+ALTER TABLE `#__jpagebuilder` DROP `page_layout`;

@@ -1,0 +1,46 @@
+<?php
+
+/**
+ * @package JPageBuilder
+ * @author Joomla! Extensions Store
+ * @copyright (C) 2024 - Joomla! Extensions Store
+ * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 or later
+ */
+use Joomla\CMS\Factory;
+use Joomla\Filesystem\Path;
+
+/**
+ * No direct access
+ */
+defined ( '_JEXEC' ) or die ( 'Restricted access' );
+final class JpagebuilderSecurityHelper {
+	public static function isActionableFolder(string $folder) {
+		$folder = strtolower ( Path::clean ( $folder ) );
+		$parts = explode ( DIRECTORY_SEPARATOR, $folder );
+		$parts = array_filter ( $parts, function ($part) {
+			return ! empty ( $part );
+		} );
+		$parts = array_values ( $parts );
+
+		if (empty ( $parts ) || ! is_array ( $parts ) || count ( $parts ) < 2) {
+			return false;
+		}
+
+		return true;
+	}
+	public static function isGetablePath(string $path) {
+		$path = strtolower ( Path::clean ( $path ) );
+		$pathArray = explode ( DIRECTORY_SEPARATOR, $path );
+		$pathArray = array_filter ( $pathArray, function ($part) {
+			return ! empty ( $part );
+		} );
+
+		$pathArray = array_values ( $pathArray );
+
+		if (empty ( $pathArray ) || ! is_array ( $pathArray ) || count ( $pathArray ) < 1) {
+			return false;
+		}
+
+		return true;
+	}
+}

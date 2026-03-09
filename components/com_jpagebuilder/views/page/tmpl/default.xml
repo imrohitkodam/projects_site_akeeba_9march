@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+        <layout title="COM_JPAGEBUILDER_PAGE_DEFAULT_TITLE">
+                <message>COM_JPAGEBUILDER_PAGE_VIEW_DEFAULT_DESC</message>
+        </layout>
+        <fields name="request">
+                <fieldset name="request"
+                        addfieldpath="/administrator/components/com_jpagebuilder/models/fields">
+
+                        <field name="id" type="modal_page"
+                                label="COM_JPAGEBUILDER_FIELD_SELECT_PAGE_LABEL"
+                                required="true"
+                                edit="false"
+                                clear="false"
+                                description="COM_JPAGEBUILDER_FIELD_SELECT_PAGE_DESC"
+                                />
+                </fieldset>
+        </fields>
+</metadata>

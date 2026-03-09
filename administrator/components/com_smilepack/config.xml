@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+	<fieldset name="display_conditions" label="COM_SMILEPACK_DISPLAY_CONDITIONS" addfieldpath="/plugins/system/nrframework/fields">
+		
+		
+		<field name="@display_conditions" type="nr_pro"
+			label="COM_SMILEPACK_DISPLAY_CONDITIONS"
+			description="COM_SMILEPACK_DISPLAY_CONDITIONS_PRO"
+			url="http://www.tassos.gr/joomla-extensions/smile-pack"
+		/>
+		
+	</fieldset>
+	<fieldset name="keys" label="COM_SMILEPACK_KEYS" addfieldpath="/plugins/system/nrframework/fields"></fieldset>
+	<fieldset name="permissions" label="JCONFIG_PERMISSIONS_LABEL" description="JCONFIG_PERMISSIONS_DESC" >
+		<field
+			name="rules"
+			type="rules"
+			label="JCONFIG_PERMISSIONS_LABEL"
+			filter="rules"
+			validate="rules"
+			component="com_smilepack"
+			section="component" />
+	</fieldset>
+</config>

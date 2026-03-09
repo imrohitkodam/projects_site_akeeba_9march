@@ -1,0 +1,160 @@
+<?php
+/**
+ * @package     Quick2cart
+ * @subpackage  com_quick2cart
+ *
+ * @author      Techjoomla <extensions@techjoomla.com>
+ * @copyright   Copyright (C) 2009 - 2021 Techjoomla. All rights reserved.
+ * @license     http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
+ */
+
+// No direct access.
+defined('_JEXEC') or die();
+
+use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Language\Text;
+?>
+<div class="">
+	<?php
+	$qtc_shipping_opt_style = ($qtc_shipping_opt_status==1) ? "af-d-flex" : "d-none";
+	$storeHelper            = $comquick2cartHelper->loadqtcClass(JPATH_SITE . "/components/com_quick2cart/helpers/storeHelper.php","storeHelper");
+
+	$legthList  = (array) $storeHelper->getStoreShippingLegthClassList($storeid = 0);
+	$weigthList = (array) $storeHelper->getStoreShippingWeigthClassList($storeid = 0);
+
+	if ($isTaxationEnabled)
+	{
+		?>
+		<div class="form-group row">
+			<label class="col-sm-3 col-xs-12 control-label" for="qtcTaxprofileSel" title="<?php echo Text::_('COM_QUICK2CART_TAXPROFILE_DESC_TOOLTIP')?>">
+				<?php echo HTMLHelper::tooltip('', Text::_('COM_QUICK2CART_TAXPROFILE_DESC'), '', Text::_('COM_QUICK2CART_TAXPROFILE_DESC'));?>
+			</label>
+			<div class="col-sm-6 col-xs-12 taxprofile">&nbsp;</div>
+		</div>
+	<?php
+	}
+
+	if ($qtc_shipping_opt_status)
+	{
+		?>
+		<div class='form-group row <?php echo $qtc_shipping_opt_style;?>'>
+			<label class="col-sm-3 col-xs-12 control-label" for="qtc_item_length" title="<?php echo Text::_('COM_QUICK2CART_PROD_DIMENSION_LENGTH_LABEL_TOOLTIP')?>">
+				<?php echo HTMLHelper::tooltip('', Text::_('COM_QUICK2CART_PROD_DIMENSION_LENGTH_LABEL_TOOLTIP'), '', Text::_('COM_QUICK2CART_PROD_DIMENSION_LENGTH_LABEL'));?>
+			</label>
+			<div class="col-sm-9 col-xs-12 form-inline">
+				<div class="row">
+					<div class="col-sm-2 col-xs-12">
+						<input
+							type="text"
+							class="form-control"
+							Onkeyup='checkforalpha(this,46,"<?php echo Text::_("QTC_ENTER_NUMERICS"); ?>");'
+							name='qtc_item_length' id='qtc_item_length'
+							value='<?php echo (!empty($minmaxstock->item_length)) ?  number_format($minmaxstock->item_length, 2, '.', '') : '' ?>'
+							placeholder="<?php echo Text::_('COM_QUICK2CART_LENGTH_HINT') ?>" />
+					</div>
+					<div class="col-sm-2 col-xs-12">
+						<input
+							type="text"
+							class="form-control"
+							Onkeyup='checkforalpha(this,46,"<?php echo Text::_("QTC_ENTER_NUMERICS"); ?>");'
+							name='qtc_item_width'
+							id='qtc_item_width'
+							value='<?php  echo (!empty($minmaxstock->item_width)) ?  number_format($minmaxstock->item_width, 2, '.', '') : '' ?>'
+							placeholder="<?php echo Text::_('COM_QUICK2CART_WIDTH_HINT') ?>" />
+					</div>
+					<div class="col-sm-2 col-xs-12">
+						<div class="input-group">
+							<input
+								type="text"
+								class="form-control"
+								Onkeyup='checkforalpha(this,46,"<?php echo Text::_("QTC_ENTER_NUMERICS"); ?>");'
+								name='qtc_item_height'
+								id='qtc_item_height'
+								value='<?php echo (!empty($minmaxstock->item_height)) ?  number_format($minmaxstock->item_height, 2, '.', '') : '' ?>'
+								placeholder="<?php echo Text::_('COM_QUICK2CART_HEIGHT_HINT') ?>" />
+								<?php
+								$lenUniteId = 0;
+
+								if (isset($minmaxstock) && $minmaxstock->item_length_class_id)
+								{
+									$lenUniteId = $minmaxstock->item_length_class_id;
+								}
+								elseif (isset($this->defaultStoreSettings['length_id']))
+								{
+									$lenUniteId = $this->defaultStoreSettings['length_id'];
+								}
+								?>
+						</div>
+					</div>
+					<div class="col-sm-3 col-xs-12">
+						<?php
+							$lenUnitDetail = $storeHelper->getProductLengthDetail($lenUniteId);
+							echo HTMLHelper::_('select.genericlist', $this->lengthClasses, "length_class_id", 'class="form-select"', "id", "title", $lenUnitDetail['id']);
+						?>
+					</div>
+				</div>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+		<?php
+		$weightUniteId = 0;
+
+		if (isset($minmaxstock) && $minmaxstock->item_weight_class_id)
+		{
+			// While edit used item class id
+			$weightUniteId = $minmaxstock->item_weight_class_id;
+		}
+		elseif (isset($this->defaultStoreSettings['weight_id']))
+		{
+			// If for store default length unite has set
+			$weightUniteId = $this->defaultStoreSettings['weight_id'];
+		}
+
+		$weightUniteDetail = $storeHelper->getProductWeightDetail($weightUniteId);
+		?>
+		<div class='form-group row <?php echo $qtc_shipping_opt_style;?>'>
+			<label class="col-sm-3 col-xs-12 control-label" for="qtc_item_weight" title="<?php echo Text::_('COM_QUICK2CART_PROD_DIMENSION_WEIGTH_LABEL_TOOLTIP')?>">
+				<?php echo HTMLHelper::tooltip('', Text::_('COM_QUICK2CART_PROD_DIMENSION_WEIGTH_LABEL'), '', Text::_('COM_QUICK2CART_PROD_DIMENSION_WEIGTH_LABEL'));?>
+			</label>
+			<div class="col-sm-6 col-xs-12 form-inline">
+				<div class="input-group ">
+					<input
+						type="text"
+						class="af-mr-5"
+						Onkeyup='checkforalpha(this,46,"<?php echo Text::_("QTC_ENTER_NUMERICS"); ?>");'
+						name='qtc_item_weight' id='qtc_item_weight'
+						value='<?php if (isset($minmaxstock)) echo number_format($minmaxstock->item_weight, 2, '.', '');?>' />
+					<?php
+					$weightUniteDetail = $storeHelper->getProductWeightDetail($weightUniteId);
+					echo HTMLHelper::_('select.genericlist', $this->weightClasses, "weigth_class_id", 'class="form-select"', "id", "title", $weightUniteDetail['id']);
+					?>
+				</div>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+
+		<!-- END for Legth & weigth class option -->
+		<!-- Shipping Profile-->
+		<div class="form-group row">
+			<label class="col-sm-3 col-xs-12 control-label" for="qtc_shipProfileSelList" title="<?php echo Text::_('COM_QUICK2CART_S_SEL_SHIPPROFILE_TOOLTIP')?>">
+				<?php echo HTMLHelper::tooltip('', Text::_('COM_QUICK2CART_S_SEL_SHIPPROFILE'), '', Text::_('COM_QUICK2CART_S_SEL_SHIPPROFILE'));?>
+			</label>
+			<div class="col-sm-6 col-xs-12 qtc_shipProfileList">
+				<span id="qtc_shipProfileSelListWrapper">
+					<?php
+						// Here default_store_id - before saving the item, value =first store id
+						// While edit default_store_id- item's store id
+						$defaultProfile   = !empty($this->itemDetail['shipProfileId']) ? $this->itemDetail['shipProfileId'] : '';
+						$shipDefaultStore = !empty($this->itemDetail['store_id']) ? $this->itemDetail['store_id'] : $this->store_id;
+
+						// Get qtc_shipProfileSelList
+						echo $shipProfileSelectList = $qtcshiphelper->qtcLoadShipProfileSelectList($shipDefaultStore, $defaultProfile);
+					?>
+				</span>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+	<?php
+	}
+	?>
+</div>

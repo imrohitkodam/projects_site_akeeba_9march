@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jomsocial>
+	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+	<component>com_quick2cart</component>
+	<rules>
+		<rule>
+			<name>Add New Product</name>
+			<description>Earn points when you add a new product into your store.</description>
+			<action_string>com_quick2cart.addproduct.points</action_string>
+			<publish>true</publish>
+			<points>0</points>
+			<access_level>1</access_level>
+		</rule>
+
+		<rule>
+			<name>Add New Store</name>
+			<description>Earn points when you add a new store.</description>
+			<action_string>com_quick2cart.CreateStore.points</action_string>
+			<publish>true</publish>
+			<points>0</points>
+			<access_level>1</access_level>
+		</rule>
+
+		<rule>
+			<name>Buy Product</name>
+			<description>Earn points when you buy a product.</description>
+			<action_string>com_quick2cart.BuyProduct.points</action_string>
+			<publish>true</publish>
+			<points>0</points>
+			<access_level>1</access_level>
+		</rule>
+	</rules>
+</jomsocial>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fieldset name="basic">
+		<field name="title" type="text" label="JGLOBAL_TITLE" size="40" class="jpagebuilder-form-control" default="" required="true" />
+		<field name="id" type="hidden" />
+		<field name="text" id="jptext" type="hidden" filter="raw" />
+		<field name="catid" type="categoryedit" extension="com_jpagebuilder" label="COM_JPAGEBUILDER_CATEGORY" addfieldpath="/administrator/components/com_jpagebuilder/fields">
+			<option value="0">COM_JPAGEBUILDER_SELECT_CATEGORY</option>
+		</field>
+
+		<field name="published" type="list" label="JSTATUS" class="chzn-color-state" filter="intval" default="1" >
+			<option value="1">JPUBLISHED</option>
+			<option value="0">JUNPUBLISHED</option>
+			<option value="-2">JTRASHED</option>
+		</field>
+
+		<field name="language" type="contentlanguage" label="JFIELD_LANGUAGE_LABEL" desc="COM_JPAGEBUILDER_FIELD_LANGUAGE_DESC">
+			<option value="*">JALL</option>
+		</field>
+
+		<field name="access" type="accesslevel" label="JFIELD_ACCESS_LABEL" desc="JFIELD_ACCESS_DESC" />
+		<field name="created_on" type="hidden" label="COM_JPAGEBUILDER_FIELD_CREATED_LABEL" size="22" format="%Y-%m-%d %H:%M:%S" filter="user_utc" />
+		<field name="created_by" type="hidden" label="COM_JPAGEBUILDER_FIELD_CREATED_BY_LABEL" />
+		<field name="modified" type="hidden" label="JGLOBAL_FIELD_MODIFIED_BY_LABEL" readonly="true" filter="unset" />
+		<field name="modified_on" type="hidden" label="JGLOBAL_FIELD_MODIFIED_LABEL" size="22" readonly="true" format="%Y-%m-%d %H:%M:%S" filter="user_utc" />
+		<field name="hits" type="hidden" label="JGLOBAL_HITS" readonly="true" />
+		<field name="extension" type="hidden" label="Extension" readonly="true" />
+		<field name="extension_view" type="hidden" label="Extension View" readonly="true" />
+		<field name="asset_id" type="hidden" label="Asset Id" readonly="true" />
+	</fieldset>
+
+	<fieldset name="pagecss" label="CSS">
+		<field name="css" type="codeeditor" class="jpagebuilder-form-control" label="COM_JPAGEBUILDER_FIELD_CSS" desc="COM_JPAGEBUILDER_FIELD_CSS_DESC" rows="5" cols="5" />
+	</fieldset>
+
+	<fieldset name="seo">
+		<field name="meta_title" type="textarea" class="jpagebuilder-form-control" label="COM_JPAGEBUILDER_EDITOR_PAGE_SETTINGS_META_TITLE"  desc="COM_JPAGEBUILDER_EDITOR_PAGE_SETTINGS_META_TITLE_DESC" rows="3" cols="40" />
+		<field name="meta_description" type="textarea" class="jpagebuilder-form-control" label="JFIELD_META_DESCRIPTION_LABEL"  desc="JFIELD_META_DESCRIPTION_DESC" rows="3" cols="40" />
+		<field name="meta_keywords" type="textarea" class="jpagebuilder-form-control" label="JFIELD_META_KEYWORDS_LABEL" desc="JFIELD_META_KEYWORDS_DESC" rows="3" cols="40" />
+
+		<field
+			name="robots"
+			type="list"
+			label="JFIELD_METADATA_ROBOTS_LABEL"
+			class="jpagebuilder-form-control" 
+			>
+			<option value="">JGLOBAL_USE_GLOBAL</option>
+			<option value="index, follow"></option>
+			<option value="noindex, follow"></option>
+			<option value="index, nofollow"></option>
+			<option value="noindex, nofollow"></option>
+		</field>
+	
+		<field name="seo_spacer" type="spacer" class="jpagebuilder-form-divider" hr="true" />
+
+		<field
+			name="og_type"
+			type="list"
+			label="COM_JPAGEBUILDER_FIELD_OG_TYPE"
+			class="jpagebuilder-form-control" 
+			desc="COM_JPAGEBUILDER_FIELD_OG_TYPE_DESC"
+		>
+			<option value="website">COM_JPAGEBUILDER_FIELD_OG_TYPE_WEBSITE</option>
+			<option value="article">COM_JPAGEBUILDER_FIELD_OG_TYPE_ARTICLE</option>
+			<option value="video.movie">COM_JPAGEBUILDER_FIELD_OG_TYPE_MOVIE</option>
+			<option value="video.tv_show">COM_JPAGEBUILDER_FIELD_OG_TYPE_TV_SHOW</option>
+			<option value="music.album">COM_JPAGEBUILDER_FIELD_OG_TYPE_ALBUM</option>
+			<option value="book">COM_JPAGEBUILDER_FIELD_OG_TYPE_BOOK</option>
+			<option value="profile">COM_JPAGEBUILDER_FIELD_OG_TYPE_PROFILE</option>
+
+		</field>
+		<field name="og_title" type="text" class="jpagebuilder-form-control" label="COM_JPAGEBUILDER_FIELD_OG_TITLE" hint="COM_JPAGEBUILDER_FIELD_OG_TITLE_PLACEHOLDER" />
+		<field name="og_image" type="jpmedia" media_format="image" label="COM_JPAGEBUILDER_FIELD_OG_IMAGE" addfieldpath="/administrator/components/com_jpagebuilder/models/fields" desc="COM_JPAGEBUILDER_FIELD_OG_IMAGE_DESC"/>
+		<field name="og_description" type="textarea" class="jpagebuilder-form-control" label="COM_JPAGEBUILDER_FIELD_OG_DESC" desc="COM_JPAGEBUILDER_FIELD_OG_DESC_DESC" rows="5" cols="5" />
+	</fieldset>
+</form>

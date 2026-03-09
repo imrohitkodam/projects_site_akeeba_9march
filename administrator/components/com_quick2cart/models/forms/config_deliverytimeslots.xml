@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fieldset>
+		<field
+			name="deliveryslotfromtime"
+			type="number"
+			label="COM_QUICK2CART_DELIVERY_SLOT_FROM_TIME"
+			description="COM_QUICK2CART_DELIVERY_SLOT_FROM_TIME_DESC"
+			min="0"
+			max="24"
+			filter="integer"
+			required="required" />
+		<field
+			name="deliveryslottotime"
+			type="number"
+			label="COM_QUICK2CART_DELIVERY_SLOT_TO_TIME"
+			description="COM_QUICK2CART_DELIVERY_SLOT_TO_TIME_DESC"
+			min="0"
+			max="24"
+			filter="integer"
+			required="required" />
+	</fieldset>
+</form>

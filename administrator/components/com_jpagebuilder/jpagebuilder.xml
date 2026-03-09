@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="component" method="upgrade">
+	<name>JPageBuilder</name>
+	<author>JExtensions Store</author>
+	<creationDate>2025-11-16</creationDate>
+	<authorEmail>info@storejextensions.org</authorEmail>
+	<authorUrl>https://storejextensions.org</authorUrl>
+	<copyright>Copyright (C) 2024 - Joomla! Extensions Store. All Rights Reserved.</copyright>
+	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+	<version>2.6</version>
+	<scriptfile>installscript.php</scriptfile>
+
+	<!-- CHANGELOG -->
+	<changelogurl>http://storejextensions.org/changelogs/jpagebuilder.xml</changelogurl>
+	
+	<!-- UPDATE SERVERS -->
+	<updateservers>
+		<server type="extension" priority="1" name="JPageBuilder Update Server">http://storejextensions.org/updates/jpagebuilder_updater.xml</server>
+	</updateservers>
+
+	<install>
+		<sql>
+			<file driver="mysql" charset="utf8">sql/install/mysql/install.mysql.utf8.sql</file>
+			<file driver="mysqli" charset="utf8">sql/install/mysql/install.mysql.utf8.sql</file>
+		</sql>
+	</install>
+
+	<uninstall> <!-- Runs on uninstall -->
+		<sql>
+			<file driver="mysql" charset="utf8">sql/uninstall/mysql/uninstall.mysql.utf8.sql</file>
+			<file driver="mysqli" charset="utf8">sql/uninstall/mysql/uninstall.mysql.utf8.sql</file>
+		</sql>
+	</uninstall>
+	
+	<update>
+		<schemas>
+			<schemapath type="mysql">sql/updates/mysql</schemapath>
+			<schemapath type="mysqli">sql/updates/mysql</schemapath>
+		</schemas>
+	</update>
+
+	<files folder="site">
+		<filename>jpagebuilder.php</filename>
+		<filename>router.php</filename>
+		<filename>controller.php</filename>
+		<folder>addons</folder>
+		<folder>assets</folder>
+		<folder>builder</folder>
+		<folder>controllers</folder>
+		<folder>editor</folder>
+		<folder>helpers</folder>
+		<folder>layouts</folder>
+		<folder>models</folder>
+		<folder>views</folder>
+	</files>
+
+	<languages folder="language/site">
+		<language tag="en-GB">en-GB/com_jpagebuilder.ini</language>
+	</languages>
+
+	<plugins>
+        <plugin name="jpagebuilder" group="system" activate="true" />
+		<plugin name="jpagebuilder" group="finder" activate="true" />
+		<plugin name="jpagebuilder" group="content" activate="true" />
+    </plugins>
+
+    <modules>
+		<module module="mod_jpagebuilder" client="site" />
+	</modules>
+
+ 	<templates>
+		<template template="jpagebuilder" />
+	</templates>
+	
+	<administration>
+		<menu link="option=com_jpagebuilder&amp;view=editor&amp;tmpl=component">COM_JPAGEBUILDER_ADMIN_MENU</menu>
+		<files folder="admin">
+			<filename>access.xml</filename>
+			<filename>config.xml</filename>
+			<filename>jpagebuilder.php</filename>
+			<filename>controller.php</filename>
+			<folder>assets</folder>
+			<folder>builder</folder>
+			<folder>controllers</folder>
+			<folder>helpers</folder>
+			<folder>templates</folder>
+			<folder>models</folder>
+			<folder>widgets</folder>
+			<folder>sql</folder>
+			<folder>tables</folder>
+			<folder>views</folder>
+		</files>
+
+		<languages folder="language/admin">
+			<language tag="en-GB">en-GB/com_jpagebuilder.ini</language>
+			<language tag="en-GB">en-GB/com_jpagebuilder.sys.ini</language>
+		</languages>
+	</administration>
+</extension>

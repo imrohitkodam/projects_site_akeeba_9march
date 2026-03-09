@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+	<view title="Zones" >
+		<message><![CDATA[Store-Setup Zones]]></message>
+		<options var="layout">
+ 			<option value="default" name="Store-Setup Zones" msg="Store-Setup Zones" />
+		</options>
+	</view>
+</metadata>

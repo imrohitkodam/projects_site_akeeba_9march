@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+	<view title="Taxprofiles" >
+		<message><![CDATA[Store-Tax Profiles]]></message>
+		<options var="layout">
+ 			<option value="default" name="Store-Tax Profiles" msg="Store-Tax Profiles" />
+		</options>
+	</view>
+</metadata>

@@ -1,0 +1,184 @@
+<?php
+/**
+ * @package     Quick2cart
+ * @subpackage  com_quick2cart
+ *
+ * @author      Techjoomla <extensions@techjoomla.com>
+ * @copyright   Copyright (C) 2009 - 2021 Techjoomla. All rights reserved.
+ * @license     http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
+ */
+
+// No direct access.
+defined('_JEXEC') or die();
+
+use Joomla\CMS\Factory;
+use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Language\Text;
+?>
+<div id	="no-more-tables">
+	<form action="" name="adminForm" id="adminForm" class="form-horizontal form-validate" method="post">
+		<?php
+		echo HTMLHelper::_('bootstrap.startTabSet', 'orderInfo', array('active' => 'order_status_info'));
+			echo HTMLHelper::_('bootstrap.addTab', 'orderInfo', 'order_status_info', Text::_('QTC_ORDER_STAT_INFO', true));
+			?>
+				<div class="clearfix">&nbsp;</div>
+				<input class="" id="" name="orderItemsStr" type="hidden" value="<?php echo implode('||', $orderItemIds); ?>" >
+				<div class="col-xs-12">
+					<div class="">
+						<table class="table table-condensed " id="complete-order" name="complete-order">
+							<tr>
+								<td class=" hidden-xs"><?php echo Text::_('QTC_ORDER_STATUS');?></td>
+								<td data-title="<?php echo Text::_('QTC_ORDER_STATUS');?>">
+									<?php echo HTMLHelper::_('select.genericlist', $this->vendorstatus, "status",  'class="pad_status form-select-sm"  ', "value", "text", $this->orderinfo->status);?>
+								</td>
+							</tr>
+							<tr>
+								<td class=" hidden-xs"><?php echo Text::_('QTC_NOTIFY');?></td>
+								<td class="" data-title="<?php echo Text::_('QTC_NOTIFY');?>">
+									<div>
+										<input type="checkbox" id="notify_chk" name="notify_chk" checked />
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td class=" hidden-xs"><?php echo Text::_('QTC_COMMENT');?></td>
+								<td data-title="<?php echo Text::_('QTC_COMMENT');?>">
+									<textarea id="" name="order_note" rows="3" class="form-control"  value=""></textarea>
+								</td>
+							</tr>
+							<tr>
+								<td class=" hidden-xs"></td>
+								<td data-title="<?php echo Text::_('COM_QUICK2CART_UPDAE_ORDER_STATUS');?>">
+									<button  class="btn btn-success " title="<?php echo Text::_('COM_QUICK2CART_UPDAE_ORDER_STATUS');?>" ><?php echo Text::_('COM_QUICK2CART_UPDAE_ORDER_STATUS'); ?></button>
+								</td>
+							</tr>
+						</table>
+						<hr/>
+					</div>
+					<input type="hidden" name="option" value="com_quick2cart" />
+					<input type="hidden" name="task" id="task" value="orders.updateStoreItemStatus" />
+					<input type="hidden" name="view" value="orders" />
+					<?php echo HTMLHelper::_( 'form.token' ); ?>
+				</div>
+			<?php
+			echo HTMLHelper::_('bootstrap.endTab');
+			echo HTMLHelper::_('bootstrap.addTab', 'orderInfo', 'order_history', Text::_('COM_QUICK2CART_ORDER_HISTORY', false));
+			?>
+				<div class="clearfix">&nbsp;</div>
+				<div class="col-xs-12">
+					<?php
+					if (!empty($this->orderHistory))
+					{
+					?>
+					<div class="table-responsive">
+						<table class="table table-condensed table-striped table-bordered">
+							<thead>
+								<th class="q2c_width_15">
+									<?php echo Text::_("QTC_PRODUCT_NAM"); ?>
+								</th>
+								<th class="q2c_width_15">
+									<?php echo Text::_("COM_QUICK2CART_CDATE"); ?>
+								</th>
+								<th class="q2c_width_15">
+									<?php echo Text::_("COM_QUICK2CART_CUSTOMER_NOTIFIED"); ?>
+								</th>
+								<th class="q2c_width_15">
+									<?php echo Text::_("QTC_PROD_STATUS"); ?>
+								</th>
+								<th class="q2c_width_15">
+									<?php echo Text::_("COM_QUICK2CART_ORDER_NOTE"); ?>
+								</th>
+							</thead>
+							<tbody>
+							<?php
+							$oldItem_id = "";
+								foreach($this->orderHistory as $row)
+								{
+									?>
+									<tr>
+										<td class="q2c_width_15" data-title="<?php echo Text::_('QTC_PRODUCT_NAM');?>">
+											<?php
+												if ($oldItem_id !== $row->name)
+												{
+													echo htmlspecialchars($row->name, ENT_COMPAT, 'UTF-8');
+													$oldItem_id = $row->name;
+												}
+											?>
+										</td>
+										<td class="q2c_width_15" data-title="<?php echo Text::_('COM_QUICK2CART_CDATE');?>">
+											<?php
+												echo Factory::getDate($row->mdate)->Format(Text::_('COM_QUICK2CART_DATE_FORMAT_SHOW_SHORT'));
+												echo '  ';
+												echo Factory::getDate($row->mdate)->Format(Text::_('COM_QUICK2CART_TIME_FORMAT_SHOW_AMPM'));
+											?>
+										</td>
+										<td class="q2c_width_15" data-title="<?php echo Text::_('COM_QUICK2CART_CUSTOMER_NOTIFIED');?>">
+											<?php
+											if($row->customer_notified == 0)
+											{
+												echo '<i class="' . QTC_ICON_REMOVE . '"></i>';
+											}
+											else
+											{
+												echo '<i class="' . QTC_ICON_CHECKMARK . '"></i>';
+											}
+											?>
+										</td>
+										<td class="q2c_width_15" data-title="<?php echo Text::_('QTC_PROD_STATUS');?>">
+											<?php
+											switch($row->order_item_status)
+											{
+												case 'C':
+													$status = Text::_('QTC_CONFR');
+												break;
+
+												case 'RF':
+													$status = Text::_('QTC_REFUN') ;
+												break;
+
+												case 'S':
+													$status = Text::_('QTC_SHIP') ;
+												break;
+
+												case 'E':
+													$status = Text::_('QTC_ERR') ;
+												break;
+
+												case 'P':
+													$status = Text::_('QTC_PENDIN') ;
+												break;
+
+												default:
+												$status = !empty($orders->order_item_status) ? $orders->order_item_status : '';
+												break;
+											}
+
+											echo htmlspecialchars($status, ENT_COMPAT, 'UTF-8');?>
+										</td>
+										<td class="" data-title="<?php echo Text::_('QTC_PROD_STATUS');?>">
+											<?php echo htmlspecialchars($row->note, ENT_COMPAT, 'UTF-8');?>
+										</td>
+									</tr>
+									<?php
+								}
+							?>
+							</tbody>
+						</table>
+					</div>
+					<?php
+					}
+					else
+					{
+						?>
+						<div class="alert alert-info">
+							<p><?php echo Text::_('COM_QUICK2CART_NO_HISTORY'); ?></p>
+						</div>
+						<?php
+					}
+					?>
+				</div>
+			<?php 
+			echo HTMLHelper::_('bootstrap.endTab');
+		echo HTMLHelper::_('bootstrap.endTabSet'); ?>
+	</form>
+</div>

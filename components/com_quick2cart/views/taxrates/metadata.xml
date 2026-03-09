@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+	<view title="Taxrates" >
+		<message><![CDATA[Store-Tax rates]]></message>
+		<options var="layout">
+ 			<option value="default" name="Store-Tax rates" msg="Store-Tax rates" />
+		</options>
+	</view>
+</metadata>

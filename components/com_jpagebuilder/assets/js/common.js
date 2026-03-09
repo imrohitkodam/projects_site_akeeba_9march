@@ -1,0 +1,1 @@
+window.addEventListener("DOMContentLoaded",(()=>{const d=document.body.classList;d.contains("com-jpagebuilder")||d.add("com-jpagebuilder")}));

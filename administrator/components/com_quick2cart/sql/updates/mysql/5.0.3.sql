@@ -1,0 +1,1 @@
+UPDATE `#__kart_orders` SET `feedbackemail_sent` = 0 WHERE `feedbackemail_sent` IS NULL;

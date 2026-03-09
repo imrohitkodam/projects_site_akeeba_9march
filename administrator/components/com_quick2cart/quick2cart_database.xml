@@ -1,0 +1,702 @@
+<?xml version="1.0" encoding="utf-8"?>
+<database>
+	<table name="#__kart_store" engine="InnoDB" charset_name="utf8mb4" collation_name="utf8mb4_unicode_ci" auto_increment="1">
+		<column name="id" data_type="int" size="11" is_null="0" auto_increment="1" ></column>
+		<column name="vendor_id" data_type="int" size="11" is_null="0" default="0" after="id"></column>
+		<column name="owner" data_type="int" size="11" is_null="0" default="0"></column>
+		<column name="title" data_type="varchar" size="255" is_null="0" default=""></column>
+		<column name="description" data_type="text" is_null="1" default="null"></column>
+		<column name="address" data_type="varchar" size="200" is_null="0" default=""></column>
+		<column name="pincode" data_type="varchar" size="50" is_null="0" default="" after="address"></column>
+		<column name="city" data_type="varchar" size="200" is_null="0" default="" after="address"></column>
+		<column name="land_mark" data_type="varchar" size="200" is_null="0" default="" after="city"></column>
+		<column name="country" data_type="int" size="11" is_null="0" default="0" after="land_mark"></column>
+		<column name="region" data_type="int" size="11" is_null="0" default="0" after="country"></column>
+		<column name="phone" data_type="varchar" size="50" is_null="0" default=""></column>
+		<column name="store_email" data_type="varchar" size="100" is_null="0" default=""></column>
+		<column name="store_avatar" data_type="varchar" size="125" is_null="0" default=""></column>
+		<column name="fee" data_type="float" size="10,2" is_null="0" default="0"></column>
+		<column name="live" data_type="tinyint" size="1" is_null="0" default="1"></column>
+		<column name="cdate" data_type="datetime" is_null="1" default="null"></column>
+		<column name="mdate" data_type="datetime" is_null="1" default="null"></column>
+		<column name="extra" data_type="text" is_null="1" default="null"></column>
+		<column name="company_name" data_type="varchar" size="100" is_null="0" default=""></column>
+		<column name="payment_mode" data_type="tinyint" size="1" is_null="0" default="0"></column>
+		<column name="pay_detail" data_type="varchar" size="225" is_null="0" default=""></column>
+		<column name="vanityurl" data_type="varchar" size="255" is_null="0" default=""></column>
+		<column name="header" data_type="varchar" size="255" is_null="0" default=""></column>
+		<column name="length_id" data_type="int" size="11" is_null="0" default="1" comment="This will be default length unite for store. Primary key of kart_lengths table"></column>
+		<column name="weight_id" data_type="int" size="11" is_null="0" default="0" comment="This will be default weight unite for store. Primary key of kart_weights table"></column>
+		<column name="taxprofile_id" data_type="int" size="11" is_null="0" default="0" comment="This will be default tax profile id for store. Primary key of kart_shipprofile table table"></column>
+		<column name="shipprofile_id" data_type="int" size="11" is_null="0" default="0" comment="This will be default ship profile id for store. Primary key of _kart_shipprofile table table"></column>
+		<primary column_name="id"></primary>
+	</table>
+
+	<table name="#__order_otps" engine="InnoDB" charset_name="utf8mb4" collation_name="utf8mb4_unicode_ci" auto_increment="1">
+		<column name="id" data_type="int" size="11" is_null="0" auto_increment="1" />
+		<column name="user_id" data_type="int" size="11" is_null="0" />
+		<column name="otp" data_type="varchar" size="10" is_null="0" />
+		<column name="created_on" data_type="datetime" is_null="0" />
+		<column name="expires_at" data_type="datetime" is_null="0" />
+
+		<primary column_name="id" />
+	</table>
+
+	<table name="#__kart_role" engine="InnoDB" charset_name="utf8mb4" collation_name="utf8mb4_unicode_ci" auto_increment="1">
+		<column name="id" data_type="int" size="11" is_null="0" auto_increment="1" ></column>
+		<column name="store_id" data_type="int" size="11" is_null="0" default="0"></column>
+		<column name="vendor_id" data_type="int" size="11" is_null="0" default="0" after="store_id"></column>
+		<column name="user_id" data_type="int" size="11" is_null="0" default="0"></column>
+		<column name="role" data_type="varchar" size="100" is_null="0" default=""></column>
+
+		<primary column_name="id"></primary>
+	</table>
+
+	<table name="#__kart_zepo_avn_method" engine="InnoDB" charset_name="utf8mb4" collation_name="utf8mb4_unicode_ci" auto_increment="1">
+		<column name="id" data_type="int" size="11" is_null="0" auto_increment="1" ></column>
+		<column name="name" data_type="varchar" size="255" is_null="0" default=""></column>
+		<column name="store_id" data_type="int" size="11" is_null="0" default="0"></column>
+		<column name="shipping_type" data_type="text" is_null="1" default="null"></column>
+		<column name="state" data_type="tinyint" size="3" is_null="0" default="0"></column>
+		<column name="payment_mode" data_type="varchar" size="255" is_null="0" default=""></column>
+		<column name="request_url" data_type="text" is_null="1" default="null"></column>
+
+		<primary column_name="id"></primary>
+	</table>
+
+	<table name="#__order_item_fee" engine="InnoDB" charset_name="utf8mb4" collation_name="utf8mb4_unicode_ci" auto_increment="1">
+		<column name="id" data_type="int" size="11" is_null="0" auto_increment="1" ></column>
+		<column name="order_item_id" data_type="int" size="11" is_null="0" default="0"></column>
+		<column name="fee" data_type="float" size="10,2" is_null="0" default="0"></column>
+		<column name="comment" data_type="varchar" size="125" is_null="0" default=""></column>
+
+		<primary column_name="id"></primary>
+	</table>
+
+	<table name="#__kart_option_currency" engine="InnoDB" charset_name="utf8mb4" collation_name="utf8mb4_unicode_ci" auto_increment="1">
+		<column name="id" data_type="int" size="11" is_null="0" auto_increment="1" ></column>
+		<column name="itemattributeoption_id" data_type="int" size="11" is_null="0" default="0"></column>
+		<column name="currency" data_type="varchar" size="16" is_null="0" default=""></column>
+		<column name="price" data_type="float" size="10,2" is_null="0" default="0"></column>
+
+		<primary column_name="id"></primary>
+	</table>
+
+	<table name="#__kart_base_currency" engine="InnoDB" charset_name="utf8mb4" collation_name="utf8mb4_unicode_ci" auto_increment="1">
+		<column name="id" data_type="int" size="11" is_null="0" auto_increment="1" ></column>
+		<column name="item_id" data_type="int" size="11" is_null="0" default="0"></column>
+		<column name="currency" data_type="varchar" size="16" is_null="0" default=""></column>
+		<column name="price" data_type="float" size="10,2" is_null="0" default="0"></column>
+		<column name="discount_price" data_type="float" size="10,2" is_null="1" default="0"></column>
+
+		<primary column_name="id"></primary>
+	</table>
+
+	<table name="#__kart_orders" engine="InnoDB" charset_name="utf8mb4" collation_name="utf8mb4_unicode_ci" auto_increment="1">
+		<column name="id" data_type="int" size="11" is_null="0" auto_increment="1" ></column>
+		<column name="prefix" data_type="varchar" size="23" is_null="0" default=""></column>
+		<column name="user_info_id" data_type="int" size="11" is_null="0" default="0"></column>
+		<column name="created_by" data_type="int" size="11" is_null="0" default="0" comment="user id of vendor who have created manual order for customer"></column>
+		<column name="name" data_type="varchar" size="255" is_null="0" default=""></column>
+		<column name="email" data_type="varchar" size="100" is_null="0" default=""></column>
+		<column name="cdate" data_type="datetime" is_null="1" default="null"></column>
+		<column name="mdate" data_type="datetime" is_null="1" default="null"></column>
+		<column name="transaction_id" data_type="varchar" size="100" is_null="0" default=""></column>
+		<column name="payee_id" data_type="varchar" size="100" is_null="0" default=""></column>
+		<column name="original_amount" data_type="float" size="10,2" is_null="0" default="0"></column>
+		<column name="amount" data_type="float" size="10,2" is_null="0" default="0"></column>
+		<column name="coupon_discount" data_type="float" size="10,2" is_null="0" default="0"></column>
+		<column name="coupon_code" data_type="varchar" size="100" is_null="0" default=""></column>
+		<column name="couponDetails" data_type="text" is_null="1" default="null" comment="Coupon price and used price flag- MRP price or field price etc is stored"></column>
+		<column name="payment_note" data_type="text" is_null="1" default="null" charset_name="utf8" collation_name="utf8_general_ci" comment="Payment gateway form comment detail goes here"></column>
+		<column name="order_tax" data_type="float" size="10,2" is_null="0" default="0"></column>
+		<column name="order_tax_details" data_type="text" is_null="1" default="null"></column>
+		<column name="order_shipping" data_type="float" size="10,2" is_null="0" default="0"></column>
+		<column name="order_shipping_details" data_type="text" is_null="1" default="null"></column>
+		<column name="orderRuleDetails" data_type="text" is_null="1" default="null"></column>
+		<column name="fee" data_type="float" size="10,2" is_null="0" default="0"></column>
+		<column name="customer_note" data_type="text" is_null="1" default="null"></column>
+		<column name="status" data_type="varchar" size="100" is_null="0" default=""></column>
+		<column name="processor" data_type="varchar" size="100" is_null="0" default=""></column>
+		<column name="ip_address" data_type="varchar" size="50" is_null="0" default=""></column>
+		<column name="ticketscount" data_type="int" size="11" is_null="0" default="0"></column>
+		<column name="currency" data_type="varchar" size="16" is_null="0" default=""></column>
+		<column name="extra" data_type="text" is_null="1" default="null"></column>
+		<column name="itemTaxShipIncluded" data_type="tinyint" size="1" is_null="0" default="0"></column>
+		<column name="migrateto28version" data_type="tinyint" size="3" is_null="0" default="0"></column>
+		<column name="params" data_type="text" is_null="1" default="null"></column>
+		<column name="deliveryfromdate" data_type="datetime" is_null="1" default="null"></column>
+		<column name="deliverytodate" data_type="datetime" is_null="1" default="null"></column>
+		<column name="feedbackemail_sent" data_type="int" is_null="0" default="0"></column>
+
+		<primary column_name="id"></primary>
+	</table>
+
+	<table name="#__kart_order_item" engine="InnoDB" charset_name="utf8mb4" collation_name="utf8mb4_unicode_ci" auto_increment="1">
+		<column name="order_item_id" data_type="int" size="11" is_null="0" auto_increment="1" ></column>
+		<column name="store_id" data_type="int" size="11" is_null="0" default="0"></column>
+		<column name="order_id" data_type="int" size="11" is_null="0" default="0"></column>
+		<column name="user_info_id" data_type="varchar" size="32" is_null="1" default="null"></column>
+		<column name="item_id" data_type="int" size="11" is_null="0" default="0"></column>
+		<column name="variant_item_id" data_type="int" size="11" is_null="0" default="0"></column>
+		<column name="product_attributes" data_type="text" is_null="1" default="null" comment="A CSV of itemattributeoption_id values, always in numerical order"></column>
+		<column name="product_attribute_names" data_type="text" is_null="1" default="null" comment="A CSV of itemattributeoption_name values"></column>
+		<column name="order_item_name" data_type="varchar" size="255" is_null="0" default=""></column>
+		<column name="product_quantity" data_type="int" size="11" is_null="0" default="0"></column>
+		<column name="product_item_price" data_type="float" size="10,2" is_null="0" default="0"></column>
+		<column name="product_attributes_price" data_type="varchar" size="64" is_null="0" default="" comment="The increase or decrease in price per item as a result of attributes. Includes + or - sign"></column>
+		<column name="product_final_price" data_type="float" size="10,2" is_null="0" default="0" comment="Amount after applying the coupon code + item shipping charges + item tax charges - discount"></column>
+		<column name="original_price" data_type="float" size="10,2" is_null="0" default="0" comment="(product_item_price + product_attributes_price) * product_quantity "></column>
+		<column name="discount" data_type="decimal" size="15,5" is_null="0" default="0"></column>
+		<column name="discount_detail" data_type="text" is_null="1" default="null" after="discount"></column>
+		<column name="coupon_code" data_type="varchar" size="100" is_null="0" default="" after="discount_detail"></column>
+		<column name="originalBasePrice" data_type="float" size="10,2" is_null="0" default="0" comment="Product price without field discount"></column>
+		<column name="item_tax" data_type="decimal" size="15,5" is_null="0" default="0" after="originalBasePrice"></column>
+		<column name="item_tax_detail" data_type="text" is_null="1" default="null" after="item_tax"></column>
+		<column name="item_shipcharges" data_type="decimal" size="15,5" is_null="0" default="0" after="item_tax_detail"></column>
+		<column name="item_shipDetail" data_type="text" is_null="1" default="null" after="item_shipcharges" comment="store item shipping changes detail"></column>
+		<column name="cdate" data_type="datetime" is_null="1" default="null"></column>
+		<column name="mdate" data_type="datetime" is_null="1" default="null"></column>
+		<column name="params" data_type="text" is_null="1" default="null" comment="Coupon code and all is stored"></column>
+		<column name="status" data_type="varchar" size="100" is_null="0" default=""></column>
+
+		<primary column_name="order_item_id"></primary>
+	</table>
+
+	<table name="#__kart_order_itemattributes" engine="InnoDB" charset_name="utf8mb4" collation_name="utf8mb4_unicode_ci" auto_increment="1">
+		<column name="orderitemattribute_id" data_type="int" size="11" is_null="0" auto_increment="1" ></column>
+		<column name="order_item_id" data_type="int" size="11" is_null="0" default="0"></column>
+		<column name="itemattributeoption_id" data_type="int" size="11" is_null="0" default="0"></column>
+		<column name="orderitemattribute_name" data_type="varchar" size="255" is_null="0" default=""></column>
+		<column name="orderitemattribute_price" data_type="float" size="10,2" is_null="0" default="0"></column>
+		<column name="orderitemattribute_prefix" data_type="varchar" size="1" is_null="0" default=""></column>
+
+		<primary column_name="orderitemattribute_id"></primary>
+		<key column_name="itemattributeoption_id" name="itemattribute_id"></key>
+	</table>
+
+	<table name="#__kart_cart" engine="InnoDB" charset_name="utf8mb4" collation_name="utf8mb4_unicode_ci" auto_increment="1">
+		<column name="cart_id" data_type="int" size="11" is_null="0" auto_increment="1" ></column>
+		<column name="user_id" data_type="int" size="11" is_null="0" default="0"></column>
+		<column name="session_id" data_type="varchar" size="200" is_null="0" default=""></column>
+		<column name="last_updated" data_type="timestamp" is_null="0" default="CURRENT_TIMESTAMP"></column>
+
+		<primary column_name="cart_id"></primary>
+	</table>
+
+	<table name="#__kart_cartitems" engine="InnoDB" charset_name="utf8mb4" collation_name="utf8mb4_unicode_ci" auto_increment="1">
+		<column name="cart_item_id" data_type="int" size="11" is_null="0" auto_increment="1" ></column>
+		<column name="cart_id" data_type="int" size="11" is_null="0" default="0"></column>
+		<column name="store_id" data_type="int" size="11" is_null="0" default="0"></column>
+		<column name="user_info_id" data_type="varchar" size="32" is_null="1" default=""></column>
+		<column name="item_id" data_type="int" size="11" is_null="0" default="0"></column>
+		<column name="variant_item_id" data_type="int" size="11" is_null="0" default="0" after="item_id"></column>
+		<column name="currency" data_type="varchar" size="16" is_null="0" default=""></column>
+		<column name="product_attributes" data_type="text" is_null="1" default="null" comment="A CSV of itemattributeoption_id values, always in numerical order"></column>
+		<column name="product_attribute_names" data_type="text" is_null="1" default="null" comment="A CSV of itemattributeoption_name values"></column>
+		<column name="order_item_name" data_type="varchar" size="255" is_null="0" default=""></column>
+		<column name="product_quantity" data_type="int" size="11" is_null="0" default="0"></column>
+		<column name="product_item_price" data_type="float" size="10,2" is_null="0" default="0"></column>
+		<column name="product_attributes_price" data_type="varchar" size="64" is_null="0" default="" comment="The increase or decrease in price per item as a result of attributes. Includes + or - sign"></column>
+		<column name="product_final_price" data_type="float" size="10,2" is_null="0" default="0"></column>
+		<column name="original_price" data_type="float" size="10,2" is_null="0" default="0"></column>
+		<column name="cdate" data_type="datetime" is_null="1" default="null"></column>
+		<column name="mdate" data_type="datetime" is_null="1" default="null"></column>
+		<column name="params" data_type="text" is_null="1" default="null"></column>
+
+		<primary column_name="cart_item_id"></primary>
+	</table>
+
+	<table name="#__kart_cartitemattributes" engine="InnoDB" charset_name="utf8mb4" collation_name="utf8mb4_unicode_ci" auto_increment="1">
+		<column name="cartitemattribute_id" data_type="int" size="11" is_null="0" auto_increment="1" ></column>
+		<column name="cart_item_id" data_type="int" size="11" is_null="0" default="0"></column>
+		<column name="itemattributeoption_id" data_type="int" size="11" is_null="0" default="0"></column>
+		<column name="cartitemattribute_name" data_type="varchar" size="255" is_null="0" default=""></column>
+		<column name="cartitemattribute_price" data_type="float" size="10,2" is_null="0" default="0"></column>
+		<column name="cartitemattribute_prefix" data_type="varchar" size="1" is_null="0" default=""></column>
+
+		<primary column_name="cartitemattribute_id"></primary>
+		<key column_name="itemattributeoption_id" name="itemattribute_id"></key>
+	</table>
+
+	<table name="#__kart_items" engine="InnoDB" charset_name="utf8mb4" collation_name="utf8mb4_unicode_ci" auto_increment="1">
+		<column name="item_id" data_type="int" size="11" is_null="0" auto_increment="1" ></column>
+		<column name="asset_id" data_type="int" size="10" is_null="0" default="0" unsigned="1"></column>
+		<column name="parent" data_type="varchar" size="255" is_null="0" default=""></column>
+		<column name="parent_id" data_type="int" size="11" is_null="0" default="0"></column>
+		<column name="product_id" data_type="int" size="11" is_null="0" default="0"></column>
+		<column name="product_type" data_type="int" size="11" is_null="0" default="1"></column>
+		<column name="store_id" data_type="int" size="11" is_null="0" default="0"></column>
+		<column name="name" data_type="varchar" size="255" is_null="0" default=""></column>
+		<column name="alias" data_type="varchar" size="255" is_null="0" default=""></column>
+		<column name="price" data_type="float" size="10,2" is_null="0" default="0"></column>
+		<column name="stock" data_type="int" size="11" is_null="0" default="0"></column>
+		<column name="min_quantity" data_type="int" size="5" is_null="0" default="0"></column>
+		<column name="max_quantity" data_type="int" size="5" is_null="0" default="0"></column>
+		<column name="slab" data_type="int" size="11" is_null="0" default="1" after="display_in_product_catlog"></column>
+		<column name="category" data_type="varchar" size="200" is_null="1" default="null"></column>
+		<column name="sku" data_type="varchar" size="200" is_null="1" default="null"></column>
+		<column name="images" data_type="text" is_null="1" default="null"></column>
+		<column name="description" data_type="text" is_null="1" default="null"></column>
+		<column name="video_link" data_type="varchar" size="200" is_null="0" default=""></column>
+		<column name="cdate" data_type="datetime" is_null="1" default="null"></column>
+		<column name="mdate" data_type="datetime" is_null="1" default="null"></column>
+		<column name="state" data_type="tinyint" size="3" is_null="0" default="1"></column>
+		<column name="featured" data_type="tinyint" size="3" is_null="0" default="0"></column>
+		<column name="metakey" data_type="text" is_null="1" default="null"></column>
+		<column name="metadesc" data_type="text" is_null="1" default="null"></column>
+		<column name="item_length" data_type="decimal" size="15,8" is_null="0" default="0"></column>
+		<column name="item_width" data_type="decimal" size="15,8" is_null="0" default="0"></column>
+		<column name="item_height" data_type="decimal" size="15,8" is_null="0" default="0"></column>
+		<column name="item_length_class_id" data_type="int" size="11" is_null="0" default="0"></column>
+		<column name="item_weight" data_type="decimal" size="15,8" is_null="0" default="0"></column>
+		<column name="item_weight_class_id" data_type="int" size="11" is_null="0" default="0"></column>
+		<column name="taxprofile_id" data_type="int" size="11" is_null="0" default="0"></column>
+		<column name="shipProfileId" data_type="int" size="11" is_null="0" default="0"></column>
+		<column name="display_in_product_catlog" data_type="tinyint" size="3" is_null="0" default="1"></column>
+		<column name="ordering" data_type="int" size="11" is_null="0" default="0"></column>
+		<column name="params" data_type="text" is_null="1" default="null" comment="Store extra data in json format. In key value pair"></column>
+
+		<primary column_name="item_id"></primary>
+	</table>
+
+	<table name="#__kart_itemattributes" engine="InnoDB" charset_name="utf8mb4" collation_name="utf8mb4_unicode_ci" auto_increment="1">
+		<column name="itemattribute_id" data_type="int" size="11" is_null="0" auto_increment="1" ></column>
+		<column name="item_id" data_type="int" size="11" is_null="0" default="0"></column>
+		<column name="store_id" data_type="int" size="11" is_null="0" default="0"></column>
+		<column name="itemattribute_name" data_type="varchar" size="255" is_null="0" default=""></column>
+		<column name="ordering" data_type="int" size="11" is_null="0" default="0"></column>
+		<column name="attribute_compulsary" data_type="BOOLEAN" is_null="0"></column>
+		<column name="attributeFieldType" data_type="varchar" size="20" is_null="0" default=""></column>
+		<column name="global_attribute_id" data_type="int" size="11" is_null="0" default="0"></column>
+		<column name="is_stock_keeping" data_type="tinyint" size="3" is_null="0" default="0"></column>
+
+		<primary column_name="itemattribute_id"></primary>
+	</table>
+
+	<table name="#__kart_itemattributeoptions" engine="InnoDB" charset_name="utf8mb4" collation_name="utf8mb4_unicode_ci" auto_increment="1">
+		<column name="itemattributeoption_id" data_type="int" size="11" is_null="0" auto_increment="1" ></column>
+		<column name="global_option_id" data_type="int" size="11" is_null="0" default="0" after="itemattributeoption_id"></column>
+		<column name="itemattribute_id" data_type="int" size="11" is_null="0" default="0"></column>
+		<column name="child_product_item_id" data_type="int" size="11" is_null="0" default="0" after="itemattribute_id"></column>
+		<column name="itemattributeoption_name" data_type="varchar" size="255" is_null="0" default=""></column>
+		<column name="itemattributeoption_price" data_type="float" size="10,2" is_null="0" default="0"></column>
+		<column name="itemattributeoption_code" data_type="varchar" size="255" is_null="0" default=""></column>
+		<column name="itemattributeoption_prefix" data_type="varchar" size="1" is_null="0" default=""></column>
+		<column name="ordering" data_type="int" size="11" is_null="0" default="0"></column>
+		<column name="state" data_type="tinyint" size="3" is_null="0" default="1" after="ordering"></column>
+
+		<primary column_name="itemattributeoption_id"></primary>
+		<key column_name="itemattribute_id" name="itemattribute_id"></key>
+	</table>
+
+	<table name="#__kart_users" engine="InnoDB" charset_name="utf8mb4" collation_name="utf8mb4_unicode_ci" auto_increment="1">
+		<column name="id" data_type="int" size="11" is_null="0" auto_increment="1" ></column>
+		<column name="user_id" data_type="int" size="11" is_null="0" default="0"></column>
+		<column name="order_id" data_type="int" size="11" is_null="0" default="0"></column>
+		<column name="user_email" data_type="varchar" size="255" is_null="0" default=""></column>
+		<column name="address_type" data_type="varchar" size="11" is_null="0" default=""></column>
+		<column name="firstname" data_type="varchar" size="250" is_null="0" default=""></column>
+		<column name="middlename" data_type="varchar" size="250" is_null="0" default=""></column>
+		<column name="lastname" data_type="varchar" size="250" is_null="0" default=""></column>
+		<column name="vat_number" data_type="varchar" size="250" is_null="0" default=""></column>
+		<column name="tax_exempt" data_type="tinyint" size="4" is_null="0" default="1"></column>
+		<column name="country_code" data_type="varchar" size="50" is_null="0" default=""></column>
+		<column name="address" data_type="varchar" size="255" is_null="0" default=""></column>
+		<column name="city" data_type="varchar" size="50" is_null="0" default=""></column>
+		<column name="land_mark" data_type="varchar" size="50" is_null="0" default=""></column>
+		<column name="state_code" data_type="varchar" size="50" is_null="0" default=""></column>
+		<column name="zipcode" data_type="varchar" size="255" is_null="0" default=""></column>
+		<column name="phone" data_type="varchar" size="50" is_null="0" default=""></column>
+		<column name="approved" data_type="tinyint" size="1" is_null="0" default="1"></column>
+
+		<primary column_name="id"></primary>
+		<key column_name="user_id" name="user_id"></key>
+	</table>
+
+	<table name="#__kart_coupon" engine="InnoDB" charset_name="utf8mb4" collation_name="utf8mb4_unicode_ci" auto_increment="1">
+		<column name="id" data_type="int" size="11" is_null="0" auto_increment="1" ></column>
+		<column name="store_id" data_type="int" size="11" is_null="0" default="0"></column>
+		<column name="item_id" data_type="varchar" size="50" is_null="0" default=""></column>
+		<column name="user_id" data_type="varchar" size="50" is_null="0" default=""></column>
+		<column name="published" data_type="tinyint" size="4" is_null="0" default="1"></column>
+		<column name="name" data_type="varchar" size="100" is_null="0" default=""></column>
+		<column name="code" data_type="varchar" size="100" is_null="0" default=""></column>
+		<column name="value" data_type="float" size="10,2" is_null="0" default="0"></column>
+		<column name="val_type" data_type="tinyint" size="4" is_null="0" default="1"></column>
+		<column name="max_use" data_type="int" size="11" is_null="0" default="0"></column>
+		<column name="max_per_user" data_type="int" size="11" is_null="0" default="0"></column>
+		<column name="description" data_type="text" is_null="1" default="null"></column>
+		<column name="extra_params" data_type="text" is_null="1" default="null"></column>
+		<column name="from_date" data_type="datetime" is_null="1" default="null"></column>
+		<column name="exp_date" data_type="datetime" is_null="1" default="null"></column>
+
+		<primary column_name="id"></primary>
+	</table>
+
+	<table name="#__kart_ship_manager" engine="InnoDB" charset_name="utf8mb4" collation_name="utf8mb4_unicode_ci" auto_increment="1">
+		<column name="id" data_type="int" size="11" is_null="0" auto_increment="1" ></column>
+		<column name="key" data_type="varchar" size="64" is_null="0" default=""></column>
+		<column name="value" data_type="varchar" size="64" is_null="0" default=""></column>
+
+		<primary column_name="id"></primary>
+	</table>
+
+	<table name="#__kart_ship_manager_currency" engine="InnoDB" charset_name="utf8mb4" collation_name="utf8mb4_unicode_ci" auto_increment="1">
+		<column name="id" data_type="int" size="11" is_null="0" auto_increment="1" ></column>
+		<column name="ship_manager_id" data_type="int" size="11" is_null="0" default="0"></column>
+		<column name="shipvalue" data_type="float" size="10,2" is_null="0" default="0"></column>
+		<column name="currency" data_type="varchar" size="16" is_null="0" default=""></column>
+
+		<primary column_name="id"></primary>
+	</table>
+
+	<table name="#__kart_payouts" engine="InnoDB" charset_name="utf8mb4" collation_name="utf8mb4_unicode_ci" auto_increment="1">
+		<column name="id" data_type="int" size="11" is_null="0" auto_increment="1" ></column>
+		<column name="user_id" data_type="varchar" size="20" is_null="0" default=""></column>
+		<column name="payee_name" data_type="varchar" size="20" is_null="0" default=""></column>
+		<column name="ad_id" data_type="int" size="11" is_null="0" default="0"></column>
+		<column name="transaction_id" data_type="varchar" size="20" is_null="0" default=""></column>
+		<column name="date" data_type="datetime" is_null="1" default="null"></column>
+		<column name="email_id" data_type="varchar" size="50" is_null="0" default=""></column>
+		<column name="amount" data_type="double" size="11,2" is_null="0" default="0"></column>
+		<column name="status" data_type="int" size="11" is_null="0" default="0"></column>
+		<column name="comment" data_type="varchar" size="50" is_null="1" default="null"></column>
+
+		<primary column_name="id"></primary>
+	</table>
+
+	<table name="#__kart_promotions" engine="InnoDB" charset_name="utf8mb4" collation_name="utf8mb4_unicode_ci" auto_increment="1">
+		<column name="id" data_type="int" size="11" is_null="0" auto_increment="1" ></column>
+		<column name="store_id" data_type="int" size="11" is_null="0" default="0" old_name="key" comment="store id"></column>
+		<column name="state" data_type="tinyint" size="3" is_null="0" default="1"></column>
+		<column name="name" data_type="varchar" size="225" is_null="0" default="" old_name="operation"></column>
+		<column name="description" data_type="varchar" size="500" is_null="0" default="" old_name="keyValue"></column>
+		<column name="from_date" data_type="datetime" is_null="1" default="null" old_name="fromDate"></column>
+		<column name="exp_date" data_type="datetime" is_null="1" default="null" old_name="toDate"></column>
+		<column name="coupon_required" data_type="tinyint" size="4" is_null="0" default="0"></column>
+		<column name="coupon_code" data_type="varchar" size="100" is_null="0" default="" old_name="discountApplied"></column>
+		<column name="discount_type" data_type="varchar" size="100" is_null="0" default="" old_name="discuntValType" comment="flat, percentage, quanity_discount"></column>
+		<column name="max_use" data_type="int" size="11" is_null="0" default="0"></column>
+		<column name="max_per_user" data_type="int" size="11" is_null="0" default="0"></column>
+		<column name="terms_and_conditions" data_type="varchar" size="700" is_null="1" default=""></column>
+		<column name="extra_params" data_type="text" is_null="1" default="null"></column>
+		<column name="catlog_promotion" data_type="tinyint" size="4" is_null="0" default="0"></column>
+		<column name="allowspecificuserpromotion" data_type="tinyint" size="4" is_null="0" default="0"></column>
+		<column name="orderamount" data_type="int" size="11" is_null="0" default="0"></column>
+		<column name="couponmailsent" data_type="tinyint" size="4" is_null="0" default="0"></column>
+		
+		<primary column_name="id"></primary>
+	</table>
+
+	<table name="#__kart_promotions_rules" engine="InnoDB" charset_name="utf8mb4" collation_name="utf8mb4_unicode_ci" auto_increment="1">
+		<column name="id" data_type="int" size="11" is_null="0" auto_increment="1" ></column>
+		<column name="promotion_id" data_type="int" size="11" is_null="0" default="0"></column>
+		<column name="condition_on" data_type="varchar" size="255" is_null="0" default=""></column>
+		<column name="condition_on_attribute" data_type="varchar" size="255" is_null="0" default="" comment="Used for where condition (Key,value). Eg key = category"></column>
+		<column name="condition_attribute_value" data_type="varchar" size="255" is_null="0" default="" comment="Used for  where condition (Key,value).  Eg value = T-shirt category"></column>
+		<column name="quantity" data_type="int" size="11" is_null="0" default="0"></column>
+		<column name="is_compulsary" data_type="varchar" size="127" is_null="0" default=""></column>
+		<column name="operation" data_type="varchar" size="255" is_null="0" default=""></column>
+		
+		<primary column_name="id"></primary>
+	</table>
+
+	<table name="#__kart_promotion_discount" engine="InnoDB" charset_name="utf8mb4" collation_name="utf8mb4_unicode_ci" auto_increment="1">
+		<column name="id" data_type="int" size="11" is_null="0" auto_increment="1" ></column>
+		<column name="promotion_id" data_type="int" size="11" is_null="0" default="0"></column>
+		<column name="discount" data_type="float" size="10,2" is_null="1" default="null"></column>
+		<column name="max_discount" data_type="float" size="10,2" is_null="1" default="null"></column>
+		<column name="currency" data_type="varchar" size="16" is_null="0" default=""></column>
+		<column name="discount_type" data_type="varchar" size="60" is_null="0" default="" comment="flat, percentage, quanity_discount"></column>
+		
+		<primary column_name="id"></primary>
+		<index name="id" column_names="id"></index>
+	</table>
+
+	<table name="#__q2c_order_history" engine="InnoDB" charset_name="utf8mb4" collation_name="utf8mb4_unicode_ci" auto_increment="1">
+		<column name="order_id" data_type="int" size="11" is_null="0" auto_increment="1" ></column>
+		<column name="status" data_type="varchar" size="1" is_null="0" default=""></column>
+		<column name="mdate" data_type="datetime" is_null="1" default="null"></column>
+		<column name="comment" data_type="varchar" size="100" is_null="0" default=""></column>
+
+		<primary column_name="order_id"></primary>
+	</table>
+
+	<table name="#__kart_orderItemFiles" engine="InnoDB" charset_name="utf8mb4" collation_name="utf8mb4_unicode_ci" auto_increment="1">
+		<column name="id" data_type="int" size="11" is_null="0" auto_increment="1" ></column>
+		<column name="product_file_id" data_type="int" size="11" is_null="0" default="0" ></column>
+		<column name="order_item_id" data_type="int" size="11" is_null="0" default="0" ></column>
+		<column name="download_count" data_type="int" size="11" is_null="0" default="0" ></column>
+		<column name="cdate" data_type="datetime" is_null="1" default="null"></column>
+		<column name="expirary_date" data_type="timestamp" is_null="0" default="CURRENT_TIMESTAMP"></column>
+		<column name="download_limit" data_type="int" size="11" is_null="0" default="0" ></column>
+		<column name="expiration_mode" data_type="varchar" size="50" is_null="0" default="" after="download_limit" comment="This is component option value for expiration mode eg Max Download, Date Expirary or both"></column>
+
+		<primary column_name="id"></primary>
+	</table>
+
+	<table name="#__kart_itemfiles" engine="InnoDB" charset_name="utf8mb4" collation_name="utf8mb4_unicode_ci" auto_increment="1">
+		<column name="file_id" data_type="int" size="11" is_null="0" auto_increment="1" ></column>
+		<column name="file_display_name" data_type="varchar" size="255" is_null="0" default=""></column>
+		<column name="item_id" data_type="int" size="11" is_null="0" default="0" ></column>
+		<column name="purchase_required" data_type="tinyint" size="1" is_null="0" default="1" ></column>
+		<column name="state" data_type="tinyint" size="1" is_null="0" default="1" ></column>
+		<column name="download_limit" data_type="int" size="11" is_null="0" default="0" ></column>
+		<column name="filePath" data_type="varchar" size="255" is_null="0" default=""></column>
+		<column name="version" data_type="varchar" size="16" is_null="0" default=""></column>
+		<column name="expiry_mode" data_type="tinyint" size="1" is_null="0" default="1" comment="1 for months"></column>
+		<column name="expiry_in" data_type="int" size="11" is_null="0" default="0" ></column>
+		<column name="cdate" data_type="datetime" is_null="1" default="null"></column>
+		<column name="mdate" data_type="datetime" is_null="1" default="null"></column>
+
+		<primary column_name="file_id"></primary>
+	</table>
+
+	<table name="#__kart_zone" engine="InnoDB" charset_name="utf8mb4" collation_name="utf8mb4_unicode_ci" auto_increment="1">
+		<column name="id" data_type="int" size="11" is_null="0" auto_increment="1" ></column>
+		<column name="name" data_type="varchar" size="255" is_null="0" default="" ></column>
+		<column name="store_id" data_type="int" size="11" is_null="0" default="0" ></column>
+		<column name="state" data_type="tinyint" size="1" is_null="0" default="1" ></column>
+		<column name="ordering" data_type="int" size="11" is_null="0" default="0" ></column>
+
+		<primary column_name="id"></primary>
+	</table>
+
+	<table name="#__kart_zonerules" engine="InnoDB" charset_name="utf8mb4" collation_name="utf8mb4_unicode_ci" auto_increment="1">
+		<column name="zonerule_id" data_type="int" size="11" is_null="0" auto_increment="1" ></column>
+		<column name="zone_id" data_type="int" size="11" is_null="0" default="0" ></column>
+		<column name="country_id" data_type="int" size="11" is_null="0" default="0" ></column>
+		<column name="region_id" data_type="int" size="11" is_null="0" default="0" ></column>
+		<column name="ordering" data_type="int" size="11" is_null="0" default="0" ></column>
+
+		<primary column_name="zonerule_id"></primary>
+	</table>
+
+	<table name="#__kart_taxrates" engine="InnoDB" charset_name="utf8mb4" collation_name="utf8mb4_unicode_ci" auto_increment="1">
+		<column name="id" data_type="int" size="11" is_null="0" auto_increment="1" ></column>
+		<column name="name" data_type="varchar" size="255" is_null="0" default="" ></column>
+		<column name="percentage" data_type="int" size="10" is_null="0" default="0" unsigned="1"></column>
+		<column name="zone_id" data_type="int" size="11" is_null="0" default="0" ></column>
+		<column name="state" data_type="tinyint" size="1" is_null="0" default="1" ></column>
+		<column name="ordering" data_type="int" size="11" is_null="0" default="0" ></column>
+		<column name="created_by" data_type="int" size="11" is_null="0" default="0" ></column>
+
+		<primary column_name="id"></primary>
+	</table>
+
+	<table name="#__kart_taxrules" engine="InnoDB" charset_name="utf8mb4" collation_name="utf8mb4_unicode_ci" auto_increment="1">
+		<column name="taxrule_id" data_type="int" size="11" is_null="0" auto_increment="1" ></column>
+		<column name="taxprofile_id" data_type="int" size="11" is_null="0" default="0" ></column>
+		<column name="taxrate_id" data_type="int" size="11" is_null="0" default="0" ></column>
+		<column name="address" data_type="varchar" size="255" is_null="0" default="" comment="Which address should be used to apply taxrates. Eg billin, shipping or store address"></column>
+		<column name="ordering" data_type="int" size="11" is_null="0" default="0" ></column>
+		<column name="state" data_type="int" size="11" is_null="0" default="1" ></column>
+
+		<primary column_name="taxrule_id"></primary>
+	</table>
+
+	<table name="#__kart_taxprofiles" engine="InnoDB" charset_name="utf8mb4" collation_name="utf8mb4_unicode_ci" auto_increment="1">
+		<column name="id" data_type="int" size="11" is_null="0" auto_increment="1" ></column>
+		<column name="name" data_type="varchar" size="255" is_null="0" default="" ></column>
+		<column name="store_id" data_type="int" size="11" is_null="0" default="0" ></column>
+		<column name="state" data_type="tinyint" size="1" is_null="0" default="1" ></column>
+		<column name="ordering" data_type="int" size="11" is_null="0" default="0" ></column>
+
+		<primary column_name="id"></primary>
+	</table>
+
+	<table name="#__kart_zoneShipMethods" engine="InnoDB" charset_name="utf8mb4" collation_name="utf8mb4_unicode_ci" auto_increment="1">
+		<column name="id" data_type="int" size="11" is_null="0" auto_increment="1" ></column>
+		<column name="name" data_type="varchar" size="255" is_null="0" default="" ></column>
+		<column name="store_id" data_type="int" size="11" is_null="0" default="0" ></column>
+		<column name="taxprofileId" data_type="int" size="11" is_null="0" default="0" ></column>
+		<column name="state" data_type="tinyint" size="3" is_null="0" default="1" ></column>
+		<column name="shipping_type" data_type="int" size="11" is_null="0" default="0" comment="It is type of shipping method eg. weight based, quantity based etc"></column>
+		<column name="min_value" data_type="decimal" size="15,5" is_null="0" default="0" ></column>
+		<column name="max_value" data_type="decimal" size="15,5" is_null="0" default="0" ></column>
+
+		<primary column_name="id"></primary>
+	</table>
+
+	<table name="#__kart_zoneShipMethodRates" engine="InnoDB" charset_name="utf8mb4" collation_name="utf8mb4_unicode_ci" auto_increment="1">
+		<column name="id" data_type="int" size="11" is_null="0" auto_increment="1" ></column>
+		<column name="methodId" data_type="int" size="11" is_null="0" default="0" comment="This is primary key of #__kart_shipMethods table"></column>
+		<column name="zone_id" data_type="int" size="11" is_null="0" default="0" comment="This is primary key of #__kart_zones table."></column>
+		<column name="rangeFrom" data_type="float" size="11,4" is_null="0" default="0" ></column>
+		<column name="rangeTo" data_type="float" size="11,4" is_null="0" default="99999" ></column>
+
+		<primary column_name="id"></primary>
+	</table>
+
+	<table name="#__kart_zoneShipMethodRateCurr" engine="InnoDB" charset_name="utf8mb4" collation_name="utf8mb4_unicode_ci" auto_increment="1">
+		<column name="id" data_type="int" size="11" is_null="0" auto_increment="1" ></column>
+		<column name="rateId" data_type="int" size="11" is_null="0" default="0" comment="This is primary key of #__kart_zoneShipMethodRates table."></column>
+		<column name="shipCost" data_type="float" size="15,8" is_null="0" default="0" ></column>
+		<column name="handleCost" data_type="float" size="15,8" is_null="0" default="0" ></column>
+		<column name="currency" data_type="varchar" size="16" is_null="0" default="" ></column>
+
+		<primary column_name="id"></primary>
+	</table>
+
+	<table name="#__kart_shipprofile" engine="InnoDB" charset_name="utf8mb4" collation_name="utf8mb4_unicode_ci" auto_increment="1">
+		<column name="id" data_type="int" size="11" is_null="0" auto_increment="1" ></column>
+		<column name="name" data_type="varchar" size="255" is_null="0" default="" ></column>
+		<column name="store_id" data_type="int" size="11" is_null="0" default="0" ></column>
+		<column name="state" data_type="tinyint" size="1" is_null="0" default="1" ></column>
+		<column name="ordering" data_type="int" size="11" is_null="0" default="0" ></column>
+
+		<primary column_name="id"></primary>
+	</table>
+
+	<table name="#__kart_shipProfileMethods" engine="InnoDB" charset_name="utf8mb4" collation_name="utf8mb4_unicode_ci" auto_increment="1">
+		<column name="id" data_type="int" size="11" is_null="0" auto_increment="1" ></column>
+		<column name="shipprofile_id" data_type="int" size="11" is_null="0" default="0" ></column>
+		<column name="client" data_type="varchar" size="255" is_null="0" default="" comment="Shipping Plugin Name"></column>
+		<column name="methodId" data_type="int" size="11" is_null="0" default="0" comment="Extension specific, Shipping Plugin Method id."></column>
+		<column name="ordering" data_type="int" size="11" is_null="0" default="0" ></column>
+
+		<primary column_name="id"></primary>
+	</table>
+
+	<table name="#__kart_zoneShipMethodCurr" engine="InnoDB" charset_name="utf8mb4" collation_name="utf8mb4_unicode_ci" auto_increment="1">
+		<column name="id" data_type="int" size="11" is_null="0" auto_increment="1" ></column>
+		<column name="methodId" data_type="int" size="11" is_null="0" default="0" ></column>
+		<column name="currency" data_type="varchar" size="16" is_null="0" default="" ></column>
+		<column name="min_value" data_type="decimal" size="15,5" is_null="0" default="0"></column>
+		<column name="max_value" data_type="decimal" size="15,5" is_null="0" default="0"></column>
+
+		<primary column_name="id"></primary>
+	</table>
+
+	<table name="#__kart_orders_history" engine="InnoDB" charset_name="utf8mb4" collation_name="utf8mb4_unicode_ci" auto_increment="1">
+		<column name="id" data_type="int" size="11" is_null="0" auto_increment="1" ></column>
+		<column name="order_id" data_type="int" size="11" is_null="0" default="0" ></column>
+		<column name="order_item_id" data_type="int" size="11" is_null="0" default="0" ></column>
+		<column name="creater_id" data_type="int" size="11" is_null="0" default="0" ></column>
+		<column name="mdate" data_type="timestamp" is_null="0" default="CURRENT_TIMESTAMP" ></column>
+		<column name="customer_notified" data_type="tinyint" size="1" is_null="0" default="0" ></column>
+		<column name="order_item_status" data_type="varchar" size="100" is_null="0" default="" ></column>
+		<column name="note" data_type="text" is_null="1" default="null" ></column>
+
+		<primary column_name="id"></primary>
+	</table>
+
+	<table name="#__kart_orders_xref" engine="InnoDB" charset_name="utf8mb4" collation_name="utf8mb4_unicode_ci" auto_increment="1">
+		<column name="id" data_type="int" size="11" is_null="0" auto_increment="1" ></column>
+		<column name="order_id" data_type="int" size="11" is_null="0" default="0" ></column>
+		<column name="mdate" data_type="timestamp" is_null="0" default="CURRENT_TIMESTAMP" ></column>
+		<column name="extra" data_type="text" is_null="1" default="null" ></column>
+
+		<primary column_name="id"></primary>
+	</table>
+
+	<table name="#__kart_affiliate" engine="InnoDB" charset_name="utf8mb4" collation_name="utf8mb4_unicode_ci" auto_increment="1">
+		<column name="order_id" data_type="int" size="11" is_null="0" auto_increment="1" ></column>
+		<column name="affiliate_id" data_type="int" size="11" is_null="1" default="null" comment="Unique id of affiliate user"></column>
+		<column name="client" data_type="varchar" size="120" is_null="0" default="" comment="Affiliate System"></column>
+
+		<primary column_name="order_id"></primary>
+	</table>
+
+	<table name="#__kart_category_attribute_set" engine="InnoDB" charset_name="utf8mb4" collation_name="utf8mb4_unicode_ci" comment="Quick2Cart category-attributeset mapping info" auto_increment="1">
+		<column name="id" data_type="int" size="11" is_null="0" auto_increment="1" ></column>
+		<column name="category_id" data_type="int" size="11" is_null="0" default="0" ></column>
+		<column name="attribute_set_id" data_type="int" size="11" is_null="0" default="0" ></column>
+
+		<primary column_name="id"></primary>
+	</table>
+
+	<table name="#__kart_global_attribute" engine="InnoDB" charset_name="utf8mb4" collation_name="utf8mb4_unicode_ci" comment="Quick2Cart global attributes info" auto_increment="1">
+		<column name="id" data_type="int" size="11" is_null="0" auto_increment="1" ></column>
+		<column name="attribute_name" data_type="varchar" size="255" is_null="0" default="" ></column>
+		<column name="display_name" data_type="varchar" size="255" is_null="0" default="" ></column>
+		<column name="renderer" data_type="varchar" size="255" is_null="0" default="filters_checkbox" ></column>
+		<column name="state" data_type="tinyint" size="3" is_null="0" default="1" ></column>
+
+		<primary column_name="id"></primary>
+	</table>
+
+	<table name="#__kart_global_attribute_option" engine="InnoDB" charset_name="utf8mb4" collation_name="utf8mb4_unicode_ci" comment="Quick2Cart global attribute options info" auto_increment="1">
+		<column name="id" data_type="int" size="11" is_null="0" auto_increment="1" ></column>
+		<column name="option_name" data_type="varchar" size="255" is_null="0" default="" ></column>
+		<column name="attribute_id" data_type="int" size="11" is_null="0" default="0" ></column>
+		<column name="ordering" data_type="int" size="11" is_null="0" default="0" ></column>
+
+		<primary column_name="id"></primary>
+	</table>
+
+	<table name="#__kart_global_attribute_set" engine="InnoDB" charset_name="utf8mb4" collation_name="utf8mb4_unicode_ci" auto_increment="1" comment="Quick2Cart global attribute set info">
+		<column name="id" data_type="int" size="11" is_null="0" auto_increment="1" ></column>
+		<column name="global_attribute_set_name" data_type="varchar" size="255" is_null="0" default="" ></column>
+		<column name="global_attribute_ids" data_type="text" is_null="1" default="null" ></column>
+		<column name="state" data_type="tinyint" size="3" is_null="0" default="1" ></column>
+
+		<primary column_name="id"></primary>
+	</table>
+
+	<table name="#__kart_customer_address" engine="InnoDB" charset_name="utf8mb4" collation_name="utf8mb4_unicode_ci" auto_increment="1">
+		<column name="id" data_type="int" size="11" is_null="0" auto_increment="1" ></column>
+		<column name="user_id" data_type="int" size="11" is_null="0" default="0" ></column>
+		<column name="firstname" data_type="varchar" size="150" is_null="0" default="" ></column>
+		<column name="middlename" data_type="varchar" size="250" is_null="0" default="" ></column>
+		<column name="lastname" data_type="varchar" size="150" is_null="0" default="" ></column>
+		<column name="vat_number" data_type="varchar" size="50" is_null="0" default="" ></column>
+		<column name="phone" data_type="varchar" size="15" is_null="0" default="" ></column>
+		<column name="address_title" data_type="varchar" size="250" is_null="0" default="" ></column>
+		<column name="user_email" data_type="varchar" size="250" is_null="0" default="" ></column>
+		<column name="address" data_type="varchar" size="250" is_null="0" default="" ></column>
+		<column name="land_mark" data_type="varchar" size="250" is_null="0" default="" ></column>
+		<column name="zipcode" data_type="varchar" size="255" is_null="0" default="" ></column>
+		<column name="country_code" data_type="int" size="11" is_null="0" default="0" ></column>
+		<column name="state_code" data_type="int" size="11" is_null="0" default="0" ></column>
+		<column name="city" data_type="varchar" size="150" is_null="0" default="" ></column>
+		<column name="last_used_for_billing" data_type="tinyint" size="4" is_null="0" default="0" ></column>
+		<column name="last_used_for_shipping" data_type="tinyint" size="4" is_null="0" default="0" ></column>
+
+		<primary column_name="id"></primary>
+	</table>
+
+	<table name="#__kart_lengths" engine="MyISAM" charset_name="utf8" auto_increment="4">
+		<column name="id" data_type="int" size="11" is_null="0" auto_increment="1" ></column>
+		<column name="title" data_type="varchar" size="255" is_null="0" default="" ></column>
+		<column name="unit" data_type="varchar" size="4" is_null="0" default="" ></column>
+		<column name="value" data_type="decimal" size="15,8" is_null="0" default="0"></column>
+		<column name="state" data_type="tinyint" size="1" is_null="0" default="1" ></column>
+		<column name="store_id" data_type="int" size="11" is_null="0" default="0" ></column>
+		<column name="ordering" data_type="int" size="10" is_null="0" default="0" ></column>
+		<column name="created_by" data_type="int" size="11" is_null="0" default="0" ></column>
+		<column name="checked_out" data_type="int" size="11" is_null="0" default="0" ></column>
+		<column name="checked_out_time" data_type="datetime" is_null="1" default="null" ></column>
+		<column name="id_default" data_type="tinyint" size="2" is_null="0" default="0" ></column>
+
+		<primary column_name="id"></primary>
+	</table>
+
+	<table name="#__kart_weights" engine="InnoDB" charset_name="utf8" auto_increment="4">
+		<column name="id" data_type="int" size="11" is_null="0" auto_increment="1" ></column>
+		<column name="title" data_type="varchar" size="255" is_null="0" default="" ></column>
+		<column name="unit" data_type="varchar" size="4" is_null="0" default="" ></column>
+		<column name="value" data_type="decimal" size="15,8" is_null="0" default="0"></column>
+		<column name="state" data_type="tinyint" size="1" is_null="0" default="1" ></column>
+		<column name="store_id" data_type="int" size="11" is_null="0" default="0" ></column>
+		<column name="ordering" data_type="int" size="10" is_null="0" default="0" ></column>
+		<column name="created_by" data_type="int" size="11" is_null="0" default="0" ></column>
+		<column name="checked_out" data_type="int" size="11" is_null="0" default="0" ></column>
+		<column name="checked_out_time" data_type="datetime" is_null="1" default="null" ></column>
+		<column name="id_default" data_type="tinyint" size="2" is_null="0" default="0" ></column>
+		
+		<primary column_name="id"></primary>
+	</table>
+	
+	<table name="#__kart_favourite" engine="InnoDB" charset_name="utf8mb4" collation_name="utf8mb4_unicode_ci">
+		<column name="id" data_type="int" size="11" is_null="0" auto_increment="1" />
+		<column name="item_id" data_type="int" size="11" is_null="0" />
+		<column name="user_id" data_type="int" size="11" is_null="0" />
+		<column name="created_at" data_type="datetime" is_null="0" default="CURRENT_TIMESTAMP" />
+		<column name="updated_at" data_type="datetime" is_null="0" default="CURRENT_TIMESTAMP" extra="on update CURRENT_TIMESTAMP" />
+
+		<primary column_name="id" />
+	</table>
+	
+</database>

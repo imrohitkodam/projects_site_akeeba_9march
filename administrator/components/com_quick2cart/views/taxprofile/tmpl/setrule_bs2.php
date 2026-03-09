@@ -1,0 +1,127 @@
+<?php
+/**
+ * @package     Quick2cart
+ * @subpackage  com_quick2cart
+ *
+ * @author      Techjoomla <extensions@techjoomla.com>
+ * @copyright   Copyright (C) 2009 - 2021 Techjoomla. All rights reserved.
+ * @license     http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
+ */
+// no direct access
+defined('_JEXEC') or die;
+use Joomla\CMS\Factory;
+use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Language\Text;
+use Joomla\CMS\Uri\Uri;
+
+HTMLHelper::addIncludePath(JPATH_COMPONENT . '/helpers/html');
+HTMLHelper::_('behavior.formvalidator');
+HTMLHelper::_('behavior.keepalive');
+
+// Import CSS
+$document = Factory::getDocument();
+HTMLHelper::_('stylesheet','components/com_quick2cart/css/quick2cart.css');
+?>
+<script type="text/javascript">
+	var root_url="<?php echo Uri::root(); ?>";
+
+	/** This function adds in zone
+	 */
+	function qtcUpdateZoneRule()
+	{
+		var qtc_taxrate_id = document.getElementById('jformtaxrate_id').value;
+		var qtc_address    = document.getElementById('jformaddress').value;
+
+		if(qtc_taxrate_id == '' || qtc_address == '')
+		{
+			Joomla.renderMessages({ 'error': ["<?php echo Text::_('COM_QUICK2CART_TAXPROFILE_INVALID_SELECTION'); ?>"] });
+			return false;
+		}
+
+		var data = {
+			jform : {
+				taxrule_id : document.getElementById('taxrule_id').value,
+				taxrate_id : qtc_taxrate_id,
+				address : qtc_address,
+			}
+		};
+		// Get country and region name
+		var selected_rule = techjoomla.jQuery("#jformtaxrate_id").children("option").filter(":selected").text() ;
+		var selected_adress = techjoomla.jQuery("#jformaddress").children("option").filter(":selected").text() ;
+
+		techjoomla.jQuery.ajax({
+			type : "POST",
+			url : Joomla.getOptions('system.paths').base + "/index.php?option=com_quick2cart&view=taxprofile&task=taxprofile.updateTaxRule",
+			data : data,
+			dataType: "json",
+			success : function(response)
+			{
+				// If not Error
+				if (response.error != 1)
+				{
+					// Remove Error dive content
+					techjoomla.jQuery('#qtcErrorContentDiv').html('');
+					techjoomla.jQuery('.qtcError').fadeOut();
+
+					var taxrule_id= response.taxrule_id;
+					// tax rate and address field value from parent window td
+					window.parent.jQuery('#qtc_taxrate_'+taxrule_id).html(selected_rule);
+					window.parent.jQuery('#qtc_address_'+taxrule_id).html(selected_adress);
+					alert("<?php echo Text::_('COM_QUICK2CART_ITEM_DATA_SAVED_SUCCESSFULLY'); ?>");
+
+					// intialize squeeze box again for edit button to work
+					window.parent.location.reload();
+				}
+				else
+				{
+					Joomla.renderMessages({ 'error': [response.errorMessage] });
+				}
+			}
+		});
+
+		return false;
+	}
+</script>
+ <div class="qyc_admin_taxprofileSetrule">
+	<form action="" method="post" enctype="multipart/form-data" name="qtcTaxRuleForm" id="qtcTaxRuleForm" class="form-validate">
+		<div class="form-horizontal">
+			<div class="row-fluid">
+				<div class="span10 form-horizontal">
+					<legend>
+						<?php echo Text::_('COM_QUICK2CART_UPDATE_TAXRULE'); ?>
+					</legend>
+					<!-- For Error Display-->
+
+					<input type="hidden" name="taxrule_id" id="taxrule_id" value="<?php echo $this->taxRule_id ?>" />
+					<!-- Map the tax rule aginst tax profile -->
+					<div class="row">
+						<div class="controls">
+							<?php echo $this->taxrate; ?>
+						</div>
+						<div class="controls af-mt-15 af-mb-20">
+							<?php echo $this->address; ?>
+
+							<input type="button" id="CreateTaxRule"
+								value="<?php echo Text::_('COM_QUICK2CART_TAXPROFILE_UPDATE_TAXRATE'); ?>"
+								class="btn btn-success" onClick="qtcUpdateZoneRule()" />
+						</div>
+
+						<div class="span12">
+							<!-- For Error Display-->
+							<div id="zoneError" colspan="3">
+								<div class="error alert alert-danger qtcError" style="display: none;">
+									<?php echo Text::_('COM_QUICK2CART_ZONE_ERROR'); ?>
+									<i class="icon-cancel pull-right" style="align: right;"
+										onclick="techjoomla.jQuery(this).parent().fadeOut();"> </i> <br />
+									<hr />
+									<div id="qtcErrorContentDiv"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<?php echo HTMLHelper::_('form.token'); ?>
+		</div>
+	</form>
+</div> <!--qyc_admin_taxprofile set rule-->

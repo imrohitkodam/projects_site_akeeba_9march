@@ -1,0 +1,192 @@
+{
+  "template1": {
+    "id": "",
+    "client": "com_quick2cart",
+    "key": "addReviewToTheProduct",
+    "title": "email notification to product Buyer to add review to the product",
+    "state": 1,
+    "user_control": 1,
+    "core": 1,
+    "email":{
+      "state": 1,
+      "cc": "",
+      "bcc": "",
+      "from_name": "",
+      "from_email": "",
+      "emailfields": {
+        "emailfields0": {
+          "id": "",
+          "language": "*",
+          "subject": "Share Your Experience - We would Love Your Feedback!",
+          "body": "Dear {{product.buyer}}, <br><p>Thank you for your recent purchase of <b>{{product.name}}</b>! We hope you are enjoying it.<br><br>Your feedback is valuable to us and helps other customers make informed decisions. We would greatly appreciate it if you could take a moment to leave a review about your experience with {{product.name}}.<br><br>👉 [Leave a Review]( <a href='{{product.link}}'>Click Here</a> )<br><br>It only takes a minute, and your insights mean the world to us!<br><br>Thank you for being a valued customer. If you have any questions or need assistance, feel free to reach out."
+        }
+      }
+    },
+    "sms": {
+      "state": 0,
+      "smsfields": {
+        "smsfields0": {
+          "id": "",
+          "language": "*",
+          "body": "You have bought {{product.buyer}}. Please find add review link on your mail."
+        }
+      }
+    },
+    "web": {
+      "state": 0,
+      "webfields": {
+        "webfields0": {
+          "id": "",
+          "language": "*",
+          "subject": "Share Your Experience - We would Love Your Feedback!",
+          "body": "You have bought {{product.buyer}}. Please find add review link on your mail."
+        }
+      }
+    },
+    "replacement_tags": [
+      {
+        "name": "product.name",
+        "description": "product name"
+      },
+      {
+        "name": "product.buyer",
+        "description": "Customer's Name"
+      },
+      {
+        "name": "product.link",
+        "description": "Link for product"
+      },
+      {
+        "name": "subject.site",
+        "description": "Site name"
+      },
+      {
+        "name": "subject.site",
+        "description": "Site name"
+      }
+    ]
+  },
+  "template2": {
+  "id": "",
+  "client": "com_quick2cart",
+  "key": "specificUserDiscountCoupon",
+  "title": "Email Notification for Customer-Specific Discount Coupon",
+  "state": 1,
+  "user_control": 1,
+  "core": 1,
+  "email": {
+    "state": 1,
+    "cc": "",
+    "bcc": "",
+    "from_name": "Quick2Cart Team",
+    "from_email": "deals@quick2cart.com",
+    "emailfields": {
+      "emailfields0": {
+        "id": "",
+        "language": "*",
+        "subject": "Exclusive Offer Just for You – Your Discount Coupon Inside!",
+        "body": "Dear {{user.name}},<br><br>\n\nWe’ve got something special just for you! As one of our valued customers, you’ve unlocked an <strong>Exclusive Discount Coupon</strong> to make your next shopping experience even better.<br><br>\n\n<strong>Coupon Code:</strong> {{coupon.code}}<br><br>\n<strong>Discount:</strong> {{coupon.discount}} off your next order<br><br>\n<strong>Valid Till:</strong> {{coupon.expiry}}<br><br>\n<strong>Applies To:</strong> {{coupon.description}}<br><br>\n\nDon’t miss out on the chance to grab your favorites at a special price before it’s gone.<br><br>\n\nWe truly appreciate your continued support and look forward to serving you again.<br><br>\n\nWarm regards,<br>\nTeam Quick2Cart"
+      }
+    }
+  },
+  "sms": {
+    "state": 0,
+    "smsfields": {
+      "smsfields0": {
+        "id": "",
+        "language": "*",
+        "body": "Hi {{user.name}}, you’ve got an exclusive coupon {{coupon.code}} worth {{coupon.discount}}! Check your email to use it before {{coupon.expiry}}."
+      }
+    }
+  },
+  "web": {
+    "state": 0,
+    "webfields": {
+      "webfields0": {
+        "id": "",
+        "language": "*",
+        "subject": "Your Exclusive Discount is Here!",
+        "body": "Hey {{user.name}}, use coupon <b>{{coupon.code}}</b> and enjoy {{coupon.discount}} off. Valid until {{coupon.expiry}}. <a href='{{coupon.link}}'>Use it now!</a>"
+      }
+    }
+  },
+  "replacement_tags": [
+    {
+      "name": "user.name",
+      "description": "Customer's full name"
+    },
+    {
+      "name": "coupon.code",
+      "description": "Unique coupon code"
+    },
+    {
+      "name": "coupon.discount",
+      "description": "Discount value or percentage"
+    },
+    {
+      "name": "coupon.expiry",
+      "description": "Expiry date of the coupon"
+    },
+    {
+      "name": "coupon.link",
+      "description": "Link to use the coupon"
+    },
+    {
+      "name": "coupon.description",
+      "description": "Details about what the coupon applies to"
+    }
+  ]
+},
+  "template3": {
+  "id": "",
+  "client": "com_quick2cart",
+  "key": "sendOtpToUser",
+  "title": "Send OTP to user for verification",
+  "state": 1,
+  "user_control": 1,
+  "core": 1,
+  "email": {
+    "state": 1,
+    "cc": "",
+    "bcc": "",
+    "from_name": "",
+    "from_email": "",
+    "emailfields": {
+      "emailfields0": {
+        "id": "",
+        "language": "*",
+        "subject": "Your One Time Password (OTP) for Verification",
+        "body": "Dear User,<br><br>Your OTP for verification is: <b>{{user.otp}}</b>.<br>This OTP is valid for 10 minutes.<br><br>If you did not request this, please ignore this email.<br><br>Thank you,<br>Team Quick2Cart"
+      }
+    }
+  },
+  "sms": {
+    "state": 1,
+    "smsfields": {
+      "smsfields0": {
+        "id": "",
+        "language": "*",
+        "body": "Your OTP for {{subject.site}} is {{user.otp}}. It is valid for 10 minutes."
+      }
+    }
+  },
+  "web": {
+    "state": 0,
+    "webfields": {}
+  },
+  "replacement_tags": [
+    {
+      "name": "user.name",
+      "description": "User's Name"
+    },
+    {
+      "name": "user.otp",
+      "description": "OTP Code"
+    },
+    {
+      "name": "subject.site",
+      "description": "Site name"
+    }
+  ]
+}
+}

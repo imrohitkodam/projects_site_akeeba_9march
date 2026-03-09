@@ -1,0 +1,9 @@
+DROP TABLE IF EXISTS `#__jpagebuilder`;
+DROP TABLE IF EXISTS `#__jpagebuilder_addonlist`;
+DROP TABLE IF EXISTS `#__jpagebuilder_addons`;
+DROP TABLE IF EXISTS `#__jpagebuilder_colors`;
+DROP TABLE IF EXISTS `#__jpagebuilder_fonts`;
+DROP TABLE IF EXISTS `#__jpagebuilder_image_shapes`;
+DROP TABLE IF EXISTS `#__jpagebuilder_media`;
+DROP TABLE IF EXISTS `#__jpagebuilder_presets`;
+DROP TABLE IF EXISTS `#__jpagebuilder_sections`;

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+	<view title="Product" >
+		<message><![CDATA[Add New Product]]></message>
+		<options var="layout">
+ 			<option value="default" name="Add New Product" msg="Add New Product" />
+		</options>
+	</view>
+</metadata>

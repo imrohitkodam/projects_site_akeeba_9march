@@ -1,0 +1,2 @@
+<?xml version="1.0"?>
+<form><fieldset name="Test Group" addrulepath="administrator/components/com_tjfields/models/rules" addfieldpath="administrator/components/com_tjfields/models/fields"><field name="com_quick2cart_product_fieldtwo" type="text" label="field2" description="" class=""/></fieldset></form>

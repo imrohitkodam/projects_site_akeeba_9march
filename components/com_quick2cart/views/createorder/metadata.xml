@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+	<view title="Createorder" >
+		<message><![CDATA[Quick2Cart Manual Orders View]]></message>
+		<options var="layout">
+ 			<option value="default" name="Quick2Cart Manual Orders View" msg="Manual Orders (For Vendors)" />
+		</options>
+	</view>
+</metadata>

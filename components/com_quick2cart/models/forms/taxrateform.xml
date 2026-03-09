@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fieldset addfieldpath="/administrator/components/com_quick2cart/models/fields" addrulepath="/libraries/techjoomla/model/rules" >
+		<field
+			name="id"
+			type="text"
+			class="form-control"
+			label="COM_QUICK2CART_S_FORM_LBL_TAXTRATE_TAXRATE_ID"
+			description="COM_QUICK2CART_S_FORM_DESC_TAXTRATE_TAXRATE_ID"
+			filter="safehtml" />
+
+		<field
+			name="name"
+			type="text"
+			label="COM_QUICK2CART_S_FORM_LBL_TAXTRATE_TAXRATE_NAME"
+			description="COM_QUICK2CART_S_FORM_DESC_TAXTRATE_TAXRATE_NAME"
+			hint="COM_QUICK2CART_FORM_TAXTRATE_NAME_PLACEHOLDER"
+			required="true"
+			validate="blankspace"
+			class="form-control validate-blankspace"
+			filter="safehtml" />
+
+		<field
+			name="percentage"
+			type="number"
+			default="0"
+			class="form-control validate-numeric"
+			label="COM_QUICK2CART_S_FORM_LBL_TAXTRATE_TAX_PERCENT"
+			description="COM_QUICK2CART_S_FORM_DESC_TAXTRATE_TAX_PERCENT"
+			hint="COM_QUICK2CART_FORM_TAXTRATE_TAX_PERCENT_PLACEHOLDER"
+			required="true"
+			filter="safehtml"
+			min="0"
+			step="1" />
+
+		<field
+			name="zone_id"
+			type="zonelist"
+			class="form-select"
+			label="COM_QUICK2CART_S_FORM_LBL_TAXTRATE_ZONE_ID"
+			description="COM_QUICK2CART_S_FORM_DESC_TAXTRATE_ZONE_ID"
+			required="true"
+			filter="safehtml" />
+
+		<field
+			name="state"
+			type="list"
+			label="JSTATUS"
+			description="JFIELD_PUBLISHED_DESC"
+			class="form-select"
+			default="1">
+			<option value="1">COM_QUICK2CART_S_PUBLISHED</option>
+			<option value="0">COM_QUICK2CART_S_JUNPUBLISHED</option>
+		</field>
+	</fieldset>
+</form>

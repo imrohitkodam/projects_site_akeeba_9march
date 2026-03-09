@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="library" method="upgrade" version="2.5">
+	<name>LIB_TJFPDI</name>
+	<libraryname>tjfpdi</libraryname>
+	<author>Techjoomla</author>
+	<authorEmail>extensions@techjoomla.com</authorEmail>
+	<authorUrl>https://techjoomla.com</authorUrl>
+	<copyright>Copyright (c) 2018-2020 Techjoomla. All rights reserved.</copyright>
+	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+	<creationDate>10th Oct 2020</creationDate>
+	<version>1.0.0</version>
+	<description>LIB_TJFPDI_XML_DESCRIPTION</description>
+	<files>
+		<folder>fpdi</folder>
+		<file>tjfpdi.php</file>
+		<file>index.html</file>
+		<file>tjfpdi.xml</file>
+		<file>tjwatermark.php</file>
+	</files>
+
+	<languages folder="language">
+		<language tag="en-GB">en-GB/en-GB.lib_tjfpdi.ini</language>
+		<language tag="en-GB">en-GB/en-GB.lib_tjfpdi.sys.ini</language>
+	</languages>
+</extension>

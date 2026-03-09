@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+	<view title="Downloads" >
+		<message><![CDATA[My Downloads]]></message>
+		<options var="layout">
+ 			<option value="default" name="My Downloads" msg="My Downloads" />
+		</options>
+	</view>
+</metadata>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<extension type="package" version="3.0" method="upgrade">
+	<name>Quick2cart Package</name>
+	<author>Techjoomla</author>
+	<authorEmail>extensions@techjoomla.com</authorEmail>
+	<authorUrl>https://techjoomla.com</authorUrl>
+	<copyright>Copyright (C) 2010 - 2025 Techjoomla. All rights reserved.</copyright>
+	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+	<creationDate>2nd Jul 2025</creationDate>
+	<version>5.1.0</version>
+	<packagename>quick2cart</packagename>
+	<packager>Techjoomla Team</packager>
+	<description>
+	</description>
+	<files>
+		<file type="library" id="lib_db_sync">libraries/lib_db_sync.zip</file>
+		<file type="component" id="com_tjnotification">components/com_tjnotification.zip</file>
+		<file type="component" id="com_jlike">components/com_jlike.zip</file>
+		<file type="component" id="com_tjfields">components/com_tjfields.zip</file>
+		<file type="component" id="com_tjvendors">components/com_tjvendors.zip</file>
+		<file type="component" id="com_tjprivacy">components/com_tjprivacy.zip</file>
+		<file type="component" id="com_tjreports">components/com_tjreports.zip</file>
+		<file type="component" id="com_quick2cart">components/com_quick2cart.zip</file>
+		<file type="plugin" id="quick2cart" group="actionlog" >plugins/actionlog/quick2cart.zip</file>
+		<file type="plugin" id="quick2cartibought" group="community" >plugins/community/quick2cartibought.zip</file>
+		<file type="plugin" id="quick2cartproduct" group="community" >plugins/community/quick2cartproduct.zip</file>
+		<file type="plugin" id="quick2cartstore" group="community" >plugins/community/quick2cartstore.zip</file>
+		<file type="plugin" id="content_quick2cart" group="content" >plugins/content/content_quick2cart.zip</file>
+		<file type="plugin" id="jlike_quick2cart" group="content" >plugins/content/jlike_quick2cart.zip</file>
+		<file type="plugin" id="quick2cart" group="flexicontent_fields" >plugins/flexicontent_fields/quick2cart.zip</file>
+		<file type="plugin" id="qtc_k2" group="k2" >plugins/k2/qtc_k2.zip</file>
+		<file type="plugin" id="quick2cart" group="privacy" >plugins/privacy/quick2cart.zip</file>
+		<file type="plugin" id="qtc_shipping_default" group="qtcshipping" >plugins/qtcshipping/qtc_shipping_default.zip</file>
+		<file type="plugin" id="qtc_tax_default" group="qtctax" >plugins/qtctax/qtc_tax_default.zip</file>
+		<file type="plugin" id="quick2cart" group="search" >plugins/search/quick2cart.zip</file>
+		<file type="plugin" id="discounts" group="share_for_discount" >plugins/discounts/share_for_discount.zip</file>
+		<file type="plugin" id="qtcamazon_easycheckout" group="system" >plugins/system/qtcamazon_easycheckout.zip</file>
+		<file type="plugin" id="qtc_sample_development" group="system" >plugins/system/qtc_sample_development.zip</file>
+		<file type="plugin" id="qtc_sms" group="system" >plugins/system/qtc_sms.zip</file>
+		<file type="plugin" id="qtc_sys" group="system" >plugins/system/qtc_sys.zip</file>
+		<file type="plugin" id="qtc_zoo" group="system" >plugins/system/qtc_zoo.zip</file>
+		<file type="plugin" id="qtc_default_zoneshipping" group="tjshipping" >plugins/tjshipping/qtc_default_zoneshipping.zip</file>
+		<file type="plugin" id="qtc_default_zonetaxation" group="tjtaxation" >plugins/tjtaxation/qtc_default_zonetaxation.zip</file>
+		<file type="plugin" id="qtc_pinwise_shipping" group="qtcshipping" >plugins/qtcshipping/qtc_pinwise_shipping.zip</file>
+		<file type="plugin" id="quick2cartproducts" group="finder" >plugins/finder/quick2cartproducts.zip</file>
+		<file type="modules" id="mod_q2ccart" client="site" >modules/site/mod_q2ccart.zip</file>
+		<file type="modules" id="mod_q2cfilters" client="site" >modules/site/mod_q2cfilters.zip</file>
+		<file type="modules" id="mod_q2c_search" client="site" >modules/site/mod_q2c_search.zip</file>
+		<file type="modules" id="mod_qtc_categorylist" client="site" >modules/site/mod_qtc_categorylist.zip</file>
+		<file type="modules" id="mod_qtc_categorypin" client="site" >modules/site/mod_qtc_categorypin.zip</file>
+		<file type="modules" id="mod_qtcproductdisplay" client="site" >modules/site/mod_qtcproductdisplay.zip</file>
+		<file type="modules" id="mod_qtcstoredisplay" client="site" >modules/site/mod_qtcstoredisplay.zip</file>
+		<file type="modules" id="mod_q2c_autosearch" client="site" >modules/site/mod_q2c_autosearch.zip</file>
+		<file type="modules" id="mod_quick2cart" client="site" >modules/site/mod_quick2cart.zip</file>
+		<file type="modules" id="mod_q2c_autosearch" client="site" >modules/site/mod_q2c_autosearch.zip</file>
+		<file type="modules" id="mod_q2c_location" client="site" >modules/site/mod_q2c_location.zip</file>
+		<file type="modules" id="mod_quick2cart_personalized_products" client="site" >modules/site/mod_quick2cart_personalized_products.zip</file>
+	</files>
+	<scriptfile>script.pkg_quick2cart.php</scriptfile>
+	<updateservers>
+		<server type="collection" priority="1" name="Quick2Cart"><![CDATA[https://techjoomla.com/updates/stream/quick2cart.xml?format=xml]]></server>
+	</updateservers>
+</extension>

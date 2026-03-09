@@ -1,0 +1,309 @@
+<?php
+/**
+ * @package     Quick2cart
+ * @subpackage  com_quick2cart
+ *
+ * @author      Techjoomla <extensions@techjoomla.com>
+ * @copyright   Copyright (C) 2009 - 2021 Techjoomla. All rights reserved.
+ * @license     http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
+ */
+
+// No direct access.
+defined('_JEXEC') or die();
+
+use Joomla\CMS\Component\ComponentHelper;
+use Joomla\CMS\Factory;
+use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Language\Text;
+use Joomla\CMS\Plugin\PluginHelper;
+use Joomla\CMS\Router\Route;
+use Joomla\CMS\Uri\Uri;
+
+/*
+ * If user is on payment layout and log out at that time undefined order is found in such condition send to home page or provide error msg
+ */
+if (isset($this->orders_site) && isset($this->undefined_orderid_msg))
+{
+	return false;
+}
+
+$params                    = ComponentHelper::getParams('com_quick2cart');
+$this->comquick2cartHelper = new comquick2cartHelper;
+$this->productHelper       = new productHelper();
+$user                      = Factory::getUser();
+$app                       = Factory::getApplication();
+$jinput                    = $app->input;
+$guest_email               = $jinput->get('email', '', 'STRING');
+$myorderItemid             = $this->comquick2cartHelper->getitemid('index.php?option=com_quick2cart&view=orders&layout=default');
+$invoiceItemid             = $this->comquick2cartHelper->getitemid('index.php?option=com_quick2cart&view=orders&layout=invoice');
+
+// Guest checkout and and called from 1 pg ckout
+if ($guest_email)
+{
+	$guest_email_chk = 0;
+	$guest_email_chk = $this->comquick2cartHelper->checkmailhash($this->orderinfo[0]->id, $guest_email);
+
+	if (!$guest_email_chk && empty($this->qtcSystemEmails))
+	{
+	?>
+		<div class="<?php echo Q2C_WRAPPER_CLASS;?>">
+			<div class="well">
+				<div class="alert alert-danger">
+					<span>
+						<?php echo Text::_('QTC_GUEST_MAIL_UNMATCH');?> </span>
+				</div>
+			</div>
+		</div>
+		<?php
+		return false;
+	}
+}
+elseif (!$user->id)
+{
+	$return                = base64_encode(Uri::getInstance());
+	$login_url_with_return = Route::_('index.php?option=com_users&view=login&return=' . $return);
+	$app->enqueueMessage(Text::_('QTC_LOGIN'), 'notice');
+	$app->redirect($login_url_with_return, 403);
+}
+
+// 1 check : for "MY ORDERS"=check for authorized user or not ( it should be
+// site,authorized to view order and not store related view)
+if (isset($this->orders_site) && empty($this->order_authorized) && !$params->get('guest'))
+{
+	$authorized = 0;
+	// 2 check : "FOR STORE ORDER " order should be releated to store
+	// if vendor releated view is present then current order should be releated to store
+	if (!empty($this->storeReleatedView))
+	{
+		// 3. store releated view but not logged in then (directly accessed
+		// known url at that time it require )
+		if (empty($user->id))
+		{
+			$msg     = Text::_('QTC_LOGIN');
+			$current = Uri::getInstance()->toString();
+			$url     = base64_encode($current);
+			$app->redirect(Route::_('index.php?option=com_users&view=login&return=' . $url, false), $msg);
+		}
+
+		$result     = $this->comquick2cartHelper->getStoreOrdereAuthorization($this->store_id, $this->orderid);
+		$authorized = (!empty($result)) ? 1 : 0;
+	}
+
+	if ($authorized == 0)
+	{
+		?>
+		<div class="<?php echo Q2C_WRAPPER_CLASS; ?>">
+			<div class="well">
+				<div class="alert alert-danger">
+					<span><?php echo Text::_('QTC_NOT_AUTHORIZED_USER_TO_VIEW_ORDER'); ?> </span>
+				</div>
+			</div>
+		</div>
+		<?php
+		return false;
+	}
+}
+
+$coupon_code = $this->orderinfo[0]->coupon_code;
+
+if (!empty($this->orderinfo[0]->address_type) && $this->orderinfo[0]->address_type == 'BT')
+{
+	$billinfo = $this->orderinfo[0];
+}
+elseif (!empty($this->orderinfo[1]->address_type) && $this->orderinfo[1]->address_type == 'BT')
+{
+	$billinfo = $this->orderinfo[1];
+}
+
+if ($params->get('shipping') == '1')
+{
+	if (!empty($this->orderinfo[0]->address_type) && $this->orderinfo[0]->address_type == 'ST')
+	{
+		$shipinfo = $this->orderinfo[0];
+	}
+	elseif (isset($this->orderinfo[1]) && (!empty($this->orderinfo[1]->address_type) && $this->orderinfo[1]->address_type == 'ST'))
+	{
+		$shipinfo = $this->orderinfo[1];
+	}
+}
+
+$this->orderinfo   = $this->orderinfo[0];
+
+// 1 for site 0 for admin
+$orders_site       = (isset($this->orders_site)) ? $this->orders_site : 0;
+$orders_email      = (isset($this->orders_email)) ? $this->orders_email : 0;
+$emailstyle        = "style='background-color: #cccccc'";
+$vendor_order_view = (!empty($this->store_id)) ? 1 : 0;
+$order_currency    = $this->orderinfo->currency;
+
+if (isset($this->order_blocks) && !empty($this->order_blocks))
+{
+	$order_blocks = $this->order_blocks;
+}
+else
+{
+	$order_blocks = array(
+		'0' => 'shipping',
+		'1' => 'billing',
+		'2' => 'cart',
+		'3' => 'order',
+		'4' => 'order_status'
+	);
+}
+
+$document = Factory::getDocument();
+
+if (!$orders_email)
+{
+	HTMLHelper::_('script','components/com_quick2cart/assets/js/bootstrap-tooltip.js');
+	HTMLHelper::_('script','components/com_quick2cart/assets/js/bootstrap-popover.js');
+	?>
+	<script type="text/javascript">
+		techjoomla.jQuery(document).ready(function()
+		{
+			jQuery('.discount').popover();
+		});
+
+		function qtc_showpaymentgetways()
+		{
+			document.getElementById("qtc_paymentmethods").style.display='block';
+		}
+	</script>
+	<?php
+}
+
+$this->wrapperDivStyle      = !empty($orders_email) ? "border: 1px solid #DDDDDD ;padding: 15px;margin-bottom: 10px;" : '';
+$this->emailTable           = "width:100%;";
+$this->email_table_bordered = !empty($orders_email) ? $this->emailTable . "border-width: 1px 1px 1px 0px; border-style: solid solid solid none; border-color: #DDD #DDD #DDD; border-collapse: separate;" : '';
+?>
+
+<div class="<?php echo Q2C_WRAPPER_CLASS; ?> q2c_border" style="<?php echo $this->wrapperDivStyle; ?>"  >
+	<div id="printOrder">
+		<?php
+		if ($orders_email)
+		{
+			?>
+			<h4 <?php echo $emailstyle; ?> >
+				<?php echo Text::_('COM_QUICK2CART_ORDER_DETAIL_INFO'); ?> &nbsp;
+				<span style="font-size: x-large;">
+					<i><?php  echo ' #' . $this->orderinfo->prefix . $this->orderinfo->id; ?></i>
+				</span>
+			 </h4>
+			<?php
+		}
+		elseif ($orders_site)
+		{
+			//<!--  START  code for back and home buttom if and only if site view,not email,and store releated view:: -->
+			$input               = $app->input;
+			$calledfromStoreview = $input->get('calledStoreview', 0, "INT");
+
+			// Show store toolbar
+			if (!empty($calledfromStoreview))
+			{
+				$active              = 'storeorder';
+				$view                = $this->comquick2cartHelper->getViewpath('vendor', 'toolbar_bs3');
+				ob_start();
+				include($view);
+				$html = ob_get_contents();
+				ob_end_clean();
+				echo $html;
+			} ?>
+
+			<legend>
+				<?php echo Text::_('QTC_ORDER_DETAIL') . '  ';  ?>
+				<strong><i> <?php echo ' #' . $this->orderinfo->prefix . (int) $this->orderinfo->id;?></i></strong>
+			</legend>
+			<?php
+		}?>
+		<div class="row">
+			<?php
+			$view  = $this->comquick2cartHelper->getViewpath('orders', 'default_basicdetails_bs3');
+			ob_start();
+				include($view);
+				$html = ob_get_contents();
+			ob_end_clean();
+			echo $html;
+			?>
+		</div>
+		<div style="clear: both;"></div>
+
+		<?php
+		// Q2C Sample development - add extra html
+		PluginHelper::importPlugin('system');
+		$result = $app->triggerEvent('onAddHtmlOrderDetailPage', array(
+			$this->orderinfo->order_id,
+			$this->orderinfo,
+			$this->orderitems
+		));
+
+		// Call the plugin and get the result
+		$orderDetailPageHtml = '';
+		$addTabPlace         = '';
+
+		if (!empty($result))
+		{
+			$orderDetailPageHtml = $result[0];
+			$addTabPlace         = !empty($result[0]['tabPlace']) ? $result[0]['tabPlace'] : '';
+		}
+
+		// END - Q2C Sample development -
+		// TRIGGER HTML addHtmlOnOrderDetailPage
+		if (!empty($orderDetailPageHtml['html']))
+		{
+			echo $orderDetailPageHtml['html'];
+		}?>
+
+		<!-- Display cart detail -->
+		<div class="row">
+			<div class="qtcPadding">
+			<?php
+			$view                = $this->comquick2cartHelper->getViewpath('orders', 'default_cartdetail_bs3');
+			ob_start();
+			include($view);
+			$html = ob_get_contents();
+			ob_end_clean();
+			echo $html;	?>
+			</div>
+		</div>
+
+		<!-- Display billing and shipping info -->
+		<div class="row">
+			<?php
+			$view = $this->comquick2cartHelper->getViewpath('orders', 'default_billing_bs3');
+			ob_start();
+			include($view);
+			$html = ob_get_contents();
+			ob_end_clean();
+			echo $html;	?>
+		</div>
+
+		<?php
+		$calledStoreview   = $jinput->get('calledStoreview');
+
+		if (!empty($vendor_order_view) && empty($orders_email) && !empty($calledStoreview))
+		{
+		?>
+		<div class="row">
+			<?php
+			$view = $this->comquick2cartHelper->getViewpath('orders', 'statushistrory_bs3');
+			ob_start();
+			include($view);
+			$html = ob_get_contents();
+			ob_end_clean();
+			echo $html;	?>
+		</div>
+		<?php
+		}
+
+		if ($orders_email && $this->orderinfo->status == 'P' && !$user->id && $params->get('guest'))
+		{
+			$Itemid = $this->comquick2cartHelper->getitemid('index.php?option=com_quick2cart&view=orders');?>
+			<div>
+				<a href="<?php echo Uri::base() . substr(Route::_('index.php?option=com_quick2cart&view=orders&layout=order&email=' . htmlspecialchars($guest_email, ENT_COMPAT, 'UTF-8') . '&orderid=' . (int) $this->orderinfo->id . '&paybuttonstatus=1' . '&Itemid=' . $Itemid), strlen(Uri::base(true)) + 1);?>">
+					<?php echo Text::_('QTC_ORDER_PROCES_GUEST_LINK');?>
+				</a>
+			</div>
+			<?php
+		}?>
+	</div>
+</div>

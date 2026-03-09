@@ -1,0 +1,621 @@
+<?php
+
+/**
+ * @package JPageBuilder
+ * @author Joomla! Extensions Store
+ * @copyright (C) 2024 - Joomla! Extensions Store
+ * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 or later
+ */
+//no direct accees
+defined('_JEXEC') or die('Restricted access');
+
+use Joomla\CMS\Language\Text;
+use Joomla\CMS\Uri\Uri;
+
+JpagebuilderConfig::addonConfig(
+	array(
+		'type' => 'repeatable',
+		'addon_name' => 'leaderprice',
+		'title' => Text::_('Leader Pricing'),
+		'desc' => Text::_('Price List module to design pixel-perfect menus, catalogs, product list or any other list of featured items.'),
+		'icon'=>Uri::root() . 'components/com_jpagebuilder/addons/leaderprice/assets/images/icon.png',
+		'category' => 'Interface',
+		'attr' => array(
+			'general' => array(
+				'admin_label' => array(
+					'type' => 'text',
+					'title' => Text::_('COM_JPAGEBUILDER_ADDON_ADMIN_LABEL'),
+					'desc' => Text::_('COM_JPAGEBUILDER_ADDON_ADMIN_LABEL_DESC'),
+					'std' => '',
+				),
+				'title' => array(
+					'type' => 'text',
+					'title' => Text::_('Title'),
+					'desc' => Text::_('Add title for Leader pricing box'),
+					'std' =>  '',
+				),
+				// Repeatable Items
+				'ui_pricelist_item' => array(
+					'title' => Text::_('Items'),
+					'attr' => array(
+						'title' => array(
+							'type' => 'text',
+							'title' => Text::_('Title'),
+							'desc' => Text::_('Define the title for menu item'),
+							'std' => 'Item',
+						),
+						'item_price' => array(
+							'type' => 'text',
+							'title' => Text::_('Price'),
+							'desc' => Text::_('Define the price for item'),
+							'std' => '$19.99',
+						),
+					),
+				),
+				'separator_card_options' => array(
+					'type' => 'separator',
+					'title' => Text::_('Card'),
+				),
+				'card_styles' => array(
+					'type' => 'select',
+					'title' => Text::_('Style'),
+					'desc' => Text::_('Select on of the boxed card styles or a blank card.'),
+					'values' => array(
+						'' => Text::_('None'),
+						'default' => Text::_('Default'),
+						'primary' => Text::_('Primary'),
+						'secondary' => Text::_('Secondary'),
+						'hover' => Text::_('Hover'),
+					),
+					'std' => '',
+				),
+				'card_size' => array(
+					'type' => 'select',
+					'title' => Text::_('Size'),
+					'desc' => Text::_('Define the card\'s size by selecting the padding between the card and its content.'),
+					'values' => array(
+						'' => Text::_('Default'),
+						'small' => Text::_('Small'),
+						'large' => Text::_('Large'),
+					),
+					'std' => '',
+					'depends' => array(array('card_styles', '!=', '')),
+				),
+				'fill_character' => array(
+					'type' => 'text',
+					'title' => Text::_('Fill character'),
+					'desc' => Text::_('To change the dot to any custom character'),
+					'std' => '.'
+				),
+				'card_margin_top' => array(
+					'type' => 'select',
+					'title' => Text::_('Margin Top'),
+					'desc' => Text::_('Set the top margin.'),
+					'values' => array(
+						'' => Text::_('Default'),
+						'small' => Text::_('Small'),
+						'medium' => Text::_('Medium'),
+						'large' => Text::_('Large'),
+						'xlarge' => Text::_('X-Large'),
+						'remove' => Text::_('None'),
+					),
+					'std' => '',
+					'depends' => array(array('title_position', '!=', 'top'), array('title_position', '!=', 'bottom')),
+				),
+				'separator_title_style_options' => array(
+					'type' => 'separator',
+					'title' => Text::_('Title'),
+				),
+				'title_position' => array(
+					'type' => 'select',
+					'title' => Text::_('Title Position'),
+					'desc' => Text::_('Heading styles differ in font-size but may also come with a predefined color, size and font'),
+					'values' => array(
+						'top' => Text::_('Top'),
+						'bottom' => Text::_('Bottom'),
+						'outside' => Text::_('Outside'),
+					),
+					'std' => 'top',
+				),
+				'title_font_family'=>array(
+					'type'=>'fonts',
+					'title'=>Text::_('Font Family'),
+					'selector'=> array(
+						'type'=>'font',
+						'font'=>'{{ VALUE }}',
+						'css'=>'.ui-title { font-family: {{ VALUE }}; }',
+					)
+				),
+				'font_weight' => array(
+					'type' => 'select',
+					'title' => Text::_('Font weight'),
+					'desc' => Text::_('Add one of the following classes to modify the font weight of your text.'),
+					'values' => array(
+					  '' => Text::_('Default'),
+					  'light' => Text::_('Light'),
+					  'normal' => Text::_('Normal'),
+					  'bold' => Text::_('Bold'),
+					  'lighter' => Text::_('Lighter'),
+					  'bolder' => Text::_('Bolder'),
+					),
+				  ),				
+				'heading_style' => array(
+					'type' => 'select',
+					'title' => Text::_('Style'),
+					'desc' => Text::_('Heading styles differ in font-size but may also come with a predefined color, size and font'),
+					'values' => array(
+						'' => Text::_('None'),
+						'heading-2xlarge' => Text::_('2XLarge'),
+						'heading-xlarge' => Text::_('XLarge'),
+						'heading-large' => Text::_('Large'),
+						'heading-medium' => Text::_('Medium'),
+						'heading-small' => Text::_('Small'),
+						'h1' => Text::_('H1'),
+						'h2' => Text::_('H2'),
+						'h3' => Text::_('H3'),
+						'h4' => Text::_('H4'),
+						'h5' => Text::_('H5'),
+						'h6' => Text::_('H6'),
+					),
+					'std' => '',
+				),
+				'title_decoration' => array(
+					'type' => 'select',
+					'title' => Text::_('Decoration'),
+					'desc' => Text::_('Decorate the title with a divider, bullet or a line that is vertically centered to the title'),
+					'values' => array(
+						'' => Text::_('None'),
+						'uk-heading-divider' => Text::_('Divider'),
+						'uk-heading-bullet' => Text::_('Bullet'),
+						'uk-heading-line' => Text::_('Line'),
+					),
+					'std' => '',
+				),
+				'title_color' => array(
+					'type' => 'select',
+					'title' => Text::_('Predefined Color'),
+					'desc' => Text::_('Select the predefined title text color.'),
+					'values' => array(
+						'' => Text::_('None'),
+						'muted' => Text::_('Muted'),
+						'emphasis' => Text::_('Emphasis'),
+						'primary' => Text::_('Primary'),
+						'secondary' => Text::_('Secondary'),
+						'success' => Text::_('Success'),
+						'warning' => Text::_('Warning'),
+						'danger' => Text::_('Danger'),
+					),
+					'std' => '',
+				),
+				'custom_title_color' => array(
+					'type' => 'color',
+					'title' => Text::_('Custom Color'),
+					'depends' => array(
+						array('title_color', '=', '')
+					),
+				),
+				'title_text_transform' => array(
+					'type' => 'select',
+					'title' => Text::_('Transform'),
+					'desc' => Text::_('The following options will transform text into uppercased, capitalized or lowercased characters.'),
+					'values' => array(
+						'' => Text::_('Inherit'),
+						'uppercase' => Text::_('Uppercase'),
+						'capitalize' => Text::_('Capitalize'),
+						'lowercase' => Text::_('Lowercase'),
+					),
+					'std' => '',
+				),
+				'heading_selector' => array(
+					'type' => 'select',
+					'title' => Text::_('HTML Element'),
+					'desc' => Text::_('Choose one of the six heading elements to fit your semantic structure.'),
+					'values' => array(
+						'h1' => Text::_('H1'),
+						'h2' => Text::_('H2'),
+						'h3' => Text::_('H3'),
+						'h4' => Text::_('H4'),
+						'h5' => Text::_('H5'),
+						'h6' => Text::_('H6'),
+						'div' => Text::_('Div'),
+					),
+					'std' => 'h3',
+				),
+				'title_margin_top' => array(
+					'type' => 'select',
+					'title' => Text::_('Margin Top'),
+					'desc' => Text::_('Set the top margin.'),
+					'values' => array(
+						'' => Text::_('Default'),
+						'small' => Text::_('Small'),
+						'medium' => Text::_('Medium'),
+						'large' => Text::_('Large'),
+						'xlarge' => Text::_('X-Large'),
+						'remove' => Text::_('None'),
+					),
+					'std' => '',
+				),
+				'separator_content_style_options' => array(
+					'type' => 'separator',
+					'title' => Text::_('Content'),
+				),
+				'content_font_family'=>array(
+					'type'=>'fonts',
+					'title'=>Text::_('Font Family'),
+					'selector'=> array(
+						'type'=>'font',
+						'font'=>'{{ VALUE }}',
+						'css'=>'.el-title { font-family: {{ VALUE }}; }',
+					)
+				),
+				'content_style' => array(
+					'type' => 'select',
+					'title' => Text::_('Style'),
+					'desc' => Text::_('Select a predefined meta text style, including color, size and font-family'),
+					'values' => array(
+						'' => Text::_('None'),
+						'text-lead' => Text::_('Lead'),
+						'text-meta' => Text::_('Meta'),
+					),
+					'std' => '',
+				),
+				'content_color'=>array(
+					'type'=>'color',
+					'title'=>Text::_('Color'),
+				),
+				'content_text_transform' => array(
+					'type' => 'select',
+					'title' => Text::_('Transform'),
+					'desc' => Text::_('The following options will transform text into uppercased, capitalized or lowercased characters.'),
+					'values' => array(
+						'' => Text::_('Inherit'),
+						'uppercase' => Text::_('Uppercase'),
+						'capitalize' => Text::_('Capitalize'),
+						'lowercase' => Text::_('Lowercase'),
+					),
+					'std' => '',
+				),
+				'content_margin_top' => array(
+					'type' => 'select',
+					'title' => Text::_('Margin Top'),
+					'desc' => Text::_('Set the top margin.'),
+					'values' => array(
+						'' => Text::_('Default'),
+						'small' => Text::_('Small'),
+						'medium' => Text::_('Medium'),
+						'large' => Text::_('Large'),
+						'xlarge' => Text::_('X-Large'),
+						'remove' => Text::_('None'),
+					),
+					'std' => '',
+				),
+				'separator_meta_style_options' => array(
+					'type' => 'separator',
+					'title' => Text::_('Price'),
+				),
+				'meta_font_family'=>array(
+					'type'=>'fonts',
+					'title'=>Text::_('Font Family'),
+					'selector'=> array(
+						'type'=>'font',
+						'font'=>'{{ VALUE }}',
+						'css'=>'.ui-meta { font-family: {{ VALUE }}; }',
+					)
+				),
+				'meta_style' => array(
+					'type' => 'select',
+					'title' => Text::_('Style'),
+					'desc' => Text::_('Select a predefined meta text style, including color, size and font-family'),
+					'values' => array(
+						'' => Text::_('None'),
+						'text-meta' => Text::_('Meta'),
+						'h1' => Text::_('H1'),
+						'h2' => Text::_('H2'),
+						'h3' => Text::_('H3'),
+						'h4' => Text::_('H4'),
+						'h5' => Text::_('H5'),
+						'h6' => Text::_('H6'),
+					),
+					'std' => '',
+				),
+				'meta_color' => array(
+					'type' => 'select',
+					'title' => Text::_('Predefined Color'),
+					'desc' => Text::_('Select the predefined meta text color.'),
+					'values' => array(
+						'' => Text::_('None'),
+						'muted' => Text::_('Muted'),
+						'emphasis' => Text::_('Emphasis'),
+						'primary' => Text::_('Primary'),
+						'secondary' => Text::_('Secondary'),
+						'success' => Text::_('Success'),
+						'warning' => Text::_('Warning'),
+						'danger' => Text::_('Danger'),
+					),
+					'std' => '',
+				),
+				'custom_meta_color'=>array(
+					'type'=>'color',
+					'title'=>Text::_('Custom Color'),
+					'depends' => array(
+						array('meta_color', '=', '')
+					),
+				),
+				'separator_general_options' => array(
+					'type' => 'separator',
+					'title' => Text::_('General'),
+				),
+				'alignment' => array(
+					'type' => 'select',
+					'title' => Text::_('Text Alignment'),
+					'desc' => Text::_('Center, left and right alignment.'),
+					'values' => array(
+						'' => Text::_('Inherit'),
+						'uk-text-left' => Text::_('Left'),
+						'uk-text-center' => Text::_('Center'),
+						'uk-text-right' => Text::_('Right'),
+						'uk-text-justify' => Text::_('Justify'),
+					),
+					'std' => 'uk-text-center',
+				),
+				'text_breakpoint' => array(
+					'type' => 'select',
+					'title' => Text::_('Text Breakpoint'),
+					'desc' => Text::_('Display the text alignment only on this device width and larger'),
+					'values' => array(
+						'' => Text::_('Always'),
+						's' => Text::_('Small (Phone Landscape)'),
+						'm' => Text::_('Medium (Tablet Landscape)'),
+						'l' => Text::_('Large (Desktop)'),
+						'xl' => Text::_('X-Large (Large Screens)'),
+					),
+					'std' => '',
+					'depends' => array(array('alignment', '!=', '')),
+				),
+				'text_alignment_fallback' => array(
+					'type' => 'select',
+					'title' => Text::_('Text Alignment Fallback'),
+					'desc' => Text::_('Define an alignment fallback for device widths below the breakpoint'),
+					'values' => array(
+						'' => Text::_('Inherit'),
+						'left' => Text::_('Left'),
+						'center' => Text::_('Center'),
+						'right' => Text::_('Right'),
+						'justify' => Text::_('Justify'),
+					),
+					'std' => '',
+					'depends' => array(
+						array('text_breakpoint', '!=', ''),
+						array('alignment', '!=', ''),
+					),
+				),
+				'addon_max_width' => array(
+					'type' => 'select',
+					'title' => Text::_('Max Width'),
+					'desc' => Text::_('Set the maximum content width.'),
+					'values' => array(
+						'' => Text::_('None'),
+						'small' => Text::_('Small'),
+						'medium' => Text::_('Medium'),
+						'large' => Text::_('Large'),
+						'xlarge' => Text::_('X-Large'),
+						'2xlarge' => Text::_('2X-Large'),
+					),
+					'std' => '',
+				),
+				'addon_max_width_alignment' => array(
+					'type' => 'select',
+					'title' => Text::_('Max Width Alignment'),
+					'desc' => Text::_('Define the alignment in case the container exceeds the element\'s max-width.'),
+					'values' => array(
+						'' => Text::_('Left'),
+						'auto' => Text::_('Center'),
+						'auto-left' => Text::_('Right'),
+					),
+					'std' => '',
+					'depends' => array(array('addon_max_width', '!=', '')),
+				),
+				'addon_max_width_breakpoint' => array(
+					'type' => 'select',
+					'title' => Text::_('Max Width Breakpoint'),
+					'desc' => Text::_('Define the device width from which the element\'s max-width will apply.'),
+					'values' => array(
+						'' => Text::_('Always'),
+						's' => Text::_('Small (Phone Landscape)'),
+						'm' => Text::_('Medium (Tablet Landscape)'),
+						'l' => Text::_('Large (Desktop)'),
+						'xl' => Text::_('X-Large (Large Screens)'),
+					),
+					'std' => '',
+					'depends' => array(array('addon_max_width', '!=', '')),
+				),
+				'addon_margin' => array(
+					'type' => 'select',
+					'title' => Text::_('Margin'),
+					'desc' => Text::_('Set the vertical margin. Note: The first element\'s top margin and the last element\'s bottom margin are always removed. Define those in the grid settings instead.'),
+					'values' => array(
+						'' => Text::_('Keep existing'),
+						'small' => Text::_('Small'),
+						'default' => Text::_('Default'),
+						'medium' => Text::_('Medium'),
+						'large' => Text::_('Large'),
+						'xlarge' => Text::_('X-Large'),
+						'remove-vertical' => Text::_('None'),
+					),
+					'std' => '',
+				), 
+				'animation' => array(
+					'type' => 'select',
+					'title' => Text::_('Animation'),
+					'desc' => Text::_('A collection of smooth animations to use within your page.'),
+					'values' => array(
+						'' => Text::_('Inherit'),
+						'fade' => Text::_('Fade'),
+						'scale-up' => Text::_('Scale Up'),
+						'scale-down' => Text::_('Scale Down'),
+						'slide-top-small' => Text::_('Slide Top Small'),
+						'slide-bottom-small' => Text::_('Slide Bottom Small'),
+						'slide-left-small' => Text::_('Slide Left Small'),
+						'slide-right-small' => Text::_('Slide Right Small'),
+						'slide-top-medium' => Text::_('Slide Top Medium'),
+						'slide-bottom-medium' => Text::_('Slide Bottom Medium'),
+						'slide-left-medium' => Text::_('Slide Left Medium'),
+						'slide-right-medium' => Text::_('Slide Right Medium'),
+						'slide-top' => Text::_('Slide Top 100%'),
+						'slide-bottom' => Text::_('Slide Bottom 100%'),
+						'slide-left' => Text::_('Slide Left 100%'),
+						'slide-right' => Text::_('Slide Right 100%'),
+						'parallax' => Text::_('Parallax'),
+					),
+					'std' => '',
+				),
+				'animation_repeat' => array(
+					'type' => 'checkbox',
+					'title' => Text::_('Repeat Animation'),
+					'desc' => Text::_('Applies the animation class every time the element is in view'),
+					'std' => 0,
+					'depends' => array(
+						array('animation', '!=', ''),
+						array('animation', '!=', 'parallax'),
+					),
+				),
+
+				'separator_parallax_options' => array(
+					'type' => 'separator',
+					'title' => Text::_('Parallax Animation Settings'),
+					'depends' => array(array('animation', '=', 'parallax')),
+				),
+				'horizontal_start' => array(
+					'type' => 'slider',
+					'title' => Text::_('Horizontal Start'),
+					'min' => -600,
+					'max' => 600,
+					'desc' => Text::_('Animate the horizontal position (translateX) in pixels.'),
+					'depends' => array(array('animation', '=', 'parallax')),
+				),
+				'horizontal_end' => array(
+					'type' => 'slider',
+					'title' => Text::_('Horizontal End'),
+					'min' => -600,
+					'max' => 600,
+					'desc' => Text::_('Animate the horizontal position (translateX) in pixels.'),
+					'depends' => array(array('animation', '=', 'parallax')),
+				),
+				'vertical_start' => array(
+					'type' => 'slider',
+					'title' => Text::_('Vertical Start'),
+					'min' => -600,
+					'max' => 600,
+					'desc' => Text::_('Animate the vertical position (translateY) in pixels.'),
+					'depends' => array(array('animation', '=', 'parallax')),
+				),
+				'vertical_end' => array(
+					'type' => 'slider',
+					'title' => Text::_('Vertical End'),
+					'min' => -600,
+					'max' => 600,
+					'desc' => Text::_('Animate the vertical position (translateY) in pixels.'),
+					'depends' => array(array('animation', '=', 'parallax')),
+				),
+				'scale_start' => array(
+					'type' => 'slider',
+					'title' => Text::_('Scale Start'),
+					'min' => 50,
+					'max' => 200,
+					'desc' => Text::_('Animate the scaling. Min: 50, Max: 200 =>  100 means 100% scale, 200 means 200% scale, and 50 means 50% scale.'),
+					'depends' => array(array('animation', '=', 'parallax')),
+				),
+				'scale_end' => array(
+					'type' => 'slider',
+					'title' => Text::_('Scale End'),
+					'min' => 50,
+					'max' => 200,
+					'desc' => Text::_('Animate the scaling. Min: 50, Max: 200 =>  100 means 100% scale, 200 means 200% scale, and 50 means 50% scale.'),
+					'depends' => array(array('animation', '=', 'parallax')),
+				),
+				'rotate_start' => array(
+					'type' => 'slider',
+					'title' => Text::_('Rotate Start'),
+					'min' => 0,
+					'max' => 360,
+					'desc' => Text::_('Animate the rotation clockwise in degrees.'),
+					'depends' => array(array('animation', '=', 'parallax')),
+				),
+				'rotate_end' => array(
+					'type' => 'slider',
+					'title' => Text::_('Rotate End'),
+					'min' => 0,
+					'max' => 360,
+					'desc' => Text::_('Animate the rotation clockwise in degrees.'),
+					'depends' => array(array('animation', '=', 'parallax')),
+				),
+				'opacity_start' => array(
+					'type' => 'slider',
+					'title' => Text::_('Opacity Start'),
+					'min' => 0,
+					'max' => 100,
+					'desc' => Text::_('Animate the opacity. 100 means 100% opacity, and 0 means 0% opacity.'),
+					'depends' => array(array('animation', '=', 'parallax')),
+				),
+				'opacity_end' => array(
+					'type' => 'slider',
+					'title' => Text::_('Opacity End'),
+					'min' => 0,
+					'max' => 100,
+					'desc' => Text::_('Animate the opacity. 100 means 100% opacity, and 0 means 0% opacity.'),
+					'depends' => array(array('animation', '=', 'parallax')),
+				),
+				'easing' => array(
+					'type' => 'slider',
+					'title' => Text::_('Easing'),
+					'min' => -200,
+					'max' => 200,
+					'desc' => Text::_('Set the animation easing. A value below 100 is faster in the beginning and slower towards the end while a value above 100 behaves inversely.'),
+					'depends' => array(array('animation', '=', 'parallax')),
+				),
+				'viewport' => array(
+					'type' => 'slider',
+					'title' => Text::_('Viewport'),
+					'min' => 10,
+					'max' => 100,
+					'desc' => Text::_('Set the animation end point relative to viewport height, e.g. 50 for 50% of the viewport'),
+					'depends' => array(array('animation', '=', 'parallax')),
+				),
+
+				'breakpoint' => array(
+					'type' => 'select',
+					'title' => Text::_('Breakpoint'),
+					'desc' => Text::_('Display the parallax effect only on this device width and larger. It is useful to disable the parallax animation on small viewports.'),
+					'values' => array(
+						'' => Text::_('Always'),
+						's' => Text::_('Small (Phone)'),
+						'm' => Text::_('Medium (Tablet)'),
+						'l' => Text::_('Large (Desktop)'),
+						'xl' => Text::_('X-Large (Large Screens)'),
+					),
+					'std' => '',
+					'depends' => array(array('animation', '=', 'parallax')),
+				),
+				'visibility' => array(
+					'type' => 'select',
+					'title' => Text::_('Visibility'),
+					'desc' => Text::_('Display the element only on this device width and larger.'),
+					'values' => array(
+						'' => Text::_('Always'),
+						'uk-visible@s' => Text::_('Small (Phone Landscape)'),
+						'uk-visible@m' => Text::_('Medium (Tablet Landscape)'),
+						'uk-visible@l' => Text::_('Large (Desktop)'),
+						'uk-visible@xl' => Text::_('X-Large (Large Screens)'),
+					),
+					'std' => '',
+				),
+				'class' => array(
+					'type' => 'text',
+					'title' => Text::_('COM_JPAGEBUILDER_ADDON_CLASS'),
+					'desc' => Text::_('COM_JPAGEBUILDER_ADDON_CLASS_DESC'),
+					'std' => ''
+				),
+			)
+		),
+	)
+);
