@@ -145,10 +145,7 @@ if (Factory::getUser()->id)
 										<div class="col-sm-3 col-xs-12 form-label"><?php echo $this->form->getLabel('region'); ?></div>
 										<div class="col-sm-9 col-xs-12"><?php echo $this->form->getInput('region'); ?></div>
 									</div>
-									<div class="form-group row mt-2">
-										<div class="col-sm-3 col-xs-12 form-label"><?php echo $this->form->getLabel('city'); ?></div>
-										<div class="col-sm-9 col-xs-12"><?php echo $this->form->getInput('city'); ?></div>
-									</div>
+									<?php echo $this->form->getInput('city'); ?>
 									<div class="form-group row mt-2">
 										<div class="col-sm-3 col-xs-12 form-label"><?php echo $this->form->getLabel('other_city'); ?></div>
 										<div class="col-sm-9 col-xs-12"><?php echo $this->form->getInput('other_city'); ?></div>

@@ -84,18 +84,33 @@ class quick2cartModelCategories extends ListModel
 	{
 		$user = Factory::getUser();
 		$app  = Factory::getApplication();
+		$store_id = $app->input->get('store_id', 0, 'INT');
 
 		// Create a new query object.
 		$db    = $this->getDbo();
 		$query = $db->getQuery(true);
 
 		// Select the required fields from the table.
-		$query->select('*');
+		$query->select('a.*');
 		$query->from($db->quoteName('#__categories', 'a'));
 		$query->where($db->quoteName('extension') . '=' . $db->quote('com_quick2cart'));
+		$query->where($db->quoteName('published') . '= 1');
 		$catIdForChild = $this->getState('filter_catid');
 		$menuParams = $app->getParams('com_quick2cart');
 		$show_child_categories = $menuParams->get('show_child_categories');
+
+		// Filter out categories that don't have active products
+		$subQuery = $db->getQuery(true);
+		$subQuery->select('DISTINCT category')
+				 ->from($db->quoteName('#__kart_items', 'i'))
+				 ->where($db->quoteName('state') . ' = 1')
+				 ->where($db->quoteName('display_in_product_catlog') . ' = 1');
+
+		if ($store_id) {
+			$subQuery->where($db->quoteName('store_id') . ' = ' . (int)$store_id);
+		}
+
+		$query->where('a.id IN (' . $subQuery . ')');
 
 		if (!$show_child_categories)
 		{
@@ -133,3 +148,6 @@ class quick2cartModelCategories extends ListModel
 		return $query;
 	}
 }
+
+
+// components/com_quick2cart/models/categories.php

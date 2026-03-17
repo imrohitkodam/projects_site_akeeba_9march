@@ -120,7 +120,7 @@ Factory::getDocument()->addScriptDeclaration(implode("\n", $script));
 								</div>
 								<?php
 								echo $this->form->renderField('region');
-								echo $this->form->renderField('city');
+								echo $this->form->getInput('city');
 								echo $this->form->renderField('other_city');
 								echo $this->form->renderField('zip');
 								echo $this->form->renderField('website_address');

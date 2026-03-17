@@ -226,29 +226,29 @@ if (!empty($preview))
 											</li>
 										</ul>
 									</li>
-									<li class="nav-item dropdown <?php echo ($active == 'storeorders' || $active == 'storeorder') ? 'active': '' ?> ">
-										<a class="nav-link dropdown-toggle" id="storeOrdersDropdownMenuLink" data-toggle="dropdown" data-bs-toggle="dropdown" aria-expanded="false" href="<?php echo $comquick2cartHelper->quick2CartRoute('index.php?option=com_quick2cart&view=orders&layout=storeorder');?>">
+									<li class="nav-item <?php echo ($active == 'storeorders' || $active == 'storeorder') ? 'active': '' ?> ">
+										<a class="nav-link" href="<?php echo $comquick2cartHelper->quick2CartRoute('index.php?option=com_quick2cart&view=orders&layout=storeorder');?>">
 											<i class="<?php echo Q2C_TOOLBAR_ICON_CART;?>"></i>
 											<?php echo Text::_('QTC_MANAGE_STORE_ORDERS'); ?>
 										</a>
 									</li>
 									
-									<li class="nav-item dropdown  <?php echo ($active == 'storecustomers' || $active == 'customerdetails') ? 'active': '' ?> dropdown">
-										<a class="nav-link dropdown-toggle" id="storeOrdersDropdownMenuLink" data-toggle="dropdown" data-bs-toggle="dropdown" aria-expanded="false" href="<?php echo $comquick2cartHelper->quick2CartRoute('index.php?option=com_quick2cart&view=orders&layout=mycustomer');?>">
+									<li class="nav-item <?php echo ($active == 'storecustomers' || $active == 'customerdetails') ? 'active': '' ?> ">
+										<a class="nav-link" href="<?php echo $comquick2cartHelper->quick2CartRoute('index.php?option=com_quick2cart&view=orders&layout=mycustomer');?>">
 											<i class="<?php echo Q2C_TOOLBAR_ICON_USERS;?>"></i>
 											<?php echo Text::_('QTC_MANAGE_STORE_CUSTOMER'); ?>
 										</a>
 									</li>
 
-									<li class="nav-item dropdown <?php echo ($active == 'promotions') ? 'active': '' ?> dropdown">
-										<a class="nav-link dropdown-toggle" id="storeOrdersDropdownMenuLink" data-toggle="dropdown" data-bs-toggle="dropdown" aria-expanded="false" href="<?php echo $comquick2cartHelper->quick2CartRoute('index.php?option=com_quick2cart&view=promotions&layout=default');?>">
+									<li class="nav-item <?php echo ($active == 'promotions') ? 'active': '' ?> ">
+										<a class="nav-link" href="<?php echo $comquick2cartHelper->quick2CartRoute('index.php?option=com_quick2cart&view=promotions&layout=default');?>">
 											<i class="<?php echo Q2C_TOOLBAR_ICON_COUPONS;?>"></i>
 											<?php echo Text::_('COM_QUICK2CART_PROMOTIONS'); ?>
 										</a>
 									</li>
 
-									<li class="nav-item dropdown <?php echo ($active == 'payouts') ? 'active': '' ?> dropdown">
-										<a class="nav-link dropdown-toggle" id="storeOrdersDropdownMenuLink" data-toggle="dropdown" data-bs-toggle="dropdown" aria-expanded="false" href="<?php echo $comquick2cartHelper->quick2CartRoute('index.php?option=com_quick2cart&view=payouts&layout=my');?>">
+									<li class="nav-item <?php echo ($active == 'payouts') ? 'active': '' ?> ">
+										<a class="nav-link" href="<?php echo $comquick2cartHelper->quick2CartRoute('index.php?option=com_quick2cart&view=payouts&layout=my');?>">
 											<i class="<?php echo Q2C_TOOLBAR_ICON_PAYOUTS;?>"></i>
 											<?php echo Text::_('QTC_MANAGE_STORE_PAYOUTS');?>
 										</a>
@@ -298,3 +298,6 @@ if (is_array($this->store_role_list) && !in_array($active, $skip_array) && (coun
 	</div>
 	<?php
 }
+
+
+// components/com_quick2cart/views/vendor/tmpl/toolbar_bs5.php

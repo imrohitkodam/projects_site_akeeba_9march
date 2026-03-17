@@ -724,7 +724,7 @@ if (!empty($this->itemDetail))
 	<!-- END OF form-group row ->
 
 	<!-- VIDEO LINK-->
-	<div class="form-group row">
+	<!-- <div class="form-group row" style="display:none;">
 		<label for="youtube_link" class="col-sm-3 col-xs-12 form-label" title="<?php echo Text::_('QTC_PROD_YOUTUBE_TOOLTIP')?>">
 			<?php echo HTMLHelper::tooltip('', Text::_('QTC_PROD_YOUTUBE'), '', Text::_('QTC_PROD_YOUTUBE'));?>
 		</label>
@@ -733,7 +733,7 @@ if (!empty($this->itemDetail))
 			value="<?php if (!empty($this->itemDetail)){  echo stripslashes($this->itemDetail['video_link']); } ?>"
 			placeholder="<?php echo Text::_('QTC_PROD_YOUTUBE_PLACE'); ?>" />
 		</div>
-	</div>
+	</div> -->
 
 	<?php
 	//@TODO get all product detail which from getItemDetail (modified)

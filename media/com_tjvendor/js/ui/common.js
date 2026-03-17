@@ -54,8 +54,23 @@ export class CommonUI{
 			let regionField = document.getElementById('jform_region');
 			jQuery(regionField).empty();
 
-			if (!err && resp){
+			if (err) {
+				console.error('AJAX Error:', err);
+				console.error('Error status:', err.status);
+				console.error('Error response:', err.responseText);
+				Joomla.renderMessages({
+					'error': [Joomla.JText._('COM_TJVENDOR_VENDOR_FORM_AJAX_FAIL_ERROR_MESSAGE')]
+				});
+				jQuery("html, body").animate({
+					scrollTop: 0
+				}, "slow");
+				return;
+			}
+
+			if (resp){
+				console.log('Response received:', resp);
 				let regions = JSON.parse(resp);
+				console.log('Parsed regions:', regions);
 
 				if(regions.success === true){
 					regions.data.forEach(region => {
@@ -73,6 +88,7 @@ export class CommonUI{
 					jQuery(regionField).trigger("liszt:updated");
 					jQuery(regionField).trigger("chosen:updated");
 				}else{
+					console.error('Response success is false:', regions);
 					Joomla.renderMessages({
 						'error': [Joomla.JText._('COM_TJVENDOR_VENDOR_FORM_AJAX_FAIL_ERROR_MESSAGE')]
 					});
@@ -82,7 +98,9 @@ export class CommonUI{
 				}
 			}
 		}
-		catch(err){
+		catch(error){
+			console.error('Exception in generateOptions:', error);
+			console.error('Response that caused error:', resp);
 			Joomla.renderMessages({
 				'error': [Joomla.JText._('COM_TJVENDOR_VENDOR_FORM_AJAX_FAIL_ERROR_MESSAGE')]
 			});
@@ -105,8 +123,23 @@ export class CommonUI{
 			let cityField = document.getElementById('jform_city');
 			jQuery(cityField).empty();
 
-			if (!err && resp){
+			if (err) {
+				console.error('AJAX Error:', err);
+				console.error('Error status:', err.status);
+				console.error('Error response:', err.responseText);
+				Joomla.renderMessages({
+					'error': [Joomla.JText._('COM_TJVENDOR_VENDOR_FORM_AJAX_FAIL_ERROR_MESSAGE')]
+				});
+				jQuery("html, body").animate({
+					scrollTop: 0
+				}, "slow");
+				return;
+			}
+
+			if (resp){
+				console.log('Response received:', resp);
 				let cities = JSON.parse(resp);
+				console.log('Parsed cities:', cities);
 
 				if(cities.success === true){
 					cities.data.forEach(city => {
@@ -124,6 +157,7 @@ export class CommonUI{
 					jQuery(cityField).trigger("liszt:updated");
 					jQuery(cityField).trigger("chosen:updated");
 				}else{
+					console.error('Response success is false:', cities);
 					Joomla.renderMessages({
 						'error': [Joomla.JText._('COM_TJVENDOR_VENDOR_FORM_AJAX_FAIL_ERROR_MESSAGE')]
 					});
@@ -133,7 +167,9 @@ export class CommonUI{
 				}
 			}
 		}
-		catch(err){
+		catch(error){
+			console.error('Exception in generateCityOptions:', error);
+			console.error('Response that caused error:', resp);
 			Joomla.renderMessages({
 				'error': [Joomla.JText._('COM_TJVENDOR_VENDOR_FORM_AJAX_FAIL_ERROR_MESSAGE')]
 			});

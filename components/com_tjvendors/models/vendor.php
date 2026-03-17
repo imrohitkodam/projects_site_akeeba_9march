@@ -452,10 +452,11 @@ class TjvendorsModelVendor extends AdminModel
 			$xrefData['params'] = '';
 		}
 
-		if (empty($data['city']))
-		{
-			$data['other_city'] = '';
-		}
+		// City is now a hidden field, so we don't clear other_city
+		// if (empty($data['city']))
+		// {
+		// 	$data['other_city'] = '';
+		// }
 
 		// To check if editing in registration form
 		if (!empty($data['vendor_id']))

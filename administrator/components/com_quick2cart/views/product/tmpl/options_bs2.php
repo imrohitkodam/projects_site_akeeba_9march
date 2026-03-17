@@ -733,7 +733,7 @@ $js_key="
 	<!-- END OF control-group ->
 
 	<!-- VIDEO LINK-->
-	<div class="control-group">
+	<div class="control-group" style="display:none;">
 		<label for="youtube_link" class="control-label">
 			<?php echo HTMLHelper::tooltip(Text::_('QTC_PROD_YOUTUBE_TOOLTIP'), Text::_('QTC_PROD_YOUTUBE'), '', Text::_('QTC_PROD_YOUTUBE'));?>
 		</label>

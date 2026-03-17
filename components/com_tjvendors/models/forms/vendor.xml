@@ -166,21 +166,17 @@
 
 		<field
 			name="city"
-			type="list"
-			label="COM_TJVENDORS_FORM_LBL_CITY"
-			description="COM_TJVENDORS_FORM_DESC_CITY"
-			onchange="CommonObj.showOtherCity('jform_city')"
-			maxlength="50"
-			class="form-select"
+			type="hidden"
+			default="0"
 			filter="string">
 		</field>
 
 		<field
 			name="other_city"
 			type="text"
-			label="COM_TJVENDORS_FORM_LBL_OTHER_CITY"
-			class="no-whitespace hide"
-			description="COM_TJVENDORS_FORM_DESC_OTHER_CITY"
+			label="COM_TJVENDORS_FORM_LBL_CITY"
+			class="no-whitespace"
+			description="COM_TJVENDORS_FORM_DESC_CITY"
 			filter="string"
 			maxlength="50"/>
 
